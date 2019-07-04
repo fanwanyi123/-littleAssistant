@@ -1,0 +1,30 @@
+server:
+  servlet:
+    context-path: /assistant
+  port: 8888
+spring:
+  profiles:
+    active: dev
+  devtools:
+    restart:
+      enabled: true
+
+    livereload:
+      enabled: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/hmadata?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: fs9295
+  messages:
+    basename: i18n/messages
+  http:
+    encoding:
+      charset: UTF-8
+thymeleaf:
+    prefix: classpath:/templates/
+
+mybatis:
+  config-location: classpath:mapper/config/sqlMapConfig.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.fanyi.assistant.model
