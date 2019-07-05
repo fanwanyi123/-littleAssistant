@@ -1,0 +1,393 @@
+﻿<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::commonHead('首页')">
+<body>
+<header class="header-nav-area js-index1-nav sticky-on"><!-- header-nav -->
+    <div class="container-fluid">
+        <div class="row flexbox-center">
+            <div class="col-md-2 col-sm-6">
+                <div class="logo">
+                    <span id="logInfo"></span>
+                </div>
+            </div>
+            <div class="col-md-7 header-nav-none">
+                <nav class="header-nav">
+                    <div class="cssmenu" data-title="Menu">
+                        <ul class="menu list-inline">
+                            <li class="active"><a href="index" th:text="#{message.home}"></a>
+                            </li>
+                            <li><a href="#" th:text="#{message.record}"></a></li>
+                            <li><a href="#" th:text="#{message.plan}"></a></li>
+                            <li><a href="#" th:text="#{message.life.assistant}"></a>
+                                <ul>
+                                    <li><a href="#" th:text="#{message.living.payment.information}"></a></li>
+                                    <li><a href="#" th:text="#{message.express.information}"></a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#" th:text="#{message.learning.assistant}"></a>
+                                <ul>
+                                    <li><a href="#" th:text="#{message.plan}"></a></li>
+                                    <li><a href="#">Team</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#" th:text="#{message.travel}"></a>
+                                <ul>
+                                    <li><a href="#" th:text="#{message.plan}"></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!-- #header-menu-wrap -->
+                </nav><!-- .header-nav -->
+            </div><!-- col-lg-7 -->
+
+            <div class="col-md-3 pl-0 pull-right">
+                <div class="header-icon text-right">
+                    <ul class="list-inline">
+                        <li class="music primary-bg" id="js-music"><i class="fa fa-music"></i></li>
+                        <li><a href="#"><i class="fa fa-user"></i> <span th:text="${session.userName}"></span></a>
+                        </li>
+                        <li><a href="login">[[#{message.login}]]</a></li>
+                        <li class="sidebar-menu"><span id="sidebar_menu_icon">
+                            <img alt="Icon" src="../static/assets/images/menu.png"
+                                 th:src="@{assets/images/menu.png}"></span>
+                        </li>
+                    </ul>
+                </div><!-- header-icon -->
+            </div>
+        </div><!-- row -->
+    </div><!-- container -->
+</header><!-- header-nav -->
+
+<div class="js-offcanvas-menu js-index1-nav" id="js_offcanvas_menu">
+    <nav class="header-nav">
+        <span class="js-offcanvas-close"><i class="pe-7s-close"></i></span>
+        <div class="cssmenu" data-title="Menu">
+            <ul class="menu list-inline">
+                <li class="active"><i class="fa fa-home"></i><a href="index" th:text="#{message.home}"></a>
+                </li>
+                <li><i class="fa fa-pencil"></i><a href="#" th:text="#{message.record}"></a></li>
+                <li><a href="#" th:text="#{message.plan}"></a></li>
+                <li><a href="#" th:text="#{message.life.assistant}"></a>
+                    <ul>
+                        <li><a href="#" th:text="#{message.living.payment.information}"></a></li>
+                        <li><a href="#" th:text="#{message.express.information}"></a></li>
+                    </ul>
+                </li>
+                <li><a href="#" th:text="#{message.learning.assistant}"></a>
+                    <ul>
+                        <li><a href="#" th:text="#{message.plan}"></a></li>
+                        <li><a href="#">Team</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" th:text="#{message.travel}"></a>
+                    <ul>
+                        <li><a href="#" th:text="#{message.plan}"></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- #header-menu-wrap -->
+        <div class="widget mt-3">
+            <div class="js-widget-search">
+                <form>
+                    <input type="text" required="" placeholder="Search Here..">
+                    <i><img alt="search icon" src="../static/assets/images/search.png"
+                            th:src="@{/assets/images/search.png}"></i>
+                </form>
+            </div>
+        </div>
+    </nav> <!-- header-nav -->
+</div><!-- js-offcanvas-menu -->
+
+<div class="slider-area" id="home">
+    <div class="slider-carousel owl-theme">
+        <div class="single-slides"></div>
+        <div class="single-slides2"></div>
+        <div class="single-slides3"></div>
+    </div> <!-- slider-carousel -->
+
+    <div class="js-info-album-player" id="js-info-album-player" style="display: none">
+        <div class="container-fluid pr-0">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-2 offset-sm-0">
+                    <div class="row">
+                        <div class="col-lg-12 dark-overlay">
+                            <div class="audio-player">
+                                <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+                                <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+                                    <div class="jp-type-playlist">
+                                        <div class="jp-gui jp-interface row">
+                                            <div class="col-lg-1 col-sm-2 pr-0">
+                                                <div class="jp-controls">
+                                                    <button class="jp-previous" tabindex="0"><i
+                                                            class="fa fa-step-backward"></i></button>
+                                                    <button class="jp-play" tabindex="0"><i class="fa fa-play"></i>
+                                                    </button>
+                                                    <button class="jp-next" tabindex="0"><i
+                                                            class="fa fa-step-forward"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-sm-2 js-album-playing-text">
+                                                <a href="javascript:void(0);" id="playlist-text">
+                                                    <div class="jp-now-playing flex-item">
+                                                        <div class="jp-track-name"></div>
+                                                        <div class="jp-artist-name"></div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="col-lg-2 col-sm-3">
+                                                <div class="jp-toggles">
+                                                    <button id="playlist-toggle" class="jp-show-playlist" tabindex="0"
+                                                            title="Playlist"><i class="fa fa-music"></i>
+                                                    </button>
+                                                    <button class="jp-shuffle" tabindex="0" title="Shuffle">
+                                                        <i class="fa fa-random"></i>
+                                                    </button>
+                                                    <button class="jp-repeat" tabindex="0" title="Repeat"><i
+                                                            class="fa fa-exchange"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-sm-5 jp-volume-controls">
+                                                <div class="">
+                                                    <button class="jp-mute" tabindex="0"><i class="fa fa-volume-up"></i>
+                                                    </button>
+                                                    <div class="jp-volume-bar">
+                                                        <div class="jp-volume-bar-value">
+                                                            <div class="bullet">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-sm-2">
+                                                <div class="js-info-album-player-content float-right">
+                                <span class="wpcf7-form-control-wrap Selectbox">
+                                  <select class="Wide wpcf7-form-control wpcf7-select" name="quality-selectbox"
+                                          aria-invalid="true">
+                                    <option value="0">Quality</option>
+                                    <option value="1">HD</option>
+                                    <option value="2">HIGH</option>
+                                    <option value="3">MEDIUM</option>
+                                    <option value="4">LOW</option>
+                                  </select>
+                                </span>
+                                                </div><!-- js-info-album-player-content -->
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="jp-progress-container">
+                                                    <div class="jp-time-holder">
+                                                        <span class="jp-current-time" role="timer" aria-label="time">&nbsp;</span>
+                                                        <span class="jp-duration" role="timer" aria-label="duration">&nbsp;</span>
+                                                    </div>
+                                                    <div class="jp-progress">
+                                                        <div class="jp-seek-bar">
+                                                            <div class="jp-play-bar">
+                                                                <div class="bullet">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div id="playlist-wrap" class="jp-playlist">
+                                            <ul>
+                                                <li>&nbsp;</li>
+                                            </ul>
+                                        </div>
+                                        <div class="jp-no-solution">
+                                            <span>Update Required</span> To play the media you will need to either
+                                            update your browser to a recent version or update your <a
+                                                href="http://get.adobe.com/flashplayer/" target="_blank">Flash
+                                            plugin</a>.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- audio-player -->
+                        </div><!-- col-lg-9 -->
+                    </div><!-- row -->
+                </div><!-- col-lg-10 -->
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- js-info-album-player -->
+</div><!-- slider-area End-->
+
+<section class="album-area album-bg has-color" id="album">
+    <div class="container">
+        <div class="section-title text-center mb-50">
+            <h2>Feature Music <span class="primary-color">Albums</span></h2>
+            <p>Check out my newest music albums. You can easily purchase our music albums on
+                <span class="primary-color">iTunes</span> or <span class="primary-color">Google Play</span></p>
+        </div><!-- section-title -->
+        <div class="row">
+            <div class="col-lg-3 col-sm-5">
+                <div class="js-single-album-item text-center">
+                    <div class="js-album-thumbnail">
+                        <div class="js-popup-album-cover">
+                            <a href="#"><i class="fa fa-plus"></i></a>
+                        </div>
+                        <ul class="app-button list-inline"><!-- app-button -->
+                            <li><a href="#"><i class="fa fa-play"></i>
+                                <p><span>Available on</span>App Store</p></a></li>
+                            <li><a href="#"><i class="fa fa-apple"></i>
+                                <p><span>Available on</span>App Store</p></a></li>
+                        </ul><!-- App-button -->
+                    </div>
+                    <div class="album-content">
+                        <h4 class="text-uppercase"><a href="#">Alone</a></h4>
+                        <span class="primary-color">(2019)</span>
+                    </div>
+                </div><!-- js-single-album-item -->
+            </div><!-- col-lg -->
+            <div class="col-lg-3 offset-lg-1 col-sm-5 offset-sm-1">
+                <div class="js-single-album-item text-center">
+                    <div class="js-album-thumbnail">
+                        <div class="js-popup-album-cover">
+                            <a href="#"><i class="fa fa-plus"></i></a>
+                        </div>
+                        <ul class="app-button list-inline"><!-- app-button -->
+                            <li><a href="#"><i class="fa fa-play"></i>
+                                <p><span>Available on</span>App Store</p></a></li>
+                            <li><a href="#"><i class="fa fa-apple"></i>
+                                <p><span>Available on</span>App Store</p></a></li>
+                        </ul><!-- App-button -->
+                    </div>
+                    <div class="album-content">
+                        <h4 class="text-uppercase"><a href="#">Without You</a></h4>
+                        <span class="primary-color">(2018)</span>
+                    </div>
+                </div><!-- js-single-album-item -->
+            </div><!-- col-lg -->
+            <div class="col-lg-3 offset-lg-1 col-sm-5">
+                <div class="js-single-album-item text-center">
+                    <div class="js-album-thumbnail">
+                        <div class="js-popup-album-cover">
+                            <a href="#"><i class="fa fa-plus"></i></a>
+                        </div>
+                        <ul class="app-button list-inline"><!-- app-button -->
+                            <li><a href="#"><i class="fa fa-play"></i>
+                                <p><span>Available on</span>App Store</p></a></li>
+                            <li><a href="#"><i class="fa fa-apple"></i>
+                                <p><span>Available on</span>App Store</p></a></li>
+                        </ul><!-- App-button -->
+                    </div>
+                    <div class="album-content">
+                        <h4 class="text-uppercase"><a href="#">Party Night</a></h4>
+                        <span class="primary-color">(2017)</span>
+                    </div>
+                </div><!-- js-single-album-item -->
+            </div><!-- col-lg -->
+        </div><!-- row -->
+    </div><!-- container -->
+</section><!-- Album Section End -->
+
+<span class="scrolltop"><i class="pe-7s-angle-up"></i></span>
+
+<footer class="js-footer-area has-color">
+    <div class="js-footer-subscribe pt-100 pb-150 bg-dark has-color">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <div class="section-title">
+                        <h2><span class="primary-color">Subscribe</span></h2>
+                        <p>Sign up for new releases to your inbox every month</p>
+                    </div><!-- section-title -->
+                </div><!-- col-lg-5 -->
+                <div class="col-lg-7">
+                    <form class="js-footer-subscribe-form">
+                        <div class="js-input-icon">
+                            <i class="fa fa-envelope-o icon"></i>
+                            <input type="email" placeholder="Email Address" required="">
+                        </div>
+                        <input type="submit" value="Subscribe" class="btn-primary">
+                    </form>
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- js-footer-subscribe -->
+
+    <div class="js-footer-section">
+        <div class="container">
+            <div class="row mb-90">
+                <div class="col-lg-3 col-sm-8">
+                    <div class="js-footer-widget">
+                        <h1 class="js-footer-logo"><a href="#"></a></h1>
+                    </div>
+                </div><!-- col end -->
+                <div class="col-lg-2 col-sm-4">
+                    <div class="js-footer-widget">
+                        <h5>Download</h5>
+                    </div>
+                </div><!-- col end -->
+                <div class="col-lg-4 col-sm-6">
+                    <div class="js-footer-widget">
+                        <h5>Recent Post</h5>
+                        <ul>
+                            <li class="js-primary-border-bottom-gradient">
+                                <div class="js-widget-recent-post mb-3 pb-3">
+                                    <div class="js-widget-post--content">
+                                        <p><a href="#">Lorem ipsum dolor sit, consectetur adipisicing elit. Rerum
+                                            amet.</a></p>
+                                        <span class="js-post-date">20 June  2018</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="js-widget-recent-post mb-0 pb-0">
+                                    <div class="js-widget-post--content">
+                                        <p><a href="#">Lorem ipsum dolor sit, consectetur adipisicing elit. Rerum
+                                            amet.</a></p>
+                                        <span class="js-post-date">20 June  2018</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div><!-- js-footer-widget -->
+                </div><!-- col end -->
+                <div class="col-lg-3 col-sm-6">
+                    <div class="js-footer-widget">
+                        <h5>Contact Info</h5>
+                        <ul class="js-contact-info">
+                            <li><i class="fa fa-map-marker"></i>
+                                <p><span>ADDRESS:</span>55 Green Tower, Street Name New York City, USA</p></li>
+                            <li><i class="fa fa-phone"></i>
+                                <p><span>Phone:</span> +88 0191 444 137</p></li>
+                            <li><i class="fa fa-envelope"></i>
+                                <p><span>Email: </span>nfo@themerocket.com</p></li>
+                            <li><i class="fa fa-globe"></i>
+                                <p><span>WEbsite: </span>themerocket.com</p></li>
+                        </ul>
+                    </div>
+                </div><!-- col end -->
+            </div><!-- row end -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p class="js-copyright">© Copyright 2018</p>
+                </div>
+            </div><!-- row end -->
+        </div><!-- container -->
+    </div><!-- footer-area -->
+</footer> <!-- footer End-->
+
+<script src="../static/assets/js/vendor/jquery-3.3.1.min.js" th:src="@{/assets/js/vendor/jquery-3.3.1.min.js}"></script>
+<script src="../static/assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script src="../static/assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
+<script src="../static/assets/js/jquery.magnific-popup.min.js"
+        th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+<script src="../static/assets/js/swiper.min.js" th:src="@{/assets/js/swiper.min.js}"></script>
+<script src="../static/assets/js/plugins.js" th:src="@{/assets/js/plugins.js}"></script>
+<script src="../static/assets/js/menu.js" th:src="@{/assets/js/menu.js}"></script>
+<script src="../static/assets/js/countdown.js" th:src="@{/assets/js/countdown.js}"></script>
+<script src="../static/assets/js/jquery.nice-select.min.js" th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+<script src="../static/assets/js/jquery.jplayer.min.js" th:src="@{/assets/js/jquery.jplayer.min.js}"></script>
+<script src="../static/assets/js/jplayer.playlist.min.js" th:src="@{/assets/js/jplayer.playlist.min.js}"></script>
+<script src="../static/assets/js/audio-player.js" th:src="@{/assets/js/audio-player.js}"></script>
+<script src="../static/assets/js/audioplayer.js" th:src="@{/assets/js/audioplayer.js}"></script>
+<script src="../static/assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
+<script src="../static/common/js/index.js" th:src="@{/common/js/index.js}"></script>
+
+</body>
+
+</html>

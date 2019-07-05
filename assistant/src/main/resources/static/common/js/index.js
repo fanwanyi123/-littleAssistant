@@ -14,10 +14,6 @@ $(document).ready(function () {
     } else {
         $("#Language").text('English');
     }
-
-    $("#js-music").on("click",function(){
-        $("#js-info-album-player").slideToggle("slow");
-    });
 });
 
 function switchLanguage() {
