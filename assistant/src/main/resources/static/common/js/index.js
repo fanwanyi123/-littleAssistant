@@ -35,4 +35,10 @@ function linkOtherPage(url) {
     window.location.href = url
 }
 
-
+function showModal(url) {
+    $("#myModal").modal('show');
+    $('#myModal').on('show.bs.modal', function () {
+        var mainContent = document.getElementById('iframe-page-one');
+        mainContent.src = url;//嵌套网址
+    })
+}

@@ -1,107 +1,23 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common::commonHead('首页')">
 <body>
-<header class="header-nav-area js-index1-nav sticky-on"><!-- header-nav -->
-    <div class="container-fluid">
-        <div class="row flexbox-center">
-            <div class="col-md-2 col-sm-6">
-                <div class="logo">
-                    <span id="logInfo"></span>
-                </div>
-            </div>
-            <div class="col-md-7 header-nav-none">
-                <nav class="header-nav">
-                    <div class="cssmenu" data-title="Menu">
-                        <ul class="menu list-inline">
-                            <li class="active"><a href="index" th:text="#{message.home}"></a>
-                            </li>
-                            <li><a href="#" th:text="#{message.record}"></a></li>
-                            <li><a href="#" th:text="#{message.plan}"></a></li>
-                            <li><a href="#" th:text="#{message.life.assistant}"></a>
-                                <ul>
-                                    <li><a href="#" th:text="#{message.living.payment.information}"></a></li>
-                                    <li><a href="#" th:text="#{message.express.information}"></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#" th:text="#{message.learning.assistant}"></a>
-                                <ul>
-                                    <li><a href="#" th:text="#{message.plan}"></a></li>
-                                    <li><a href="#">Team</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#" th:text="#{message.travel}"></a>
-                                <ul>
-                                    <li><a href="#" th:text="#{message.plan}"></a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div><!-- #header-menu-wrap -->
-                </nav><!-- .header-nav -->
-            </div><!-- col-lg-7 -->
-
-            <div class="col-md-3 pl-0 pull-right">
-                <div class="header-icon text-right">
-                    <ul class="list-inline">
-                        <li class="music primary-bg" id="js-music"><i class="fa fa-music"></i></li>
-                        <li><a href="#"><i class="fa fa-user"></i> <span th:text="${session.userName}"></span></a>
-                        </li>
-                        <li><a href="login">[[#{message.login}]]</a></li>
-                        <li class="sidebar-menu"><span id="sidebar_menu_icon">
-                            <img alt="Icon" src="../static/assets/images/menu.png"
-                                 th:src="@{assets/images/menu.png}"></span>
-                        </li>
-                    </ul>
-                </div><!-- header-icon -->
-            </div>
-        </div><!-- row -->
-    </div><!-- container -->
-</header><!-- header-nav -->
-
-<div class="js-offcanvas-menu js-index1-nav" id="js_offcanvas_menu">
-    <nav class="header-nav">
-        <span class="js-offcanvas-close"><i class="pe-7s-close"></i></span>
-        <div class="cssmenu" data-title="Menu">
-            <ul class="menu list-inline">
-                <li class="active"><i class="fa fa-home"></i><a href="index" th:text="#{message.home}"></a>
-                </li>
-                <li><i class="fa fa-pencil"></i><a href="#" th:text="#{message.record}"></a></li>
-                <li><a href="#" th:text="#{message.plan}"></a></li>
-                <li><a href="#" th:text="#{message.life.assistant}"></a>
-                    <ul>
-                        <li><a href="#" th:text="#{message.living.payment.information}"></a></li>
-                        <li><a href="#" th:text="#{message.express.information}"></a></li>
-                    </ul>
-                </li>
-                <li><a href="#" th:text="#{message.learning.assistant}"></a>
-                    <ul>
-                        <li><a href="#" th:text="#{message.plan}"></a></li>
-                        <li><a href="#">Team</a></li>
-                    </ul>
-                </li>
-                <li><a href="#" th:text="#{message.travel}"></a>
-                    <ul>
-                        <li><a href="#" th:text="#{message.plan}"></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- #header-menu-wrap -->
-        <div class="widget mt-3">
-            <div class="js-widget-search">
-                <form>
-                    <input type="text" required="" placeholder="Search Here..">
-                    <i><img alt="search icon" src="../static/assets/images/search.png"
-                            th:src="@{/assets/images/search.png}"></i>
-                </form>
-            </div>
-        </div>
-    </nav> <!-- header-nav -->
-</div><!-- js-offcanvas-menu -->
-
+<header th:include="common::commonHeader"></header>
 <div class="slider-area" id="home">
     <div class="slider-carousel owl-theme">
-        <div class="single-slides"></div>
+        <div class="single-slides">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <a class="js-video-popup v-center" href="login">
+                            <img src="../static/assets/images/video-image/play.png"
+                                 th:src="@{/assets/images/video-image/play.png}" alt="Play">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="single-slides2"></div>
         <div class="single-slides3"></div>
     </div> <!-- slider-carousel -->
@@ -283,6 +199,8 @@
     </div><!-- container -->
 </section><!-- Album Section End -->
 
+<!--modal -->
+<div th:include="common::commonModal"></div>
 <span class="scrolltop"><i class="pe-7s-angle-up"></i></span>
 
 <footer class="js-footer-area has-color">
@@ -370,24 +288,7 @@
         </div><!-- container -->
     </div><!-- footer-area -->
 </footer> <!-- footer End-->
-
-<script src="../static/assets/js/vendor/jquery-3.3.1.min.js" th:src="@{/assets/js/vendor/jquery-3.3.1.min.js}"></script>
-<script src="../static/assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
-<script src="../static/assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
-<script src="../static/assets/js/jquery.magnific-popup.min.js"
-        th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
-<script src="../static/assets/js/swiper.min.js" th:src="@{/assets/js/swiper.min.js}"></script>
-<script src="../static/assets/js/plugins.js" th:src="@{/assets/js/plugins.js}"></script>
-<script src="../static/assets/js/menu.js" th:src="@{/assets/js/menu.js}"></script>
-<script src="../static/assets/js/countdown.js" th:src="@{/assets/js/countdown.js}"></script>
-<script src="../static/assets/js/jquery.nice-select.min.js" th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
-<script src="../static/assets/js/jquery.jplayer.min.js" th:src="@{/assets/js/jquery.jplayer.min.js}"></script>
-<script src="../static/assets/js/jplayer.playlist.min.js" th:src="@{/assets/js/jplayer.playlist.min.js}"></script>
-<script src="../static/assets/js/audio-player.js" th:src="@{/assets/js/audio-player.js}"></script>
-<script src="../static/assets/js/audioplayer.js" th:src="@{/assets/js/audioplayer.js}"></script>
-<script src="../static/assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
-<script src="../static/common/js/index.js" th:src="@{/common/js/index.js}"></script>
-
+<div th:include="common::commonJs"></div>
 </body>
 
 </html>

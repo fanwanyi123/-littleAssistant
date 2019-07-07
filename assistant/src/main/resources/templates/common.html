@@ -86,12 +86,153 @@
     </script>
 </head>
 <body>
+<div th:fragment="commonHeader">
+    <header class="header-nav-area js-index1-nav sticky-on"><!-- header-nav -->
+        <div class="container-fluid">
+            <div class="row flexbox-center">
+                <div class="col-md-2 col-sm-6">
+                    <div class="logo">
+                        <span id="logInfo"></span>
+                    </div>
+                </div>
+                <div class="col-md-7 header-nav-none">
+                    <nav class="header-nav">
+                        <div class="cssmenu" data-title="Menu">
+                            <ul class="menu list-inline">
+                                <li class="active"><a href="index" th:text="#{message.home}"></a>
+                                </li>
+                                <li><a onclick="showModal('record')" th:text="#{message.record}"></a></li>
+                                <li><a href="#" th:text="#{message.plan}"></a></li>
+                                <li><a href="#" th:text="#{message.life.assistant}"></a>
+                                    <ul>
+                                        <li><a href="#" th:text="#{message.living.payment.information}"></a></li>
+                                        <li><a href="#" th:text="#{message.express.information}"></a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#" th:text="#{message.learning.assistant}"></a>
+                                    <ul>
+                                        <li><a href="#" th:text="#{message.plan}"></a></li>
+                                        <li><a href="#">Team</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#" th:text="#{message.travel}"></a>
+                                    <ul>
+                                        <li><a href="#" th:text="#{message.plan}"></a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div><!-- #header-menu-wrap -->
+                    </nav><!-- .header-nav -->
+                </div><!-- col-lg-7 -->
+
+                <div class="col-md-3 pl-0 pull-right">
+                    <div class="header-icon text-right">
+                        <ul class="list-inline">
+                            <li class="music primary-bg" id="js-music"><i class="fa fa-music"></i></li>
+                            <li><a href="#"><i class="fa fa-user"></i> <span th:text="${session.userName}"></span></a>
+                            </li>
+                            <li><a href="login">[[#{message.login}]]</a></li>
+                            <li class="sidebar-menu"><span id="sidebar_menu_icon">
+                            <img alt="Icon" src="../static/assets/images/menu.png"
+                                 th:src="@{assets/images/menu.png}"></span>
+                            </li>
+                        </ul>
+                    </div><!-- header-icon -->
+                </div>
+            </div><!-- row -->
+        </div><!-- container -->
+    </header><!-- header-nav -->
+
+    <div class="js-offcanvas-menu js-index1-nav" id="js_offcanvas_menu">
+        <nav class="header-nav">
+            <span class="js-offcanvas-close"><i class="pe-7s-close"></i></span>
+            <div class="cssmenu" data-title="Menu">
+                <ul class="menu list-inline">
+                    <li class="active"><i class="fa fa-home"></i><a href="index" th:text="#{message.home}"></a>
+                    </li>
+                    <li><i class="fa fa-pencil"></i><a href="#" th:text="#{message.record}"></a></li>
+                    <li><a href="#" th:text="#{message.plan}"></a></li>
+                    <li><a href="#" th:text="#{message.life.assistant}"></a>
+                        <ul>
+                            <li><a href="#" th:text="#{message.living.payment.information}"></a></li>
+                            <li><a href="#" th:text="#{message.express.information}"></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" th:text="#{message.learning.assistant}"></a>
+                        <ul>
+                            <li><a href="#" th:text="#{message.plan}"></a></li>
+                            <li><a href="#">Team</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" th:text="#{message.travel}"></a>
+                        <ul>
+                            <li><a href="#" th:text="#{message.plan}"></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- #header-menu-wrap -->
+            <div class="widget mt-3">
+                <div class="js-widget-search">
+                    <form>
+                        <input type="text" required="" placeholder="Search Here..">
+                        <i><img alt="search icon" src="../static/assets/images/search.png"
+                                th:src="@{/assets/images/search.png}"></i>
+                    </form>
+                </div>
+            </div>
+        </nav> <!-- header-nav -->
+    </div><!-- js-offcanvas-menu -->
+</div>
+<!-- 模态框（Modal） -->
+<div th:fragment="commonModal">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                    </h4>
+                </div>
+                <div class="modal-body iframe-body-sty">
+                    <iframe id="iframe-page-one" style="width: 500px;height: 300px" frameborder="0"
+                            scrolling="auto"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        提交更改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
 <a th:fragment="commonLanguage" th:onclick="switchLanguage()"
    onclick="switchLanguage()" id="Language"><i class="fa fa-language"></i></a>
 
-<footer th:fragment="commonFooter">
-    <script src="../static/common/js/jquery-1.7.2.js" th:src="@{/common/js/jquery-1.7.2.js}"></script>
+<div th:fragment="commonJs">
+    <script src="../static/assets/js/vendor/jquery-3.3.1.min.js"
+            th:src="@{/assets/js/vendor/jquery-3.3.1.min.js}"></script>
+    <script src="../static/assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <script src="../static/assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
+    <script src="../static/assets/js/jquery.magnific-popup.min.js"
+            th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>
+    <script src="../static/assets/js/swiper.min.js" th:src="@{/assets/js/swiper.min.js}"></script>
+    <script src="../static/assets/js/plugins.js" th:src="@{/assets/js/plugins.js}"></script>
+    <script src="../static/assets/js/menu.js" th:src="@{/assets/js/menu.js}"></script>
+    <script src="../static/assets/js/countdown.js" th:src="@{/assets/js/countdown.js}"></script>
+    <script src="../static/assets/js/jquery.nice-select.min.js"
+            th:src="@{/assets/js/jquery.nice-select.min.js}"></script>
+    <script src="../static/assets/js/jquery.jplayer.min.js" th:src="@{/assets/js/jquery.jplayer.min.js}"></script>
+    <script src="../static/assets/js/jplayer.playlist.min.js" th:src="@{/assets/js/jplayer.playlist.min.js}"></script>
+    <script src="../static/assets/js/audio-player.js" th:src="@{/assets/js/audio-player.js}"></script>
+    <script src="../static/assets/js/audioplayer.js" th:src="@{/assets/js/audioplayer.js}"></script>
+    <script src="../static/assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
     <script src="../static/common/js/index.js" th:src="@{/common/js/index.js}"></script>
-</footer>
+</div>
 </body>
 </html>
