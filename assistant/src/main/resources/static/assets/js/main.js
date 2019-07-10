@@ -336,12 +336,6 @@ JS Table of content:
 	 	// Audio Player
  		$('audio').audioPlayer();
  		
- 		// Select Option
-		$("select").each(function(){
-			$('select').niceSelect();
-		});
-
-
 	    // Scroll To Top
 		if ($('.scrolltop').length > 0) {
 			 $(".scrolltop").on("click",function(){

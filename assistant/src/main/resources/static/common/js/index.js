@@ -14,6 +14,10 @@ $(document).ready(function () {
     } else {
         $("#Language").text('English');
     }
+
+    $("#selectTag").click(function () {
+        $("#addTagModal").modal('show');
+    })
 });
 
 function switchLanguage() {
@@ -36,9 +40,7 @@ function linkOtherPage(url) {
 }
 
 function showModal(url) {
+    var mainContent = document.getElementById('iframe-page-one');
+    mainContent.src = url;//嵌套网址
     $("#myModal").modal('show');
-    $('#myModal').on('show.bs.modal', function () {
-        var mainContent = document.getElementById('iframe-page-one');
-        mainContent.src = url;//嵌套网址
-    })
 }

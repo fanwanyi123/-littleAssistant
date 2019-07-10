@@ -686,14 +686,6 @@ Description: Devaid MusicTemplate is only for your Music Industry.
 	.jp-interface{
 		text-align: center;
 	}
-	.nice-select {
-	    align-self: center;
-	    float: left;
-	    margin: 0 auto;
-	    text-align: center;
-	    vertical-align: middle;
-	    width: 100%;
-	}
 	.js-info-album-player-content{
 	    float: none !important;
 	    margin-left: auto;

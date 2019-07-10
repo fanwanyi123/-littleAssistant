@@ -87,13 +87,19 @@
     z-index: 9;
     color: white;
 }
-.iframe-body-sty{
+
+.iframe-body-sty {
     overflow: hidden;
 }
-.v-center {
-   margin-top: 36%;
-}
 
+.btn-center {
+    margin-top: 36%;
+    margin-left: 36%;
+    opacity:0.5;
+}
+.v-center {
+    margin-top: 36%;
+}
 .header-nav .menu > li {
     padding: 0;
 }
