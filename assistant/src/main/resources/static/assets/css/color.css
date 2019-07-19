@@ -132,19 +132,4 @@ span.primary-color,
 	background: linear-gradient(to right, #5105fd 0%, #aa31e5 100%);
 }
 
-
-/*Light Gradient Color*/
-
-#ja-all-product-slider2.owl-theme .owl-dots .owl-dot.active span,
-#js-artist-video-slide-style2.owl-theme .owl-dots .owl-dot.active span,
-#js-singer-slider-style2.owl-theme .owl-dots .owl-dot.active span,
-.js-blog-style5 .js-blog-admin-reade-more,
-.btn-light,
-.js-product-price,
-.light-gradient-color {
-	background: -webkit-linear-gradient(left, #ff5294 0%, #f76e64 100%);
-	background: -o-linear-gradient(left, #ff5294 0%, #f76e64 100%);
-	background: linear-gradient(to right, #ff5294 0%, #f76e64 100%);
-}
-
  

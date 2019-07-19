@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::commonHead('做笔记')">
+<body>
+<header th:include="common::commonHeader"></header>
+<link rel="stylesheet" type="text/css" href="../static/common/css/zTreeStyle/zTreeStyle.css"
+      th:href="@{/common/css/zTreeStyle/zTreeStyle.css}">
+<style type="text/css">
+    .input-text {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .single-input{
+        background: white;
+    }
+</style>
+<section class="js-product-checkout-area has-color bg-dark pb-0">
+    <div class="container">
+        <div class="border">
+            <div class="js-product-checkout-content">
+                <form action="#">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mb-50 mb-sm-30 mb-xs-20">
+                                <input class="input-text" name="title" type="text"
+                                       th:placeholder="#{message.enter.title}">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!--Single Forum Start-->
+                            <div class="single-input mb-50 mb-sm-30 mb-xs-20">
+                                <textarea class="layui-textarea layui-hide" name="articleContent" lay-verify="content" id="content"></textarea>
+                            </div>
+                            <!--Single Forum End-->
+                        </div>
+                        <div class="col-12">
+                            <!--Single Forum Start-->
+                            <div class="mb-50 mb-sm-30 mb-xs-20">
+                                <i class="fa fa-bookmark"></i>&nbsp;
+                                <a id="selectTag">选择分类
+                                </a>
+                                <i class="fa fa-caret-down"></i>
+                            </div>
+                            <!--Single Forum End-->
+                        </div>
+                        <div class="col-12">
+                            <!--Single Forum Start-->
+                            <div class="mb-50 mb-sm-30 mb-xs-20">
+                                <span>状态</span>
+                                <input type="radio" name="articleStatus" value="1" title="发布" checked><span>发布</span>
+                                <input type="radio" name="articleStatus" value="0" title="草稿"><span>草稿</span>
+                            </div>
+                            <!--Single Forum End-->
+                        </div>
+                        <div class="col-12">
+                            <div class="forum-post">
+                                <button class="df-btn" id="submit-btn">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- js-product-checkout -->
+
+        </div><!-- border -->
+    </div><!--container -->
+</section>
+<!-- 模态框 -->
+<div class="modal fade" id="addTagModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h4 class="modal-title">添加标签</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <div style="overflow:auto;">
+                    <ul id="treeDemo" class="ztree" style="max-height:300px;width:auto; overflow-y:scroll;"></ul>
+                </div>
+                <div id="rMenu" style="display:none;border:1px solid red;">
+                    要显示的内容
+                </div>
+                <!--<div id="rMenu" style="z-index:1000;">-->
+                <!--<ul>-->
+                <!--<li id="m_add" onclick="menuAddNode();">增加节点</li>-->
+                <!--<li id="m_edit" onclick="menuEditNode();">编辑节点</li>-->
+                <!--<li id="m_editFile" onclick="menuEditContentNode();">编辑内容</li>-->
+                <!--<li id="m_delete" onclick="menuDeleteNode();">删除节点</li>-->
+                <!--</ul>-->
+                <!--</div>-->
+            </div>
+
+            <!-- 模态框底部 -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="tagChecked()" data-dismiss="modal">确定</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<footer th:include="common::commonFooter"></footer>
+<div th:include="common::commonJs"></div>
+<script type="text/javascript" src="../static/common/js/jquery.ztree.core-3.5.js"
+        th:src="@{/common/js/jquery.ztree.core-3.5.js}"></script>
+<script type="text/javascript" src="../static/common/js/jquery.ztree.excheck-3.5.js"
+        th:src="@{/common/js/jquery.ztree.excheck-3.5.js}"></script>
+<script type="text/javascript" src="../static/common/js/ztreeinit.js"
+        th:src="@{/common/js/ztreeinit.js}"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+
+        //上传图片,必须放在 创建一个编辑器前面
+        layedit.set({
+            uploadImage: {
+                url: '/admin/upload/img' //接口url
+                ,type: 'post' //默认post
+            }
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('content',{
+                height:350,
+            }
+        );
+
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            , content: function (value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+        layedit.build('content', {
+            tool: [
+                'strong' //加粗
+                ,'italic' //斜体
+                ,'underline' //下划线
+                ,'del' //删除线
+                ,'|' //分割线
+                ,'left' //左对齐
+                ,'center' //居中对齐
+                ,'right' //右对齐
+                ,'link' //超链接
+                ,'unlink' //清除链接
+                ,'face' //表情
+                ,'image' //插入图片
+                ,'code'
+            ]
+        });
+
+        layui.use('code', function(){ //加载code模块
+            layui.code();
+        });
+    });
+</script>
+</body>
+</html>

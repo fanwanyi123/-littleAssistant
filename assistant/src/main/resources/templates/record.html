@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common::commonHead('整理')">
+<head th:replace="common::commonHead('记录')">
 <body>
 <header th:include="common::commonHeader"></header>
 <section class="js-product-checkout-area has-color bg-dark pb-0">
@@ -19,7 +19,7 @@
                         <label>文件上传<span class="primary-color">*</span></label>
                         <input type="file" accept=".txt,.Excel,.csv">
                     </div>
-                    <button type="submit" class="btn btn-primary no-border-radius float-right">提交
+                    <button type="submit" class="btn btn-primary no-border-radius">提交
                     </button>
                 </form><!-- form -->
             </div><!-- js-product-checkout -->
@@ -160,17 +160,20 @@
             <div class="modal-body">
                 <div class="radio">
                     <label>
-                        <i class="fa fa-bookmark"></i>&nbsp;<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>&nbsp;选项 1
+                        <i class="fa fa-bookmark" style="color: green"></i>&nbsp;生活&nbsp;&nbsp;
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>&nbsp;
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <i class="fa fa-bookmark"></i>&nbsp;<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">&nbsp;选项 2
+                        <i class="fa fa-bookmark" style="color: red"></i>&nbsp;工作&nbsp;&nbsp;
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">&nbsp;
                     </label>
                 </div>
                 <div class="radio">
                     <label>
-                        <i class="fa fa-bookmark"></i>&nbsp;<input type="radio" name="optionsRadios" id="optionsRadios3" value="option2">&nbsp;选项 2
+                        <i class="fa fa-bookmark" style="color: yellow"></i>&nbsp;学习&nbsp;&nbsp;
+                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option2">&nbsp;
                     </label>
                 </div>
             </div>

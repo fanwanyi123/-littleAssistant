@@ -111,15 +111,7 @@ h3 { font-size: 28px; }
 h4 { font-size: 20px; }
 h5 { font-size: 18px; }
 h6 { font-size: 16px; } 
-.has-color p,
-.has-color h1,
-.has-color h2,
-.has-color h3,
-.has-color h4,
-.has-color h5,
-.has-color h6 {
-    color: #ffffff !important;
-}
+
 h1 a,
 h2 a,
 h3 a,
@@ -158,9 +150,7 @@ input[type="password"],
 input[type="submit"],
 input[type="text"]{
     padding-left: 20px;
-    padding-top: 22px; 
     line-height: 50px;
-    margin-bottom: 35px;
     width: 100%;
 }
 textarea{
@@ -185,9 +175,6 @@ textarea{
 .btn-secondary,
 .btn-light:focus,
 .btn-light:hover,
-.btn-light{
-    color: #ffffff !important;
-}
 .bg-light{
     background-color: #ecf5f6;
 }

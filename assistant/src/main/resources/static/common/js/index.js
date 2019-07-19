@@ -15,9 +15,18 @@ $(document).ready(function () {
         $("#Language").text('English');
     }
 
-    $("#selectTag").click(function () {
-        $("#addTagModal").modal('show');
-    })
+
+    //菜单添加样式
+    $(".menu-tabbable").find("li").each(function () {
+
+        var a = $(this).find("a:first")[0];
+
+        if (location.pathname.indexOf($(a).attr("href")) > 0) {
+            $(this).addClass("active");
+        } else {
+            $(this).removeClass("active");
+        }
+    });
 });
 
 function switchLanguage() {
@@ -35,7 +44,7 @@ function switchLanguage() {
     }
 }
 
-function linkOtherPage(url) {
+function jumpPage(url) {
     window.location.href = url
 }
 

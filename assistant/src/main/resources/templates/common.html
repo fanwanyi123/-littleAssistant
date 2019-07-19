@@ -7,7 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" href="../static/common/images/21113.gif" th:href="@{/common/images/21113.gif}">
-
+    <!-- layUi -->
+    <link rel="stylesheet" href="../static/common/layui/css/layui.css" th:href="@{/common/layui/css/layui.css}">
     <!-- animate -->
     <link rel="stylesheet" href="../static/assets/css/animate.css" th:href="@{/assets/css/animate.css}">
     <!-- font-awesome -->
@@ -98,11 +99,12 @@
                 <div class="col-md-7 header-nav-none">
                     <nav class="header-nav">
                         <div class="cssmenu" data-title="Menu">
-                            <ul class="menu list-inline">
-                                <li class="active"><a href="index" th:text="#{message.home}"></a>
+                            <ul class="menu list-inline menu-tabbable">
+                                <li><a href="index" th:text="#{message.home}"></a>
                                 </li>
-                                <li><a href="record" th:text="#{message.notes}"></a></li>
+                                <li><a href="takeNotes" th:text="#{message.notes}"></a></li>
                                 <li><a href="plan" th:text="#{message.plan}"></a></li>
+                                <li><a href="record" th:text="#{message.time.axis}"></a></li>
                             </ul>
                         </div><!-- #header-menu-wrap -->
                     </nav><!-- .header-nav -->
@@ -130,7 +132,7 @@
         <nav class="header-nav">
             <span class="js-offcanvas-close"><i class="pe-7s-close"></i></span>
             <div class="cssmenu" data-title="Menu">
-                <ul class="menu list-inline">
+                <ul class="menu list-inline menu-tabbable">
                     <li class="active"><i class="fa fa-home"></i><a href="index" th:text="#{message.home}"></a>
                     </li>
                     <li><i class="fa fa-pencil"></i><a href="#" th:text="#{message.notes}"></a></li>
@@ -304,45 +306,10 @@
         <div class="js-footer-section">
             <div class="container">
                 <div class="row mb-90">
-                    <div class="col-lg-3 col-sm-8">
-                        <div class="js-footer-widget">
-                            <h1 class="js-footer-logo"><a href="#"></a></h1>
-                        </div>
-                    </div><!-- col end -->
-                    <div class="col-lg-2 col-sm-4">
-                        <div class="js-footer-widget">
-                            <h5>Download</h5>
-                        </div>
-                    </div><!-- col end -->
-                    <div class="col-lg-4 col-sm-6">
-                        <div class="js-footer-widget">
-                            <h5>Recent Post</h5>
-                            <ul>
-                                <li class="js-primary-border-bottom-gradient">
-                                    <div class="js-widget-recent-post mb-3 pb-3">
-                                        <div class="js-widget-post--content">
-                                            <p><a href="#">Lorem ipsum dolor sit, consectetur adipisicing elit. Rerum
-                                                amet.</a></p>
-                                            <span class="js-post-date">20 June  2018</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="js-widget-recent-post mb-0 pb-0">
-                                        <div class="js-widget-post--content">
-                                            <p><a href="#">Lorem ipsum dolor sit, consectetur adipisicing elit. Rerum
-                                                amet.</a></p>
-                                            <span class="js-post-date">20 June  2018</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div><!-- js-footer-widget -->
-                    </div><!-- col end -->
-                    <div class="col-lg-3 col-sm-6">
+                    <div class="col-lg-12">
                         <div class="js-footer-widget">
                             <h5>Contact Info</h5>
-                            <ul class="js-contact-info">
+                            <ul class="js-contact-info list-inline menu-tabbable">
                                 <li><i class="fa  fa-qq"></i>
                                     <p><span>QQ:</span>534310620</p></li>
                                 <li><i class="fa fa-phone"></i>
@@ -370,6 +337,8 @@
 <div th:fragment="commonJs">
     <script src="../static/assets/js/vendor/jquery-3.3.1.min.js"
             th:src="@{/assets/js/vendor/jquery-3.3.1.min.js}"></script>
+    <script src="../static/common/layui/layui.all.js" th:src="@{/common/layui/layui.all.js}"></script>
+    <script src="../static/assets/js/popper.min.js" th:src="@{/assets/js/popper.min.js}"></script>
     <script src="../static/assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
     <script src="../static/assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
     <script type="text/javascript" src="../static/common/js/vue.min.js" th:src="@{/common/js/vue.min.js}"></script>

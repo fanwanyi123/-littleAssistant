@@ -17,6 +17,11 @@ public class IndexController {
         return "record";
     }
 
+    @RequestMapping(value = "takeNotes")
+    public String takeNotes() {
+        return "takeNotes";
+    }
+
     @RequestMapping(value = "plan")
     public String plan() {
         return "plan";
