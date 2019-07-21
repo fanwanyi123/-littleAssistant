@@ -21,7 +21,7 @@ $(document).ready(function () {
 
         var a = $(this).find("a:first")[0];
 
-        if (location.pathname.indexOf($(a).attr("href")) > 0) {
+        if (location.pathname == $(a).attr("href")) {
             $(this).addClass("active");
         } else {
             $(this).removeClass("active");

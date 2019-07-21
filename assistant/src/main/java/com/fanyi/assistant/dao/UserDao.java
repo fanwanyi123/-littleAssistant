@@ -11,12 +11,11 @@ import java.util.List;
 @Mapper
 public interface UserDao {
 	
-	public List<User> findAll();
+	 List<User> findAll();
 
+	 Integer findUserByInputVal(@Param("userName") String userName, @Param("pwd") String pwd);
 
-	public Integer findUserByInputVal(@Param("userName") String userName, @Param("pwd") String pwd);
+	 void insertUserInfo(User user);
 
-	public void insertUserInfo(User user);
-
-    public Integer findUserByUserName(@Param("userName") String userName);
+     Integer findUserByUserName(@Param("userName") String userName);
 }

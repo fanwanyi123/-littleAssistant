@@ -717,12 +717,6 @@
 .js-album-style4,
 .js-product-area,
 .js-hot-tracks,
-.album-bg{ 
-  background-image: url("../../assets/images/album/bg.jpg") !important;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover; 
-}
 .js-album-thumbnail{
   margin-bottom: 30px;
   position: relative;
@@ -2401,12 +2395,6 @@ header.header-nav-style2 {
     background-repeat: no-repeat;
     background-size: cover; 
     padding-bottom: 200px;
-}
-.album-bg2{
-    background-image: url("../../assets/images/album/album-bg2.jpg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover; 
 }
 .js-album-style2 .album-thumbnail{
     margin-bottom: 20px;

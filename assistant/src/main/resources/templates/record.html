@@ -4,6 +4,8 @@
 <head th:replace="common::commonHead('记录')">
 <body>
 <header th:include="common::commonHeader"></header>
+<link rel="stylesheet" type="text/css" href="../static/common/css/zTreeStyle/zTreeStyle.css"
+      th:href="@{/common/css/zTreeStyle/zTreeStyle.css}">
 <section class="js-product-checkout-area has-color bg-dark pb-0">
     <div class="container">
         <div class="border">
@@ -158,29 +160,26 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-                <div class="radio">
-                    <label>
-                        <i class="fa fa-bookmark" style="color: green"></i>&nbsp;生活&nbsp;&nbsp;
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>&nbsp;
-                    </label>
+                <div style="overflow:auto;">
+                    <ul id="treeDemo" class="ztree" style="max-height:300px;width:auto; overflow-y:scroll;"></ul>
                 </div>
-                <div class="radio">
-                    <label>
-                        <i class="fa fa-bookmark" style="color: red"></i>&nbsp;工作&nbsp;&nbsp;
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">&nbsp;
-                    </label>
+                <div id="rMenu" style="display:none;border:1px solid red;">
+                    要显示的内容
                 </div>
-                <div class="radio">
-                    <label>
-                        <i class="fa fa-bookmark" style="color: yellow"></i>&nbsp;学习&nbsp;&nbsp;
-                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option2">&nbsp;
-                    </label>
-                </div>
+                <!--<div id="rMenu" style="z-index:1000;">-->
+                <!--<ul>-->
+                <!--<li id="m_add" onclick="menuAddNode();">增加节点</li>-->
+                <!--<li id="m_edit" onclick="menuEditNode();">编辑节点</li>-->
+                <!--<li id="m_editFile" onclick="menuEditContentNode();">编辑内容</li>-->
+                <!--<li id="m_delete" onclick="menuDeleteNode();">删除节点</li>-->
+                <!--</ul>-->
+                <!--</div>-->
             </div>
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary align-center" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="tagChecked()" data-dismiss="modal">确定</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
             </div>
 
         </div>
@@ -188,5 +187,11 @@
 </div>
 <footer th:include="common::commonFooter"></footer>
 <div th:include="common::commonJs"></div>
+<script type="text/javascript" src="../static/common/js/jquery.ztree.core-3.5.js"
+        th:src="@{/common/js/jquery.ztree.core-3.5.js}"></script>
+<script type="text/javascript" src="../static/common/js/jquery.ztree.excheck-3.5.js"
+        th:src="@{/common/js/jquery.ztree.excheck-3.5.js}"></script>
+<script type="text/javascript" src="../static/common/js/ztreeinit.js"
+        th:src="@{/common/js/ztreeinit.js}"></script>
 </body>
 </html>

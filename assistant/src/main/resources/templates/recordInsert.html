@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common::commonHead('做笔记')">
+<head th:replace="common::commonHead('做记录')">
 <body>
 <header th:include="common::commonHeader"></header>
-<link rel="stylesheet" type="text/css" href="../static/common/css/zTreeStyle/zTreeStyle.css"
-      th:href="@{/common/css/zTreeStyle/zTreeStyle.css}">
 <style type="text/css">
     .input-text {
         display: block;
@@ -36,14 +34,24 @@
                             <!--Single Forum End-->
                         </div>
                         <div class="col-12">
-                            <!--Single Forum Start-->
-                            <div class="mb-50 mb-sm-30 mb-xs-20">
-                                <i class="fa fa-bookmark"></i>&nbsp;
-                                <a id="selectTag">选择分类
-                                </a>
-                                <i class="fa fa-caret-down"></i>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">分类 <span style="color: #FF5722; ">*</span> </label>
+                                <div class="layui-input-inline">
+                                    <select name="articleParentCategoryId" id="articleParentCategoryId" lay-filter="articleParentCategoryId" required>
+                                        <option value="" selected="">一级分类</option>
+                                        <!--<c:forEach items="${categoryList}" var="c">-->
+                                            <!--<c:if test="${c.categoryPid==0}">-->
+                                                <!--<option value="${c.categoryId}">${c.categoryName}</option>-->
+                                            <!--</c:if>-->
+                                        <!--</c:forEach>-->
+                                    </select>
+                                </div>
+                                <div class="layui-input-inline">
+                                    <select name="articleChildCategoryId" id="articleChildCategoryId">
+                                        <option value="" selected>二级分类</option>
+                                    </select>
+                                </div>
                             </div>
-                            <!--Single Forum End-->
                         </div>
                         <div class="col-12">
                             <!--Single Forum Start-->
@@ -66,52 +74,8 @@
         </div><!-- border -->
     </div><!--container -->
 </section>
-<!-- 模态框 -->
-<div class="modal fade" id="addTagModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- 模态框头部 -->
-            <div class="modal-header">
-                <h4 class="modal-title">添加标签</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- 模态框主体 -->
-            <div class="modal-body">
-                <div style="overflow:auto;">
-                    <ul id="treeDemo" class="ztree" style="max-height:300px;width:auto; overflow-y:scroll;"></ul>
-                </div>
-                <div id="rMenu" style="display:none;border:1px solid red;">
-                    要显示的内容
-                </div>
-                <!--<div id="rMenu" style="z-index:1000;">-->
-                <!--<ul>-->
-                <!--<li id="m_add" onclick="menuAddNode();">增加节点</li>-->
-                <!--<li id="m_edit" onclick="menuEditNode();">编辑节点</li>-->
-                <!--<li id="m_editFile" onclick="menuEditContentNode();">编辑内容</li>-->
-                <!--<li id="m_delete" onclick="menuDeleteNode();">删除节点</li>-->
-                <!--</ul>-->
-                <!--</div>-->
-            </div>
-
-            <!-- 模态框底部 -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="tagChecked()" data-dismiss="modal">确定</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 <footer th:include="common::commonFooter"></footer>
 <div th:include="common::commonJs"></div>
-<script type="text/javascript" src="../static/common/js/jquery.ztree.core-3.5.js"
-        th:src="@{/common/js/jquery.ztree.core-3.5.js}"></script>
-<script type="text/javascript" src="../static/common/js/jquery.ztree.excheck-3.5.js"
-        th:src="@{/common/js/jquery.ztree.excheck-3.5.js}"></script>
-<script type="text/javascript" src="../static/common/js/ztreeinit.js"
-        th:src="@{/common/js/ztreeinit.js}"></script>
 <script>
     layui.use(['form', 'layedit', 'laydate'], function() {
         var form = layui.form
