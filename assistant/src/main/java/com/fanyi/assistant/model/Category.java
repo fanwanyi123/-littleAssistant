@@ -13,16 +13,12 @@ public class Category implements Serializable {
 
     private static final long serialVersionUID = 6687286913317513141L;
 
-    private Integer categoryId;
+    private Integer id;
 
-    private Integer categoryPid;
+    private Integer pid;
 
-    private String categoryName;
+    private String name;
 
-    private String categoryDescription;
-
-    private Integer categoryOrder;
-
-    private String categoryIcon;
+    private String icon;
 
 }

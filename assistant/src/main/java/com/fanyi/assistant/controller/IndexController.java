@@ -12,11 +12,10 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping(value = "record")
-    public String record() {
-        return "record";
+    @RequestMapping(value = "recordInsert")
+    public String insertArticleView() {
+        return "recordInsert";
     }
-
     @RequestMapping(value = "plan")
     public String plan() {
         return "plan";

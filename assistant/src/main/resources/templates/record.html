@@ -1,190 +1,106 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common::commonHead('记录')">
+      xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml"
+      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head th:replace="common::commonHead('全部记录')">
 <body>
 <header th:include="common::commonHeader"></header>
 <link rel="stylesheet" type="text/css" href="../static/common/css/zTreeStyle/zTreeStyle.css"
       th:href="@{/common/css/zTreeStyle/zTreeStyle.css}">
-<section class="js-product-checkout-area has-color bg-dark pb-0">
-    <div class="container">
-        <div class="border">
-            <div class="js-product-checkout-content">
-                <form action="" role="form">
-                    <div class="form-group">
-                        <i class="fa fa-bookmark"></i>
-                        <a id="selectTag">选择分类
-                        </a>
-                        <i class="fa fa-caret-down"></i>
-                    </div>
-                    <div class="form-group">
-                        <label>文件上传<span class="primary-color">*</span></label>
-                        <input type="file" accept=".txt,.Excel,.csv">
-                    </div>
-                    <button type="submit" class="btn btn-primary no-border-radius">提交
-                    </button>
-                </form><!-- form -->
-            </div><!-- js-product-checkout -->
-            <div class="js-checkout-accordion">
-                <div id="accordion">
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne"
-                                        aria-expanded="false" aria-controls="collapseOne">
-                                    02. BILLING INFORMATION
-                                </button>
-                            </h5>
-                        </div> <!-- card-header -->
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion"
-                             style="">
-                            <div class="card-body">
-                                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson
-                                    ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food
-                                    truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a
-                                    bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-                                    keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                                    proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
-                                    farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them
-                                    accusamus labore sustainable VHS.</p>
-                            </div>
-                        </div>
-                    </div><!-- Card Close-->
-                    <div class="card">
-                        <div class="card-header" id="headingTwo">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
-                                        aria-expanded="false" aria-controls="collapseTwo">
-                                    03. SHIPPING INFORMATION
-                                </button>
-                            </h5>
-                        </div> <!-- card-header -->
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion"
-                             style="">
-                            <div class="card-body">
-                                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson
-                                    ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food
-                                    truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a
-                                    bird on it</p>
-                                <p>squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                    helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad
-                                    vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw
-                                    denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore
-                                    sustainable VHS.</p>
-                            </div>
-                        </div>
-                    </div><!-- Card Close-->
-                    <div class="card">
-                        <div class="card-header" id="headingThree">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                        data-target="#collapseThree" aria-expanded="false"
-                                        aria-controls="collapseThree">
-                                    04. SHIPPING METHOD
-                                </button>
-                            </h5>
-                        </div> <!-- card-header -->
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion"
-                             style="">
-                            <div class="card-body">
-                                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson
-                                    ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food
-                                    truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a
-                                    bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-                                    keffiyeh helvetica,</p>
-                                <p>craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-                                    butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-                                    synth nesciunt you probably haven't heard of them accusamus labore sustainable
-                                    VHS.</p>
-                            </div>
-                        </div>
-                    </div><!-- Card Close-->
-                    <div class="card">
-                        <div class="card-header" id="headingfour">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                        data-target="#collapsefour" aria-expanded="false" aria-controls="collapsefour">
-                                    05. PAYMENT INFORMATION
-                                </button>
-                            </h5>
-                        </div><!-- card-header -->
-                        <div id="collapsefour" class="collapse" aria-labelledby="headingfour" data-parent="#accordion"
-                             style="">
-                            <div class="card-body">
-                                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson
-                                    ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food
-                                    truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a
-                                    bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim
-                                    keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
-                                    proident. Ad vegan excepteur </p>
-                                <p>butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-                                    synth nesciunt you probably haven't heard of them accusamus labore sustainable
-                                    VHS.</p>
-                            </div>
-                        </div>
-                    </div><!-- Card Close-->
-                </div> <!-- Accordion -->
-                <div class="js-post-pagination">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-lg-3">
-                            <a href="#" class="js-next-slide"><img src="assets/images/next-slide.png" alt="icon"></a>
-                        </div>
-                        <div class="col-lg-6 text-center">
-                            <ul class="pagination-list">
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 text-right">
-                            <a href="#" class="js-prev-slide"><img src="assets/images/prev-slide.png" alt="icon"></a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- js-checkout-accordion -->
-        </div><!-- border -->
-    </div><!--container -->
-</section>
-<!-- 模态框 -->
-<div class="modal fade" id="addTagModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<style type="text/css">
+    .treeDiv {
+        overflow: auto;
+        max-width: 300px;
+        margin-left: 30px;
+    }
 
-            <!-- 模态框头部 -->
-            <div class="modal-header">
-                <h4 class="modal-title">添加标签</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+    .treeDiv > input {
+        line-height: 10px;
+        width: 55%;
+        background-image: url(assets/images/search.png);
+        background-repeat: no-repeat;
+        background-position: left;
+    }
 
-            <!-- 模态框主体 -->
-            <div class="modal-body">
-                <div style="overflow:auto;">
-                    <ul id="treeDemo" class="ztree" style="max-height:300px;width:auto; overflow-y:scroll;"></ul>
-                </div>
-                <div id="rMenu" style="display:none;border:1px solid red;">
-                    要显示的内容
-                </div>
-                <!--<div id="rMenu" style="z-index:1000;">-->
-                <!--<ul>-->
-                <!--<li id="m_add" onclick="menuAddNode();">增加节点</li>-->
-                <!--<li id="m_edit" onclick="menuEditNode();">编辑节点</li>-->
-                <!--<li id="m_editFile" onclick="menuEditContentNode();">编辑内容</li>-->
-                <!--<li id="m_delete" onclick="menuDeleteNode();">删除节点</li>-->
-                <!--</ul>-->
-                <!--</div>-->
-            </div>
+    #vueTable table {
+        width: 100%;
+        font-size: 14px;
+        border: 1px solid #eee
+    }
 
-            <!-- 模态框底部 -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="tagChecked()" data-dismiss="modal">确定</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            </div>
+    #vueTable {
+        padding: 0 10px;
+    }
 
-        </div>
+    table thead th {
+        background: #4e555b;
+        padding: 10px;
+        text-align: left;
+    }
+
+    table tbody td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        border-right: 1px solid #eee;
+    }
+
+    table tbody td span {
+        margin: 0 10px;
+        cursor: pointer;
+    }
+</style>
+<section class="js-product-checkout-area has-color bg-dark pb-0" style="min-height: 850px;">
+    <div class="treeDiv" style="float: left;">
+        <input id="keyword" type="text" placeholder="搜索关键字">
+        <ul id="treeDemo" class="ztree" style="max-height:500px;width:auto; overflow-y:scroll;"></ul>
     </div>
-</div>
+    <div class="container">
+        <div id="vueTable" style="color: whitesmoke;text-align: center">
+            <table cellpadding="0" cellspacing="0" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>标题</th>
+                    <th>所属分类</th>
+                    <th>状态</th>
+                    <th>发布时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in pageInfo">
+                    <td>{{item.articleTitle}}</td>
+                    <td width="10%"><span v-for="category in item.categoryList">{{category.name}}</span></td>
+                    <td width="15%"><a href=""><span style="color:#5FB878;" v-show="item.articleStatus == 1">已发布</span></a>
+                        <a href=""><span style="color:#FF5722;" v-show="item.articleStatus == 0">草稿</span></a>
+                    </td>
+                    <td width="15%">{{item.articleUpdateTime}}</td>
+                    <td width="15%"><a @click="deletelist(item.articleId)"
+                                       class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-mini" @click="edit(item.articleId)">编辑</a></td>
+                </tr>
+                <tr v-show="pageInfo.length==0">
+                    <td colspan="5" class="text-center text-info">
+                        <p>暂无数据...</p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <el-pagination
+                    background
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    :page-sizes="[5, 10, 20, 30]"
+                    :page-size="pageNum"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="all">
+            </el-pagination>
+        </div>
+    </div><!--container -->
+    <!--music -->
+    <div th:include="common::commonMusicPlayer"></div>
+</section>
 <footer th:include="common::commonFooter"></footer>
 <div th:include="common::commonJs"></div>
 <script type="text/javascript" src="../static/common/js/jquery.ztree.core-3.5.js"
@@ -193,5 +109,7 @@
         th:src="@{/common/js/jquery.ztree.excheck-3.5.js}"></script>
 <script type="text/javascript" src="../static/common/js/ztreeinit.js"
         th:src="@{/common/js/ztreeinit.js}"></script>
+<script type="text/javascript" src="../static/assets/js/record/home.js"
+        th:src="@{/assets/js/record/home.js}"></script>
 </body>
 </html>

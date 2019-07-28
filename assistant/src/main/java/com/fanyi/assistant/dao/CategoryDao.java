@@ -2,7 +2,6 @@ package com.fanyi.assistant.dao;
 
 import com.fanyi.assistant.model.Category;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -60,19 +59,4 @@ public interface CategoryDao {
      */
     List<Category> listCategory();
 
-    /**
-     * 根据父分类找子分类
-     *
-     * @param id 分类ID
-     * @return 列表
-     */
-    List<Category> findChildCategory(@Param(value = "id") Integer id);
-
-    /**
-     * 根据标签名获取标签
-     *
-     * @param name 名称
-     * @return 分类
-     */
-    Category getCategoryByName(String name);
 }

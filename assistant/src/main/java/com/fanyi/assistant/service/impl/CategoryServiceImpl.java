@@ -22,18 +22,6 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDao categoryDao;
 
     @Override
-    public Category getCategoryById(Integer id) {
-        Category category = null;
-        try {
-            category = categoryDao.getCategoryById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("根据分类ID获得分类, id:{}, cause:{}", id, e);
-        }
-        return category;
-    }
-
-    @Override
     public void updateCategory(Category category) {
         try {
             categoryDao.update(category);
@@ -56,19 +44,6 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     @Override
-    public Integer countCategory() {
-        Integer count = 0;
-        try {
-            count = categoryDao.countCategory();
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("统计分类失败, cause:{}", e);
-        }
-        return count;
-    }
-
-
-    @Override
     public List<Category> listCategory() {
         List<Category> categoryList = null;
         try {
@@ -81,17 +56,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
-    @Override
-    public Category getCategoryByName(String name) {
-        Category category = null;
-        try {
-            category = categoryDao.getCategoryByName(name);
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("更新分类失败, category:{}, cause:{}", category, e);
-        }
-        return category;
-    }
 
 
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanyi.assistant.dao.RecordCategoryRefDao">
+    <resultMap id="BaseResultMap" type="com.fanyi.assistant.model.RecordCategoryRef">
+        <result column="article_id" jdbcType="INTEGER" property="articleId"/>
+        <result column="category_id" jdbcType="INTEGER" property="categoryId"/>
+    </resultMap>
+
+    <sql id="tb">record_category_ref</sql>
+
+    <insert id="insert" parameterType="java.lang.Integer">
+        insert into
+        <include refid="tb"/>
+        (article_id, category_id)
+        values (#{articleId}, #{categoryId})
+    </insert>
+
+    <select id="listCategoryByArticleId" parameterType="java.lang.Integer"
+            resultType="com.fanyi.assistant.model.Category">
+        SELECT tag_info.id,tag_info.pid,tag_info.name
+        FROM tag_info, record_category_ref
+        WHERE record_category_ref.article_id = #{value} AND
+        record_category_ref.category_id = tag_info.id
+        ORDER BY tag_info.pid asc
+    </select>
+</mapper>

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function (e) {
     var pageObj = {};
     var url = decodeURI(location.search); //获取url中"?"符后的字串 ('?modFlag=business&role=1')
     if (url.indexOf("?") != -1) {
@@ -18,9 +18,7 @@ $(document).ready(function () {
 
     //菜单添加样式
     $(".menu-tabbable").find("li").each(function () {
-
         var a = $(this).find("a:first")[0];
-
         if (location.pathname == $(a).attr("href")) {
             $(this).addClass("active");
         } else {

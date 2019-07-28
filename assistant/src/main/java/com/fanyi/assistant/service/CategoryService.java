@@ -9,13 +9,6 @@ import java.util.List;
  * @author fanyi
  */
 public interface CategoryService {
-    /**
-     * 获得分类总数
-     *
-     * @return
-     */
-    Integer countCategory();
-
 
     /**
      * 获得分类列表
@@ -23,15 +16,6 @@ public interface CategoryService {
      * @return 分类列表
      */
     List<Category> listCategory();
-
-
-    /**
-     * 根据id查询分类信息
-     *
-     * @param id     ID
-     * @return 分类
-     */
-    Category getCategoryById(Integer id);
 
     /**
      * 添加分类
@@ -48,13 +32,6 @@ public interface CategoryService {
      */
     void updateCategory(Category category);
 
-    /**
-     * 根据分类名获取分类
-     *
-     * @param name 名称
-     * @return 分类
-     */
-    Category getCategoryByName(String name);
 
 
 }

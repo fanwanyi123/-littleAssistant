@@ -1,8 +1,5 @@
 var zTreeObj;
 $(document).ready(function () {
-    $("#selectTag").click(function () {
-        $("#addTagModal").modal('show');
-    })
     $.ajax({
         url: "getTreeData",
         type: "post",
@@ -68,37 +65,17 @@ function onCheck(event, treeId, treeNode) {
     }
 }
 
-function tagChecked() {
-    var nodesChecked = zTreeObj.getSelectedNodes(true);
-    $("#selectTag").text(nodesChecked);
+function OnRightClick(event, treeId, treeNode) {
+
 }
 
-function OnRightClick(event, treeId, treeNode) {
-    checkDiv($(this))
-    // showRMenu("firstNode", event.clientX, event.clientY+top);//处理位置，使用的是绝对位置
-}
-//显示被隐藏的DIV
-function checkDiv(obj){
-    //给要显示的DIV设置左边距
-    var left = event.clientX;
-    var intleft = parseInt(left) + 15;
-    //给要显示的DIV设置上边距
-    var top = event.clientY;
-    var inttop = parseInt(top) +15;
-    $("#rMenu").show();
-    $("#rMenu").css({
-        "background-color":'#33ee33',
-        "position":'absolute',
-        "z-index":1100,
-        "top":inttop,
-        "left":intleft
-    });
-}
-//事件触发 隐藏菜单
-function onBodyMouseDown(event) {
-    if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length > 0)) {
-        rMenu.css({
-            "visibility" : "hidden"
-        });
+//input框变化时查询节点
+document.getElementById("keyword").addEventListener("input", treeSearch, false);
+function treeSearch() {
+    var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+    var keywords = $("#keyword").val();
+    var nodes = treeObj.getNodesByParamFuzzy("name", keywords, null);
+    if (nodes.length > 0) {
+        treeObj.selectNode(nodes[0]);
     }
 }
