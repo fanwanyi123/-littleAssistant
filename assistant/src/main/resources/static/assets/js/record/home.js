@@ -1,7 +1,6 @@
 var vueObj;
 $(document).ready(function (e) {
-    vueFunction("#vueTable", e);
-    // initDataList();
+    vueFunction("#vueRecord", e);
 });
 
 function vueFunction(el, e) {
@@ -12,6 +11,10 @@ function vueFunction(el, e) {
             pageInfo: [],
             pageNum: 5,
             currentPage: 1,
+            recordId: 0,
+            recordDetail: "",
+            afterRecord: "",
+            preRecord: "",
         },
         e: e,
         created: function () {
@@ -47,22 +50,74 @@ function vueFunction(el, e) {
                     }
                 });
             },
+            detailRecord(id){
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url:'/record/'+id,
+                    dataType: "json",
+                    success:function (data) {
+                        var keyArray = Object.keys(data)
+                        if (keyArray.indexOf("0") > -1){
+                            window.location.href = "tab"
+                        }else {
+                           var dataMap = objToStrMap(data)
+                           this.recordDetail = dataMap.get("record");
+                           this.preRecord = dataMap.get("preRecord")
+                           this.afterRecord = dataMap.get("afterRecord")
+                            window.location.href = "tab"
+                        }
+                        console.info(data);
+                    }
+                })
+            },
+            deleteRecord(id) {
+                if(confirmDelete()==true){
+                    $.ajax({
+                        async: false,
+                        type: "POST",
+                        url:'/record/delete/'+id,
+                        dataType: "text",
+                        complete:function () {
+                            window.location.reload();
+                        }
+                    })
+                }
+            },
+            editRecord(id){
+                $.ajax({
+                    async: false,
+                    type: "POST",
+                    url:'/record/edit/'+id,
+                    dataType: "json",
+                    complete:function () {
+                        window.location.reload();
+                    }
+                })
+            }
         }
     })
 }
 
+function confirmDelete() {
+    var msg = "您确定要删除吗？";
+    if (confirm(msg)==true){
+        return true;
+    }else{
+        return false;
+    }
+}
 
-// function initDataList() {
-//     $.ajax({
-//         url: "/record/list",
-//         type: "post",
-//         dataType: "json",
-//         data: {
-//             pageIndex: vueObj.cur
-//         },
-//         success: function (data) {
-//             vueObj.all = data.pages
-//             vueObj.pageInfo = data.list;
-//         }
-//     });
-// }
+function objToStrMap(obj){
+    let strMap = new Map();
+    for (let k of Object.keys(obj)) {
+        strMap.set(k,obj[k]);
+    }
+    return strMap;
+}
+/**
+ *json转换为map
+ */
+function jsonToMap(jsonStr){
+    return this.objToStrMap(JSON.parse(jsonStr));
+}

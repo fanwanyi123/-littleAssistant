@@ -23,9 +23,8 @@ var setting = {
         showTitle: true    //设置是否显示节点的title提示信息
     },
     check:{
-        enable: true,        //设置是否显示checkbox复选框
+        enable: false,        //设置是否显示checkbox复选框
         autoCheckTrigger: false,
-        chkStyle: "checkbox",//值为checkbox或者radio表示
     },
     data: {
         simpleData: {

@@ -43,7 +43,7 @@
                                     <div class="layui-input-inline">
                                         <select name="articleParentCategoryId" id="articleParentCategoryId"
                                                 lay-filter="articleParentCategoryId" required
-                                                v-on:change="getChildTag">
+                                                v-on:change="getChildTag" th:placeholder="请选择">
                                             <option value="" selected="">请选择</option>
                                             <option v-for="item in categoryList" v-if="item.pid == 0" :value="item.id">
                                                 {{item.name}}
@@ -109,7 +109,7 @@
         //上传图片,必须放在 创建一个编辑器前面
         layedit.set({
             uploadImage: {
-                url: '/admin/upload/img' //接口url
+                url: '/upload/img' //接口url
                 , type: 'post' //默认post
             }
         });
@@ -147,12 +147,18 @@
                 , 'unlink' //清除链接
                 , 'face' //表情
                 , 'image' //插入图片
-                , 'code'
+                , 'code'//代码块
             ]
         });
 
         layui.use('code', function () { //加载code模块
-            layui.code();
+            layui.code({
+                elem: "pre",
+                title: '代码',
+                skin: "notepad",
+                encode: true,
+                about: false
+            })
         });
     });
 </script>

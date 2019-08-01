@@ -2,46 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.fanyi.assistant.dao.RecordDao">
     <resultMap id="BaseResultMap" type="com.fanyi.assistant.model.Record">
-        <id column="article_id" property="articleId" jdbcType="INTEGER"/>
-        <result column="article_user_id" property="articleUserId" jdbcType="VARCHAR"/>
-        <result column="article_title" property="articleTitle" jdbcType="VARCHAR"/>
-        <result column="article_content" property="articleContent" jdbcType="LONGVARCHAR"/>
-        <result column="article_summary" property="articleSummary" jdbcType="VARCHAR"/>
-        <result column="article_view_count" property="articleViewCount" jdbcType="INTEGER"/>
-        <result column="article_comment_count" property="articleCommentCount" jdbcType="INTEGER"/>
-        <result column="article_like_count" property="articleLikeCount" jdbcType="INTEGER"/>
-        <result column="article_is_comment" property="articleIsComment" jdbcType="INTEGER"/>
-        <result column="article_order" property="articleOrder" jdbcType="INTEGER"/>
-        <result column="article_create_time" property="articleCreateTime" jdbcType="TIMESTAMP"/>
-        <result column="article_update_time" property="articleUpdateTime" jdbcType="TIMESTAMP"/>
-        <result column="article_status" property="articleStatus" jdbcType="INTEGER"/>
+        <id column="record_id" property="recordId" jdbcType="INTEGER"/>
+        <result column="record_user_id" property="recordUserId" jdbcType="VARCHAR"/>
+        <result column="record_title" property="recordTitle" jdbcType="VARCHAR"/>
+        <result column="record_content" property="recordContent" jdbcType="LONGVARCHAR"/>
+        <result column="record_summary" property="recordSummary" jdbcType="VARCHAR"/>
+        <result column="record_view_count" property="recordViewCount" jdbcType="INTEGER"/>
+        <result column="record_comment_count" property="recordCommentCount" jdbcType="INTEGER"/>
+        <result column="record_like_count" property="recordLikeCount" jdbcType="INTEGER"/>
+        <result column="record_is_comment" property="recordIsComment" jdbcType="INTEGER"/>
+        <result column="record_order" property="recordOrder" jdbcType="INTEGER"/>
+        <result column="record_create_time" property="recordCreateTime" jdbcType="TIMESTAMP"/>
+        <result column="record_update_time" property="recordUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="record_status" property="recordStatus" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="tb">record</sql>
 
     <sql id="Base_Column_List">
-    article_id, article_user_id, article_title, article_content,article_summary, article_view_count, article_comment_count, article_like_count, article_create_time,
-    article_update_time, article_is_comment, article_status, article_order
+    record_id, record_user_id, record_title, record_content,record_summary, record_view_count, record_comment_count, record_like_count, record_create_time,
+    record_update_time, record_is_comment, record_status, record_order
     </sql>
 
     <insert id="insert" parameterType="com.fanyi.assistant.model.Record" useGeneratedKeys="true"
-            keyProperty="articleId">
+            keyProperty="recordId">
         insert into
         <include refid="tb"/>
-        (article_user_id, article_title,
-        article_view_count, article_comment_count,
-        article_like_count, article_create_time, article_update_time,
-        article_is_comment, article_status, article_order,
-        article_content, article_summary)
-        values (#{articleUserId,jdbcType=INTEGER}, #{articleTitle,jdbcType=VARCHAR},
-        #{articleViewCount,jdbcType=INTEGER},
-        #{articleCommentCount,jdbcType=INTEGER},
-        #{articleLikeCount,jdbcType=INTEGER}, #{articleCreateTime,jdbcType=TIMESTAMP},
-        #{articleUpdateTime,jdbcType=TIMESTAMP},
-        #{articleIsComment,jdbcType=INTEGER}, #{articleStatus,jdbcType=INTEGER}, #{articleOrder,jdbcType=INTEGER},
-        #{articleContent,jdbcType=LONGVARCHAR}, #{articleSummary,jdbcType=VARCHAR})
+        (record_user_id, record_title,
+        record_view_count, record_comment_count,
+        record_like_count, record_create_time, record_update_time,
+        record_is_comment, record_status, record_order,
+        record_content, record_summary)
+        values (#{recordUserId,jdbcType=INTEGER}, #{recordTitle,jdbcType=VARCHAR},
+        #{recordViewCount,jdbcType=INTEGER},
+        #{recordCommentCount,jdbcType=INTEGER},
+        #{recordLikeCount,jdbcType=INTEGER}, #{recordCreateTime,jdbcType=TIMESTAMP},
+        #{recordUpdateTime,jdbcType=TIMESTAMP},
+        #{recordIsComment,jdbcType=INTEGER}, #{recordStatus,jdbcType=INTEGER}, #{recordOrder,jdbcType=INTEGER},
+        #{recordContent,jdbcType=LONGVARCHAR}, #{recordSummary,jdbcType=VARCHAR})
     </insert>
 
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from
+        <include refid="tb"/>
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </delete>
 
     <select id="findAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT
@@ -50,21 +55,60 @@
         record
         <where>
             <if test="status != null">
-                article.article_status = #{status} AND
+                record.record_status = #{status} AND
             </if>
             <if test="keywords != null">
-                article.article_title LIKE concat(concat('%',#{keywords}),'%') AND
+                record.record_title LIKE concat(concat('%',#{keywords}),'%') AND
             </if>
             <if test="userId != null">
-                article.article_user_id = #{userId} AND
+                record.record_user_id = #{userId} AND
             </if>
             <if test="categoryId != null">
-                article.article_id IN (
-                SELECT record_category_ref.article_id FROM record_category_ref
+                record.record_id IN (
+                SELECT record_category_ref.record_id FROM record_category_ref
                 WHERE record_category_ref.category_id = #{categoryId}
                 ) AND
             </if>
         </where>
-        ORDER BY `record`.`article_order` DESC, `record`.`article_id` DESC
+        ORDER BY `record`.`record_order` DESC, `record`.`record_id` DESC
+    </select>
+
+
+    <select id="getRecordByStatusAndId" resultType="com.fanyi.assistant.model.Record">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="tb"/>
+        <where>
+            <if test="status != null">
+                record_status = #{status} AND
+            </if>
+            record_id = #{id}
+        </where>
+    </select>
+
+    <!--获得下一篇的文章-->
+    <select id="getAfterRecord" resultType="com.fanyi.assistant.model.Record">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="tb"/>
+        <where>
+            record_id > #{id} AND record_status = 1
+        </where>
+        ORDER BY record_id
+        limit 1
+    </select>
+    <!--获得上一篇的文章-->
+    <select id="getPreRecord" resultType="com.fanyi.assistant.model.Record">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        <include refid="tb"/>
+        <where>
+            record_id &lt; #{id} AND record_status = 1
+        </where>
+        ORDER BY record_id
+        limit 1
     </select>
 </mapper>

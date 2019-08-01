@@ -36,33 +36,58 @@ public class RecordServiceImpl implements RecordService {
     public void insertRecord(Record record) {
         //添加文章
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        record.setArticleCreateTime(formatter.format(new Date()));
+        record.setRecordCreateTime(formatter.format(new Date()));
         String dateString = formatter.format(new Date());
-        record.setArticleUpdateTime(dateString);
-        record.setArticleViewCount(0);
-        record.setArticleLikeCount(0);
-        record.setArticleCommentCount(0);
-        record.setArticleOrder(1);
+        record.setRecordUpdateTime(dateString);
+        record.setRecordViewCount(0);
+        record.setRecordLikeCount(0);
+        record.setRecordCommentCount(0);
+        record.setRecordOrder(1);
         recordDao.insert(record);
         //添加分类和文章关联
         for (int i = 0; i < record.getCategoryList().size(); i++) {
-            RecordCategoryRef recordCategoryRef = new RecordCategoryRef(record.getArticleId(), record.getCategoryList().get(i).getId());
+            RecordCategoryRef recordCategoryRef = new RecordCategoryRef(record.getRecordId(), record.getCategoryList().get(i).getId());
             recordCategoryRefDao.insert(recordCategoryRef);
         }
     }
 
+    @Override
+    public void deleteRecord(Integer id) {
+        recordDao.deleteById(id);
+    }
 
     @Override
     public PageInfo<Record> pageArticle(Integer pageIndex,
                                          Integer pageSize,
                                          HashMap<String, Object> criteria) {
         PageHelper.startPage(pageIndex, pageSize);
-        List<Record> articleList = recordDao.findAll(criteria);
-        for (int i = 0; i < articleList.size(); i++) {
+        List<Record> recordList = recordDao.findAll(criteria);
+        for (int i = 0; i < recordList.size(); i++) {
             //封装CategoryList
-            List<Category> categoryList = recordCategoryRefDao.listCategoryByArticleId(articleList.get(i).getArticleId());
-            articleList.get(i).setCategoryList(categoryList);
+            List<Category> categoryList = recordCategoryRefDao.listCategoryByArticleId(recordList.get(i).getRecordId());
+            recordList.get(i).setCategoryList(categoryList);
         }
-        return new PageInfo<>(articleList);
+        return new PageInfo<>(recordList);
+    }
+
+
+    @Override
+    public Record getRecordByStatusAndId(Integer status, Integer id) {
+        Record record = recordDao.getRecordByStatusAndId(status, id);
+        if (record != null) {
+            List<Category> categoryList = recordCategoryRefDao.listCategoryByArticleId(record.getRecordId());
+            record.setCategoryList(categoryList);
+        }
+        return record;
+    }
+
+    @Override
+    public Record getAfterRecord(Integer id) {
+        return recordDao.getAfterRecord(id);
+    }
+
+    @Override
+    public Record getPreRecord(Integer id) {
+        return recordDao.getPreRecord(id);
     }
 }

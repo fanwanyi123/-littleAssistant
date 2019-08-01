@@ -19,8 +19,13 @@ public interface RecordService {
     void insertRecord(Record record);
 
     /**
+     * 删除文章
+     * @param id 文章ID
+     */
+    void deleteRecord(Integer id);
+
+    /**
      * 分页显示
-     *
      * @param pageIndex 第几页开始
      * @param pageSize  一页显示多少
      * @param criteria  查询条件
@@ -29,4 +34,28 @@ public interface RecordService {
     PageInfo<Record> pageArticle(Integer pageIndex,
                                  Integer pageSize,
                                  HashMap<String, Object> criteria);
+
+
+    /**
+     * 文章详情页面显示
+     * @param status 状态
+     * @param id 章ID
+     * @return 文章
+     */
+    Record getRecordByStatusAndId(Integer status, Integer id);
+
+
+    /**
+     * 获得上一篇文章
+     * @param id 文章ID
+     * @return 文章
+     */
+    Record getAfterRecord(Integer id);
+
+    /**
+     * 获得下一篇文章
+     * @param id 文章ID
+     * @return 文章
+     */
+    Record getPreRecord(Integer id);
 }

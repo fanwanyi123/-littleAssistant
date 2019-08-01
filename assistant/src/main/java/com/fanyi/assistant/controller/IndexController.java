@@ -26,10 +26,13 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value = "expressInfo")
-    public String expressInfo() {
-        return "expressInfo";
-
+    @RequestMapping(value = "tree")
+    public String tree() {
+        return "tree";
     }
 
+    @RequestMapping(value = "tab")
+    public String tab() {
+        return "tab";
+    }
 }

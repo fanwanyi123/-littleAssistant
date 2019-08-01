@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml"
-      xmlns:v-bind="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common::commonHead('全部记录')">
 <body>
 <header th:include="common::commonHeader"></header>
-<link rel="stylesheet" type="text/css" href="../static/common/css/zTreeStyle/zTreeStyle.css"
-      th:href="@{/common/css/zTreeStyle/zTreeStyle.css}">
 <style type="text/css">
-    .treeDiv {
-        overflow: auto;
-        max-width: 300px;
-        margin-left: 30px;
-    }
-
-    .treeDiv > input {
-        line-height: 10px;
-        width: 55%;
-        background-image: url(assets/images/search.png);
-        background-repeat: no-repeat;
-        background-position: left;
-    }
-
-    #vueTable table {
+    #vueRecord table {
         width: 100%;
         font-size: 14px;
         border: 1px solid #eee
     }
 
-    #vueTable {
+    #vueRecord {
         padding: 0 10px;
     }
 
@@ -37,7 +20,6 @@
         padding: 10px;
         text-align: left;
     }
-
     table tbody td {
         padding: 10px;
         text-align: left;
@@ -51,12 +33,8 @@
     }
 </style>
 <section class="js-product-checkout-area has-color bg-dark pb-0" style="min-height: 850px;">
-    <div class="treeDiv" style="float: left;">
-        <input id="keyword" type="text" placeholder="搜索关键字">
-        <ul id="treeDemo" class="ztree" style="max-height:500px;width:auto; overflow-y:scroll;"></ul>
-    </div>
     <div class="container">
-        <div id="vueTable" style="color: whitesmoke;text-align: center">
+        <div id="vueRecord" style="color: whitesmoke;text-align: center">
             <table cellpadding="0" cellspacing="0" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -69,15 +47,15 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in pageInfo">
-                    <td>{{item.articleTitle}}</td>
+                    <td><a @click="detailRecord(item.recordId)" href="#">{{item.recordTitle}}</a></td>
                     <td width="10%"><span v-for="category in item.categoryList">{{category.name}}</span></td>
-                    <td width="15%"><a href=""><span style="color:#5FB878;" v-show="item.articleStatus == 1">已发布</span></a>
-                        <a href=""><span style="color:#FF5722;" v-show="item.articleStatus == 0">草稿</span></a>
+                    <td width="15%"><a href=""><span style="color:#5FB878;" v-show="item.recordStatus == 1">已发布</span></a>
+                        <a href=""><span style="color:#FF5722;" v-show="item.recordStatus == 0">草稿</span></a>
                     </td>
-                    <td width="15%">{{item.articleUpdateTime}}</td>
-                    <td width="15%"><a @click="deletelist(item.articleId)"
+                    <td width="15%">{{item.recordUpdateTime}}</td>
+                    <td width="20%"><a @click="deleteRecord(item.recordId)"
                                        class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
-                        <a class="layui-btn layui-btn-danger layui-btn-mini" @click="edit(item.articleId)">编辑</a></td>
+                        <a class="layui-btn layui-btn-danger layui-btn-mini" @click="editRecord(item.recordId)">编辑</a></td>
                 </tr>
                 <tr v-show="pageInfo.length==0">
                     <td colspan="5" class="text-center text-info">
@@ -103,12 +81,6 @@
 </section>
 <footer th:include="common::commonFooter"></footer>
 <div th:include="common::commonJs"></div>
-<script type="text/javascript" src="../static/common/js/jquery.ztree.core-3.5.js"
-        th:src="@{/common/js/jquery.ztree.core-3.5.js}"></script>
-<script type="text/javascript" src="../static/common/js/jquery.ztree.excheck-3.5.js"
-        th:src="@{/common/js/jquery.ztree.excheck-3.5.js}"></script>
-<script type="text/javascript" src="../static/common/js/ztreeinit.js"
-        th:src="@{/common/js/ztreeinit.js}"></script>
 <script type="text/javascript" src="../static/assets/js/record/home.js"
         th:src="@{/assets/js/record/home.js}"></script>
 </body>

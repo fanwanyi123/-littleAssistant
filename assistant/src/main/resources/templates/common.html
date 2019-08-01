@@ -42,6 +42,13 @@
     <!-- color -->
     <link rel="stylesheet" href="../static/assets/css/color.css" th:href="@{/assets/css/color.css}">
     <link rel="stylesheet" href="../static/common/css/element.min.css" th:href="@{/common/css/element.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/common/css/zTreeStyle/zTreeStyle.css"
+          th:href="@{/common/css/zTreeStyle/zTreeStyle.css}">
+    <style>
+        .ztree li{
+            margin: 10px;
+        }
+    </style>
     <script language="javascript">
         function getCurDate() {
             var d = new Date();
@@ -105,7 +112,7 @@
                                 </li>
                                 <li><a href="/recordInsert" th:text="#{message.recording}"></a></li>
                                 <li><a href="/plan" th:text="#{message.plan}"></a></li>
-                                <li><a href="/record" th:text="#{message.time.axis}"></a></li>
+                                <li><a href="/record" th:text="#{message.record.book}"></a></li>
                             </ul>
                         </div><!-- #header-menu-wrap -->
                     </nav><!-- .header-nav -->
@@ -132,23 +139,25 @@
     <div class="js-offcanvas-menu js-index1-nav" id="js_offcanvas_menu">
         <nav class="header-nav">
             <span class="js-offcanvas-close"><i class="pe-7s-close"></i></span>
-            <div class="cssmenu" data-title="Menu">
-                <ul class="menu list-inline menu-tabbable">
-                    <li class="active"><i class="fa fa-home"></i><a href="../index" th:text="#{message.home}"></a>
-                    </li>
-                    <li><i class="fa fa-pencil"></i><a href="#" th:text="#{message.recording}"></a></li>
-                    <li><i class="fa fa-calendar"></i><a href="#" th:text="#{message.plan}"></a></li>
-                </ul>
-            </div><!-- #header-menu-wrap -->
             <div class="widget mt-3">
                 <div class="js-widget-search">
                     <form>
-                        <input type="text" required="" placeholder="Search Here..">
+                        <input type="text" id="keyword" required="" placeholder="Search Here..">
                         <i><img alt="search icon" src="../static/assets/images/search.png"
                                 th:src="@{/assets/images/search.png}"></i>
                     </form>
                 </div>
             </div>
+            <div data-title="Menu">
+                <!--<ul class="menu list-inline menu-tabbable">-->
+                <!--<li class="active"><i class="fa fa-home"></i><a href="../index" th:text="#{message.home}"></a>-->
+                <!--</li>-->
+                <!--<li><i class="fa fa-pencil"></i><a href="#" th:text="#{message.recording}"></a></li>-->
+                <!--<li><i class="fa fa-calendar"></i><a href="#" th:text="#{message.plan}"></a></li>-->
+                <!--</ul>-->
+                <ul id="treeDemo" class="ztree"
+                    style="max-height:500px;width:auto; overflow-y:scroll;overflow-x:scroll;color: #0b0b0b"></ul>
+            </div><!-- #header-menu-wrap -->
         </nav> <!-- header-nav -->
     </div><!-- js-offcanvas-menu -->
 </div>
@@ -249,31 +258,31 @@
 </div>
 <!--&lt;!&ndash; 模态框（Modal） &ndash;&gt;-->
 <!--<div th:fragment="commonModal">-->
-    <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-        <!--<div class="modal-dialog">-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-header">-->
-                    <!--<button type="button" class="close" data-dismiss="modal"-->
-                            <!--aria-hidden="true">×-->
-                    <!--</button>-->
-                    <!--<h4 class="modal-title" id="myModalLabel">-->
-                    <!--</h4>-->
-                <!--</div>-->
-                <!--<div class="modal-body iframe-body-sty">-->
-                    <!--<iframe id="iframe-page-one" style="width: 500px;height: 300px" frameborder="0"-->
-                            <!--scrolling="auto"></iframe>-->
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
-                    <!--<button type="button" class="btn btn-default"-->
-                            <!--data-dismiss="modal">关闭-->
-                    <!--</button>-->
-                    <!--<button type="button" class="btn btn-primary">-->
-                        <!--提交更改-->
-                    <!--</button>-->
-                <!--</div>-->
-            <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
-        <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
-    <!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+<!--<div class="modal-dialog">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<button type="button" class="close" data-dismiss="modal"-->
+<!--aria-hidden="true">×-->
+<!--</button>-->
+<!--<h4 class="modal-title" id="myModalLabel">-->
+<!--</h4>-->
+<!--</div>-->
+<!--<div class="modal-body iframe-body-sty">-->
+<!--<iframe id="iframe-page-one" style="width: 500px;height: 300px" frameborder="0"-->
+<!--scrolling="auto"></iframe>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" class="btn btn-default"-->
+<!--data-dismiss="modal">关闭-->
+<!--</button>-->
+<!--<button type="button" class="btn btn-primary">-->
+<!--提交更改-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
 <!--</div>-->
 
 <a th:fragment="commonLanguage" th:onclick="switchLanguage()"
@@ -351,13 +360,19 @@
     <script src="../static/assets/js/menu.js" th:src="@{/assets/js/menu.js}"></script>
     <script src="../static/assets/js/countdown.js" th:src="@{/assets/js/countdown.js}"></script>
     <!--<script src="../static/assets/js/jquery.nice-select.min.js"-->
-            <!--th:src="@{/assets/js/jquery.nice-select.min.js}"></script>-->
+    <!--th:src="@{/assets/js/jquery.nice-select.min.js}"></script>-->
     <script src="../static/assets/js/jquery.jplayer.min.js" th:src="@{/assets/js/jquery.jplayer.min.js}"></script>
     <script src="../static/assets/js/jplayer.playlist.min.js" th:src="@{/assets/js/jplayer.playlist.min.js}"></script>
     <script src="../static/assets/js/audio-player.js" th:src="@{/assets/js/audio-player.js}"></script>
     <script src="../static/assets/js/audioplayer.js" th:src="@{/assets/js/audioplayer.js}"></script>
     <script src="../static/assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
     <script src="../static/common/js/index.js" th:src="@{/common/js/index.js}"></script>
+    <script type="text/javascript" src="../static/common/js/jquery.ztree.core-3.5.js"
+            th:src="@{/common/js/jquery.ztree.core-3.5.js}"></script>
+    <script type="text/javascript" src="../static/common/js/jquery.ztree.excheck-3.5.js"
+            th:src="@{/common/js/jquery.ztree.excheck-3.5.js}"></script>
+    <script type="text/javascript" src="../static/common/js/ztreeinit.js"
+            th:src="@{/common/js/ztreeinit.js}"></script>
 </div>
 </body>
 </html>

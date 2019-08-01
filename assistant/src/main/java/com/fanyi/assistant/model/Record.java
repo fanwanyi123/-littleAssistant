@@ -13,31 +13,31 @@ public class Record implements Serializable{
 
     private static final long serialVersionUID = 5207865247400761539L;
 
-    private Integer articleId;
+    private Integer recordId;
 
-    private String articleUserId;
+    private String recordUserId;
 
-    private String articleTitle;
+    private String recordTitle;
 
-    private Integer articleViewCount;
+    private Integer recordViewCount;
 
-    private Integer articleCommentCount;
+    private Integer recordCommentCount;
 
-    private Integer articleLikeCount;
+    private Integer recordLikeCount;
 
-    private String articleCreateTime;
+    private String recordCreateTime;
 
-    private String articleUpdateTime;
+    private String recordUpdateTime;
 
-    private Integer articleIsComment;
+    private Integer recordIsComment;
 
-    private Integer articleStatus;
+    private Integer recordStatus;
 
-    private Integer articleOrder;
+    private Integer recordOrder;
 
-    private String articleContent;
+    private String recordContent;
 
-    private String articleSummary;
+    private String recordSummary;
 
     private List<Category> categoryList;
 

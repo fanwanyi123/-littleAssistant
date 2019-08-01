@@ -14,15 +14,15 @@ public class RecordCategoryRef implements Serializable{
 
     private static final long serialVersionUID = -6809206515467725995L;
 
-    private Integer articleId;
+    private Integer recordId;
 
     private Integer categoryId;
 
     public RecordCategoryRef() {
     }
 
-    public RecordCategoryRef(Integer articleId, Integer categoryId) {
-        this.articleId = articleId;
+    public RecordCategoryRef(Integer recordId, Integer categoryId) {
+        this.recordId = recordId;
         this.categoryId = categoryId;
     }
 }
