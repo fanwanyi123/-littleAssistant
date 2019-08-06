@@ -1,7 +1,7 @@
 var zTreeObj;
 $(document).ready(function () {
     $.ajax({
-        url: "getTreeData",
+        url: getRootPath() + "/getTreeData",
         type: "post",
         dataType: "json",
         enable: true,
@@ -50,9 +50,9 @@ function onClick(event, treeId, treeNode, clickFlag) {
 function initTreeIcon(data) {
     for (var i=0;i<data.length;i++){
       if (data[i].pid ==0){
-          data[i].icon = "common/css/zTreeStyle/img/diy/3.png"
+          data[i].icon = getRootPath() + "/common/css/zTreeStyle/img/diy/3.png"
       }else {
-          data[i].icon = "common/css/zTreeStyle/img/diy/2.png"
+          data[i].icon = getRootPath() + "/common/css/zTreeStyle/img/diy/2.png"
       }
     }
 }

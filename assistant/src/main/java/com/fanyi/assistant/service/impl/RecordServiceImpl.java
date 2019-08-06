@@ -52,6 +52,22 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateRecordDetail(Record record) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        record.setRecordUpdateTime(formatter.format(new Date()));
+        recordDao.update(record);
+        if (record.getCategoryList() != null) {
+            //删除分类和文章关联
+            recordCategoryRefDao.deleteByRecordId(record.getRecordId());
+            //添加分类和文章关联
+            for (int i = 0; i < record.getCategoryList().size(); i++) {
+                RecordCategoryRef recordCategoryRef = new RecordCategoryRef(record.getRecordId(), record.getCategoryList().get(i).getId());
+                recordCategoryRefDao.insert(recordCategoryRef);
+            }
+        }
+    }
+    @Override
     public void deleteRecord(Integer id) {
         recordDao.deleteById(id);
     }

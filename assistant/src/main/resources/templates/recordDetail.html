@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common::commonHead('记录详情')">
+<body>
+<header th:include="common::commonHeader"></header>
+<input type="hidden" name="recordId" id="recordId" th:value="${recordId}">
+<section class="js-product-checkout-area has-color bg-dark pb-0">
+    <div class="container">
+        <div class="js-product-checkout-content">
+            <div id="recordDetailVue" v-cloak>
+                <!--<ul class="breadcrumb">-->
+                    <!--<li><a href="/record">总览</a> <span class="divider">/</span></li>-->
+                    <!--<li class="active">详情</li>-->
+                <!--</ul>-->
+                <span class="layui-breadcrumb" style="visibility: visible;">
+                  <a href="/record">总览</a><span lay-separator="">/</span>
+                    <a><cite>详情</cite></a>
+                </span>
+                <article class="post" id="articleDetail">
+                    <div class="row">
+                        <div class="col-12">
+                            <h3 name="recordTitle" style="text-align: center;">
+                                {{recordTitle}}
+                            </h3>
+                        </div>
+                        <div class="col-12">
+                            <!--Single Forum Start-->
+                            <div class="mb-50 mb-sm-30 mb-xs-20">
+                                <span id="recordContent"></span>
+                            </div>
+                            <!--Single Forum End-->
+                        </div>
+                        <div class="col-12">
+                            <div class="share-sd">
+                            <span class="share-s" style="margin-top: 25px!important;">
+                                <a href="javascript:void(0)" id="share-s" title="分享">
+                                                <i class="fa fa-share-alt"></i>分享
+                                </a>
+                            </span>
+                                <div id="share" style="display: none">
+                                    <ul>
+                                        <li><a title="更多" class="bds_more fa fa-plus-square" data-cmd="more"
+                                               onclick="return false;" href="#"></a></li>
+                                        <li><a title="分享到QQ空间" class="fa fa-qq" data-cmd="qzone" onclick="return false;"
+                                               href="#"></a></li>
+                                        <li><a title="分享到新浪微博" class="fa fa-weibo" data-cmd="tsina"
+                                               onclick="return false;" href="#"></a></li>
+                                        <li><a title="分享到腾讯微博" class="fa fa-pinterest-square" data-cmd="tqq"
+                                               onclick="return false;" href="#"></a></li>
+                                        <li><a title="分享到人人网" class="fa fa-renren" data-cmd="renren"
+                                               onclick="return false;" href="#"></a></li>
+                                        <li><a title="分享到微信" class="fa fa-weixin" data-cmd="weixin"
+                                               onclick="return false;" href="#"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <div class="footer-nav">
+                    <span class="footer-nav-link" style="float: left" v-if="preRecord==null" disabled="disabled">
+                        <i class="el-icon-arrow-left"></i>
+                         已是第一页
+                    </span>
+                    <span class="footer-nav-link" style="float: left" v-else @click="pageJump(preRecord.recordId)">
+                        <i class="el-icon-arrow-left"></i>
+                          上一页
+                    </span>
+                    <span class="footer-nav-link" style="float: right" v-if="afterRecord==null" disabled="disabled">
+                        已是最后一页
+                        <i class="el-icon-arrow-right"></i>
+                    </span>
+                    <span class="footer-nav-link" style="float: right" v-else @click="pageJump(afterRecord.recordId)">
+                        下一页
+                        <i class="el-icon-arrow-right"></i>
+                    </span>
+                </div>
+                <!--<ul class="pager">-->
+                <!--<li class="previous">-->
+                <!--<a href="#" @click="pageJump(preRecord.recordId)" rel="next">-->
+                <!--上一页-->
+                <!--<br>-->
+                <!--<span :value="preRecord==null ? '已是第一页': preRecord.recordTitle"></span>-->
+                <!--</a>-->
+                <!--</li>-->
+                <!--<li class="next">-->
+                <!--<a href="#" @click="pageJump(afterRecord.recordId)" rel="next">-->
+                <!--下一页-->
+                <!--<br>-->
+                <!--<span :value="afterRecord==null ? '已是最后一页': afterRecord.recordTitle"></span>-->
+                <!--</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+            </div><!--VUE -->
+        </div><!-- js-product-checkout -->
+    </div><!--container -->
+    <!--music -->
+    <div th:include="common::commonMusicPlayer"></div>
+</section>
+<footer th:include="common::commonFooter"></footer>
+<div th:include="common::commonJs"></div>
+<script>
+    // 分享 √
+    if (/iphone|ipod|ipad|ipad|mobile/i.test(navigator.userAgent.toLowerCase())) {
+        $('.share-sd').click(function () {
+            $('#share').animate({
+                    opacity: 'toggle',
+                    top: '-80px'
+                },
+                500).animate({
+                    top: '-60px'
+                },
+                'fast');
+            return false;
+        });
+    } else {
+        $(".share-sd").mouseover(function () {
+            $(this).children("#share").show();
+        });
+        $(".share-sd").mouseout(function () {
+            $(this).children("#share").hide();
+        });
+    }
+</script>
+<script type="text/javascript" src="../static/assets/js/record/detail.js"
+        th:src="@{/assets/js/record/detail.js}"></script>
+</body>
+</html>

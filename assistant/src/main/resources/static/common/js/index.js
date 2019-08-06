@@ -19,7 +19,9 @@ $(document).ready(function (e) {
     //菜单添加样式
     $(".menu-tabbable").find("li").each(function () {
         var a = $(this).find("a:first")[0];
-        if (location.pathname == $(a).attr("href")) {
+        var activeUrl = location.pathname.lastIndexOf('/') > 0 ?
+            location.pathname.slice(0, location.pathname.lastIndexOf('/')) : location.pathname
+        if (activeUrl.includes($(a).attr("href"))) {
             $(this).addClass("active");
         } else {
             $(this).removeClass("active");

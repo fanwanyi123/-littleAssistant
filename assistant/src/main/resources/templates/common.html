@@ -45,9 +45,10 @@
     <link rel="stylesheet" type="text/css" href="../static/common/css/zTreeStyle/zTreeStyle.css"
           th:href="@{/common/css/zTreeStyle/zTreeStyle.css}">
     <style>
-        .ztree li{
+        .ztree li {
             margin: 10px;
         }
+        [v-cloak]{ display: none; }
     </style>
     <script language="javascript">
         function getCurDate() {
@@ -92,9 +93,21 @@
         }
 
         setInterval("getCurDate()", 100);
+
+        function getRootPath() {
+            var curWwwPath = window.document.location.href;
+            var pathName = window.document.location.pathname;
+            var pos = curWwwPath.indexOf(pathName);
+            var localhostPaht = curWwwPath.substring(0, pos);
+            return localhostPaht;
+        }
     </script>
+    <script src="../static/assets/js/vendor/jquery-3.3.1.min.js"
+            th:src="@{/assets/js/vendor/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" src="../static/common/js/vue.min.js" th:src="@{/common/js/vue.min.js}"></script>
 </head>
 <body>
+<input type="hidden" id="path">
 <div th:fragment="commonHeader">
     <header class="header-nav-area js-index1-nav sticky-on"><!-- header-nav -->
         <div class="container-fluid">
@@ -110,7 +123,7 @@
                             <ul class="menu list-inline menu-tabbable">
                                 <li><a href="/index" th:text="#{message.home}"></a>
                                 </li>
-                                <li><a href="/recordInsert" th:text="#{message.recording}"></a></li>
+                                <li><a href="/takeNotes" th:text="#{message.recording}"></a></li>
                                 <li><a href="/plan" th:text="#{message.plan}"></a></li>
                                 <li><a href="/record" th:text="#{message.record.book}"></a></li>
                             </ul>
@@ -127,7 +140,7 @@
                             <li><a href="login">[[#{message.login}]]</a></li>
                             <li class="sidebar-menu"><span id="sidebar_menu_icon">
                             <img alt="Icon" src="../static/assets/images/menu.png"
-                                 th:src="@{assets/images/menu.png}"></span>
+                                 th:src="@{/assets/images/menu.png}"></span>
                             </li>
                         </ul>
                     </div><!-- header-icon -->
@@ -345,13 +358,10 @@
     </footer> <!-- footer End-->
 </div>
 <div th:fragment="commonJs">
-    <script src="../static/assets/js/vendor/jquery-3.3.1.min.js"
-            th:src="@{/assets/js/vendor/jquery-3.3.1.min.js}"></script>
     <script src="../static/common/layui/layui.all.js" th:src="@{/common/layui/layui.all.js}"></script>
     <script src="../static/assets/js/popper.min.js" th:src="@{/assets/js/popper.min.js}"></script>
     <script src="../static/assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
     <script src="../static/assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
-    <script type="text/javascript" src="../static/common/js/vue.min.js" th:src="@{/common/js/vue.min.js}"></script>
     <script src="../static/common/js/element.min.js" th:src="@{/common/js/element.min.js}"></script>
     <script src="../static/assets/js/jquery.magnific-popup.min.js"
             th:src="@{/assets/js/jquery.magnific-popup.min.js}"></script>

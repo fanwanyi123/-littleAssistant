@@ -24,8 +24,15 @@ public interface RecordCategoryRefDao {
 
     /**
      * 根据文章ID获得分类列表
-     * @param articleId 文章ID
+     * @param recordId 文章ID
      * @return 分类列表
      */
-    List<Category> listCategoryByArticleId(Integer articleId);
+    List<Category> listCategoryByArticleId(Integer recordId);
+
+    /**
+     * 根据文章ID删除记录
+     * @param recordId 文章ID
+     * @return 影响行数
+     */
+    int deleteByRecordId(Integer recordId);
 }

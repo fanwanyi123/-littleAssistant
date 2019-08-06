@@ -9,6 +9,7 @@ import com.fanyi.assistant.service.RecordService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,6 +31,7 @@ public class RecordController {
     private CategoryService categoryService;
     @Autowired
     private RecordService recordService;
+
     /**
      * 做记录页面显示
      *
@@ -44,42 +46,43 @@ public class RecordController {
 
     /**
      * 后台添加文章提交操作
-     * @param articleParam articleParam
+     *
+     * @param recordParam recordParam
      * @return
      */
     @RequestMapping(value = "/insertSubmit", method = RequestMethod.POST)
-    public String insertArticleSubmit(HttpSession session, RecordParam articleParam) {
+    public String insertRecordSubmit(HttpSession session, RecordParam recordParam) {
         Record record = new Record();
         //用户ID
         String userName = (String) session.getAttribute("userName");
         record.setRecordUserId(userName);
-        record.setRecordTitle(articleParam.getArticleTitle());
+        record.setRecordTitle(recordParam.getRecordTitle());
         //文章摘要
         int summaryLength = 150;
-        String summaryText = HtmlUtil.cleanHtmlTag(articleParam.getArticleContent());
+        String summaryText = HtmlUtil.cleanHtmlTag(recordParam.getRecordContent());
         if (summaryText.length() > summaryLength) {
             String summary = summaryText.substring(0, summaryLength);
             record.setRecordSummary(summary);
         } else {
             record.setRecordSummary(summaryText);
         }
-        record.setRecordContent(articleParam.getArticleContent());
-        record.setRecordStatus(articleParam.getArticleStatus());
+        record.setRecordContent(recordParam.getRecordContent());
+        record.setRecordStatus(recordParam.getRecordStatus());
         //填充分类
         List<Category> categoryList = new ArrayList<>();
-        if (articleParam.getArticleChildCategoryId() != null) {
+        if (recordParam.getRecordChildCategoryId() != null) {
             Category category = new Category();
-            category.setId(articleParam.getArticleParentCategoryId());
+            category.setId(recordParam.getRecordParentCategoryId());
             categoryList.add(category);
         }
-        if (articleParam.getArticleChildCategoryId() != null) {
+        if (recordParam.getRecordChildCategoryId() != null) {
             Category category = new Category();
-            category.setId(articleParam.getArticleChildCategoryId());
+            category.setId(recordParam.getRecordChildCategoryId());
             categoryList.add(category);
         }
-        if (articleParam.getArticleGrandsonCategoryId() != null) {
+        if (recordParam.getRecordGrandsonCategoryId() != null) {
             Category category = new Category();
-            category.setId(articleParam.getArticleGrandsonCategoryId());
+            category.setId(recordParam.getRecordGrandsonCategoryId());
             categoryList.add(category);
         }
         record.setCategoryList(categoryList);
@@ -90,12 +93,13 @@ public class RecordController {
 
     /**
      * 后台文章列表显示
+     *
      * @return modelAndView
      */
     @RequestMapping(value = "list")
     @ResponseBody
     public Object dataList(@RequestParam(required = false, defaultValue = "1") Integer pageIndex,
-                        @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
+                           @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         HashMap<String, Object> criteria = new HashMap<>(1);
         PageInfo<Record> articlePageInfo = recordService.pageArticle(pageIndex, pageSize, criteria);
         return articlePageInfo;
@@ -103,6 +107,7 @@ public class RecordController {
 
     /**
      * 后台文章列表显示
+     *
      * @return modelAndView
      */
     @RequestMapping(value = "")
@@ -113,6 +118,7 @@ public class RecordController {
 
     /**
      * 文章详情页显示
+     *
      * @param articleId 文章ID
      * @return modelAndView
      */
@@ -120,26 +126,28 @@ public class RecordController {
     @ResponseBody
     public Object getRecordDetailPage(@PathVariable("articleId") Integer articleId) {
         //文章信息
-        Map<String,Object> detailMap = new HashMap<>();
+        Map<String, Object> recordMap = new HashMap<>();
         Record record = recordService.getRecordByStatusAndId(1, articleId);
-        if (record == null) {
-            detailMap.put("0",null);
-            return detailMap;
-        }
         //文章信息
-        detailMap.put("record", record);
+        recordMap.put("recordDetail", record);
         //获取下一篇文章
         Record afterRecord = recordService.getAfterRecord(articleId);
-        detailMap.put("afterRecord", afterRecord);
-
+        recordMap.put("afterRecord", afterRecord);
         //获取上一篇文章
         Record preRecord = recordService.getPreRecord(articleId);
-        detailMap.put("preRecord", preRecord);
-        return detailMap;
+        recordMap.put("preRecord", preRecord);
+        return recordMap;
+    }
+
+    @RequestMapping(value = "/detail/{id}")
+    public String recordDetail(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("recordId", id);
+        return "recordDetail";
     }
 
     /**
      * 删除文章
+     *
      * @param id 文章ID
      */
     @RequestMapping(value = "/delete/{id}")
@@ -150,6 +158,7 @@ public class RecordController {
 
     /**
      * 编辑文章页面显示
+     *
      * @param id
      * @return
      */
@@ -162,6 +171,50 @@ public class RecordController {
         modelAndView.addObject("categoryList", categoryList);
         modelAndView.setViewName("recordEdit");
         return modelAndView;
+    }
+
+    /**
+     * 编辑文章提交
+     *
+     * @param recordParam
+     * @return
+     */
+    @RequestMapping(value = "/editSubmit", method = RequestMethod.POST)
+    public String editRecordSubmit(RecordParam recordParam) {
+        Record record = new Record();
+        record.setRecordId(recordParam.getRecordId());
+        record.setRecordTitle(recordParam.getRecordTitle());
+        record.setRecordContent(recordParam.getRecordContent());
+        record.setRecordStatus(recordParam.getRecordStatus());
+        //文章摘要
+        int summaryLength = 150;
+        String summaryText = HtmlUtil.cleanHtmlTag(record.getRecordContent());
+        if (summaryText.length() > summaryLength) {
+            String summary = summaryText.substring(0, summaryLength);
+            record.setRecordSummary(summary);
+        } else {
+            record.setRecordSummary(summaryText);
+        }
+        //填充分类
+        List<Category> categoryList = new ArrayList<>();
+        if (recordParam.getRecordChildCategoryId() != null) {
+            Category category = new Category();
+            category.setId(recordParam.getRecordParentCategoryId());
+            categoryList.add(category);
+        }
+        if (recordParam.getRecordChildCategoryId() != null) {
+            Category category = new Category();
+            category.setId(recordParam.getRecordChildCategoryId());
+            categoryList.add(category);
+        }
+        if (recordParam.getRecordGrandsonCategoryId() != null) {
+            Category category = new Category();
+            category.setId(recordParam.getRecordGrandsonCategoryId());
+            categoryList.add(category);
+        }
+        record.setCategoryList(categoryList);
+        recordService.updateRecordDetail(record);
+        return "redirect:/record";
     }
 }
 

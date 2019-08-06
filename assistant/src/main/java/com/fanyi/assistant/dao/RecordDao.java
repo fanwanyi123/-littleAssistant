@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * 记录Dao
+ *
  * @author fanyi
  */
 @Mapper
@@ -22,13 +23,24 @@ public interface RecordDao {
     Integer insert(Record record);
 
     /**
+     * 更新记录
+     *
+     * @param record 文章
+     * @return 影响行数
+     */
+    Integer update(Record record);
+
+    /**
      * 根据ID删除
+     *
      * @param recordId recordId
      * @return 影响函数
      */
     Integer deleteById(Integer recordId);
+
     /**
      * 获得所有的文章
+     *
      * @param criteria 查询条件
      * @return 文章列表
      */
@@ -37,14 +49,16 @@ public interface RecordDao {
 
     /**
      * 根据id查询记录信息
+     *
      * @param status 状态
-     * @param id 文章ID
+     * @param id     文章ID
      * @return 文章
      */
     Record getRecordByStatusAndId(@Param(value = "status") Integer status, @Param(value = "id") Integer id);
 
     /**
      * 获得上一篇文章
+     *
      * @param id 文章ID
      * @return 文章
      */

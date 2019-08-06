@@ -23,6 +23,8 @@ spring:
       charset: UTF-8
 thymeleaf:
     prefix: classpath:/templates/
+    content-type: text/html
+    mode: HTML5
 
 mybatis:
   config-location: classpath:mapper/config/sqlMapConfig.xml

@@ -23,4 +23,12 @@
         record_category_ref.category_id = tag_info.id
         ORDER BY tag_info.pid asc
     </select>
+
+
+    <delete id="deleteByRecordId" parameterType="java.lang.Integer">
+        delete from
+        <include refid="tb"/>
+        where record_id = #{value}
+    </delete>
+
 </mapper>

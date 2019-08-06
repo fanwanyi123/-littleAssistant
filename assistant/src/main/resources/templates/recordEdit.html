@@ -1,10 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>编辑</title>
-</head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head th:replace="common::commonHead('修改记录')">
 <body>
+<header th:include="common::commonHeader"></header>
+<style type="text/css">
+    .input-text {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
+    .single-input {
+        background: white;
+    }
+</style>
+<section class="js-product-checkout-area has-color bg-dark pb-0">
+    <div class="container">
+        <div class="js-product-checkout-content">
+            <!--<ul class="breadcrumb">-->
+                <!--<li><a href="/record">总览</a> <span class="divider">/</span></li>-->
+                <!--<li class="active">编辑</li>-->
+            <!--</ul>-->
+            <span class="layui-breadcrumb" style="visibility: visible;">
+                  <a href="/record">总览</a><span lay-separator="">/</span>
+                    <a><cite>编辑</cite></a>
+                </span>
+            <form action="/record/editSubmit" method="post">
+                <input type="hidden" name="recordId" th:value="${record.recordId}">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-50 mb-sm-30 mb-xs-20">
+                            <input class="input-text" name="recordTitle" type="text"
+                                   th:placeholder="#{message.enter.title}" th:value="${record.recordTitle}">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <!--Single Forum Start-->
+                        <div class="single-input mb-50 mb-sm-30 mb-xs-20">
+                                <textarea class="layui-textarea layui-hide" name="recordContent" lay-verify="content"
+                                          id="content" th:value="${record.recordContent}"
+                                          th:text="${record.recordContent}"></textarea>
+                        </div>
+                        <!--Single Forum End-->
+                    </div>
+                    <div class="col-12">
+                        <div id="app">
+                            <div class="mb-50 mb-sm-30 mb-xs-20">
+                                <i class="fa fa-bookmark" id="tagIcon"></i>
+                                <label>分类 <span style="color: #FF5722; ">*</span> </label>
+                                <div class="layui-input-inline">
+                                    <select name="recordParentCategoryId" id="recordParentCategoryId"
+                                            lay-filter="recordParentCategoryId" required
+                                            v-on:change="getChildTag" th:placeholder="请选择">
+                                        <option value="" selected="">请选择</option>
+                                        <option v-for="item in categoryList" v-if="item.pid == 0" :value="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="layui-input-inline">
+                                    <select name="recordChildCategoryId" id="recordChildCategoryId"
+                                            v-on:change="getGrandSonTag" v-show="showSecond">
+                                        <option value="" selected>请选择</option>
+                                        <option v-for="item in childTagList" :value="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="layui-input-inline">
+                                    <select name="recordGrandsonCategoryId" id="recordGrandsonCategoryId"
+                                            v-show="showThird">
+                                        <option value="" selected>请选择</option>
+                                        <option v-for="item in grandsonList" :value="item.id">
+                                            {{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <!--Single Forum Start-->
+                        <div class="mb-50 mb-sm-30 mb-xs-20">
+                            <span>状态</span>
+                            &nbsp;
+                            <input type="radio" name="recordStatus" value="1" title="发布"
+                                   th:checked="${record.recordStatus== 1}"><span>发布</span>
+                            &nbsp;
+                            <input type="radio" name="recordStatus" value="0" title="草稿"
+                                   th:checked="${record.recordStatus== 0}"><span>草稿</span>
+                        </div>
+                        <!--Single Forum End-->
+                    </div>
+                    <div class="col-12">
+                        <div class="forum-post">
+                            <button type="submit" class="btn btn-primary no-border-radius" id="submit-btn">保存
+                            </button>
+                            &nbsp;
+                            <button type="reset" class="btn btn-primary no-border-radius">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- js-product-checkout -->
+    </div><!--container -->
+    <!--music -->
+    <div th:include="common::commonMusicPlayer"></div>
+</section>
+<footer th:include="common::commonFooter"></footer>
+<div th:include="common::commonJs"></div>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+
+        //上传图片,必须放在 创建一个编辑器前面
+        layedit.set({
+            uploadImage: {
+                url: '/upload/img' //接口url
+                , type: 'post' //默认post
+            }
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('content', {
+                height: 350,
+            }
+        );
+
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            , content: function (value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+        layedit.build('content', {
+            tool: [
+                'strong' //加粗
+                , 'italic' //斜体
+                , 'underline' //下划线
+                , 'del' //删除线
+                , '|' //分割线
+                , 'left' //左对齐
+                , 'center' //居中对齐
+                , 'right' //右对齐
+                , 'link' //超链接
+                , 'unlink' //清除链接
+                , 'face' //表情
+                , 'image' //插入图片
+                , 'code'//代码块
+            ]
+        });
+
+        layui.use('code', function () { //加载code模块
+            layui.code({
+                elem: "pre",
+                title: '代码',
+                skin: "notepad",
+                encode: true,
+                about: false
+            })
+        });
+    });
+</script>
+<script src="../static/assets/js/record/insert.js" th:src="@{/assets/js/record/insert.js}"></script>
 </body>
 </html>

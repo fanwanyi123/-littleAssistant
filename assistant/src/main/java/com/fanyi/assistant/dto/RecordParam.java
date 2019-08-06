@@ -8,20 +8,20 @@ import lombok.Data;
 @Data
 public class RecordParam {
 
-    private Integer articleId;
+    private Integer recordId;
 
-    private String articleTitle;
+    private String recordTitle;
 
-    private String articleContent;
+    private String recordContent;
 
-    private Integer articleParentCategoryId;
+    private Integer recordParentCategoryId;
 
-    private Integer articleChildCategoryId;
+    private Integer recordChildCategoryId;
 
-    private Integer articleGrandsonCategoryId;
+    private Integer recordGrandsonCategoryId;
 
-    private Integer articleOrder;
+    private Integer recordOrder;
 
-    private Integer articleStatus;
+    private Integer recordStatus;
 
 }

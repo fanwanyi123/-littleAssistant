@@ -23,14 +23,14 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-50 mb-sm-30 mb-xs-20">
-                                <input class="input-text" name="articleTitle" type="text"
+                                <input class="input-text" name="recordTitle" type="text"
                                        th:placeholder="#{message.enter.title}">
                             </div>
                         </div>
                         <div class="col-12">
                             <!--Single Forum Start-->
                             <div class="single-input mb-50 mb-sm-30 mb-xs-20">
-                                <textarea class="layui-textarea layui-hide" name="articleContent" lay-verify="content"
+                                <textarea class="layui-textarea layui-hide" name="recordContent" lay-verify="content"
                                           id="content"></textarea>
                             </div>
                             <!--Single Forum End-->
@@ -41,17 +41,34 @@
                                     <i class="fa fa-bookmark" id="tagIcon"></i>
                                     <label>分类 <span style="color: #FF5722; ">*</span> </label>
                                     <div class="layui-input-inline">
-                                        <select name="articleParentCategoryId" id="articleParentCategoryId"
-                                                lay-filter="articleParentCategoryId" required
+                                        <select name="recordParentCategoryId" id="recordParentCategoryId"
+                                                lay-filter="recordParentCategoryId" required
                                                 v-on:change="getChildTag" th:placeholder="请选择">
                                             <option value="" selected="">请选择</option>
                                             <option v-for="item in categoryList" v-if="item.pid == 0" :value="item.id">
                                                 {{item.name}}
                                             </option>
                                         </select>
+                                        <!--<el-select-->
+                                        <!--v-model="value"-->
+                                        <!--multiple-->
+                                        <!--filterable-->
+                                        <!--allow-create-->
+                                        <!--default-first-option-->
+                                        <!--placeholder="请选择标签"-->
+                                        <!--v-on:change="getChildTag"-->
+                                        <!--name="recordParentCategoryId" id="recordParentCategoryId">-->
+                                        <!--<el-option-->
+                                        <!--v-for="item in categoryList"-->
+                                        <!--v-if="item.pid == 0"-->
+                                        <!--:key="item.id"-->
+                                        <!--:label="item.name"-->
+                                        <!--:value="item.id">-->
+                                        <!--</el-option>-->
+                                        <!--</el-select>-->
                                     </div>
                                     <div class="layui-input-inline">
-                                        <select name="articleChildCategoryId" id="articleChildCategoryId"
+                                        <select name="recordChildCategoryId" id="recordChildCategoryId"
                                                 v-on:change="getGrandSonTag" v-show="showSecond">
                                             <option value="" selected>请选择</option>
                                             <option v-for="item in childTagList" :value="item.id">
@@ -60,7 +77,7 @@
                                         </select>
                                     </div>
                                     <div class="layui-input-inline">
-                                        <select name="articleGrandsonCategoryId" id="articleGrandsonCategoryId"
+                                        <select name="recordGrandsonCategoryId" id="recordGrandsonCategoryId"
                                                 v-show="showThird">
                                             <option value="" selected>请选择</option>
                                             <option v-for="item in grandsonList" :value="item.id">
@@ -76,15 +93,16 @@
                             <div class="mb-50 mb-sm-30 mb-xs-20">
                                 <span>状态</span>
                                 &nbsp;
-                                <input type="radio" name="articleStatus" value="1" title="发布" checked><span>发布</span>
+                                <input type="radio" name="recordStatus" value="1" title="发布" checked><span>发布</span>
                                 &nbsp;
-                                <input type="radio" name="articleStatus" value="0" title="草稿"><span>草稿</span>
+                                <input type="radio" name="recordStatus" value="0" title="草稿"><span>草稿</span>
                             </div>
                             <!--Single Forum End-->
                         </div>
                         <div class="col-12">
                             <div class="forum-post">
-                                <button type="submit" class="btn btn-primary no-border-radius" id="submit-btn">保存</button>
+                                <button type="submit" class="btn btn-primary no-border-radius" id="submit-btn">保存
+                                </button>
                                 &nbsp;
                                 <button type="reset" class="btn btn-primary no-border-radius">重置</button>
                             </div>
@@ -95,6 +113,8 @@
 
         </div><!-- border -->
     </div><!--container -->
+    <!--music -->
+    <div th:include="common::commonMusicPlayer"></div>
 </section>
 <footer th:include="common::commonFooter"></footer>
 <div th:include="common::commonJs"></div>

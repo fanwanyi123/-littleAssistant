@@ -12,24 +12,25 @@ function vueFunction(el,e) {
             childTagList: [],
             grandsonList: [],
             showSecond: false,
-            showThird: false
+            showThird: false,
+            value: []
         },
         e: e,
         methods:{
-            getChildTag: function () {
-                var articleParentCategoryId = $("#articleParentCategoryId").val();
-                if (articleParentCategoryId == 1){
+            getChildTag: function (val) {
+                var recordParentCategoryId = $("#recordParentCategoryId").val();
+                if (recordParentCategoryId == 1){
                     $("#tagIcon").attr("style","color:green;");
-                } else if (articleParentCategoryId == 2){
+                } else if (recordParentCategoryId == 2){
                     $("#tagIcon").attr("style","color:yellow");
                 } else {
                     $("#tagIcon").attr("style","color:red");
                 }
                 vm.showSecond = false;
                 vm.childTagList = [];
-                if (articleParentCategoryId){
+                if (recordParentCategoryId){
                     for (var i=0; i < vm.categoryList.length;i++){
-                        if (articleParentCategoryId == vm.categoryList[i].pid){
+                        if (recordParentCategoryId == vm.categoryList[i].pid){
                             var set = new Set(vm.childTagList);
                             set.add(vm.categoryList[i]);
                             vm.childTagList = Array.from(set);
@@ -39,12 +40,12 @@ function vueFunction(el,e) {
                 }
             },
             getGrandSonTag: function () {
-                var articleChildCategoryId = $("#articleChildCategoryId").val();
+                var recordChildCategoryId = $("#recordChildCategoryId").val();
                 vm.showThird = false;
                 vm.grandsonList = [];
-                if (articleChildCategoryId){
+                if (recordChildCategoryId){
                     for (var i=0; i < vm.categoryList.length;i++){
-                        if (articleChildCategoryId == vm.categoryList[i].pid){
+                        if (recordChildCategoryId == vm.categoryList[i].pid){
                             var set = new Set(vm.grandsonList);
                             set.add(vm.categoryList[i]);
                             vm.grandsonList = Array.from(set)
@@ -52,7 +53,7 @@ function vueFunction(el,e) {
                         }
                     }
                 }
-            }
+            },
         }
     })
 }
@@ -60,7 +61,7 @@ function vueFunction(el,e) {
 
 function initCategory(){
     $.ajax({
-        url: "/record/getCategory",
+        url: getRootPath() + "/record/getCategory",
         type: "post",
         dataType: "json",
         success: function (data) {

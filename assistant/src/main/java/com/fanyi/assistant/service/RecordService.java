@@ -19,6 +19,11 @@ public interface RecordService {
     void insertRecord(Record record);
 
     /**
+     * 修改记录详细信息
+     * @param record 记录
+     */
+    void updateRecordDetail(Record record);
+    /**
      * 删除文章
      * @param id 文章ID
      */

@@ -12,8 +12,8 @@
         <result column="record_like_count" property="recordLikeCount" jdbcType="INTEGER"/>
         <result column="record_is_comment" property="recordIsComment" jdbcType="INTEGER"/>
         <result column="record_order" property="recordOrder" jdbcType="INTEGER"/>
-        <result column="record_create_time" property="recordCreateTime" jdbcType="TIMESTAMP"/>
-        <result column="record_update_time" property="recordUpdateTime" jdbcType="TIMESTAMP"/>
+        <result column="record_create_time" property="recordCreateTime" jdbcType="VARCHAR"/>
+        <result column="record_update_time" property="recordUpdateTime" jdbcType="VARCHAR"/>
         <result column="record_status" property="recordStatus" jdbcType="INTEGER"/>
     </resultMap>
 
@@ -36,11 +36,31 @@
         values (#{recordUserId,jdbcType=INTEGER}, #{recordTitle,jdbcType=VARCHAR},
         #{recordViewCount,jdbcType=INTEGER},
         #{recordCommentCount,jdbcType=INTEGER},
-        #{recordLikeCount,jdbcType=INTEGER}, #{recordCreateTime,jdbcType=TIMESTAMP},
-        #{recordUpdateTime,jdbcType=TIMESTAMP},
+        #{recordLikeCount,jdbcType=INTEGER}, #{recordCreateTime,jdbcType=VARCHAR},
+        #{recordUpdateTime,jdbcType=VARCHAR},
         #{recordIsComment,jdbcType=INTEGER}, #{recordStatus,jdbcType=INTEGER}, #{recordOrder,jdbcType=INTEGER},
         #{recordContent,jdbcType=LONGVARCHAR}, #{recordSummary,jdbcType=VARCHAR})
     </insert>
+
+    <update id="update" parameterType="com.fanyi.assistant.model.Record">
+        update
+        <include refid="tb"/>
+        <set>
+            <if test="recordUserId != null">record_user_id = #{recordUserId,jdbcType=VARCHAR},</if>
+            <if test="recordTitle != null">record_title = #{recordTitle,jdbcType=VARCHAR},</if>
+            <if test="recordViewCount != null">record_view_count = #{recordViewCount,jdbcType=INTEGER},</if>
+            <if test="recordCommentCount != null">record_comment_count = #{recordCommentCount,jdbcType=INTEGER},</if>
+            <if test="recordLikeCount != null">record_like_count = #{recordLikeCount,jdbcType=INTEGER},</if>
+            <if test="recordCreateTime != null">record_create_time = #{recordCreateTime,jdbcType=VARCHAR},</if>
+            <if test="recordUpdateTime != null">record_update_time = #{recordUpdateTime,jdbcType=VARCHAR},</if>
+            <if test="recordIsComment != null">record_is_comment = #{recordIsComment,jdbcType=INTEGER},</if>
+            <if test="recordStatus != null">record_status = #{recordStatus,jdbcType=INTEGER},</if>
+            <if test="recordOrder != null">record_order = #{recordOrder,jdbcType=INTEGER},</if>
+            <if test="recordContent != null">record_content = #{recordContent,jdbcType=LONGVARCHAR},</if>
+            <if test="recordSummary != null">record_summary = #{recordSummary,jdbcType=VARCHAR},</if>
+        </set>
+        where record_id = #{recordId,jdbcType=INTEGER}
+    </update>
 
     <delete id="deleteById" parameterType="java.lang.Integer">
         delete from
@@ -74,16 +94,16 @@
     </select>
 
 
-    <select id="getRecordByStatusAndId" resultType="com.fanyi.assistant.model.Record">
+    <select id="getRecordByStatusAndId" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List"/>
+        record.*
         FROM
-        <include refid="tb"/>
+        record
         <where>
             <if test="status != null">
-                record_status = #{status} AND
+                record.record_status = #{status} AND
             </if>
-            record_id = #{id}
+            record.record_id = #{id}
         </where>
     </select>
 
