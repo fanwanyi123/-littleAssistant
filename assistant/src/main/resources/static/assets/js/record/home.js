@@ -83,6 +83,22 @@ function vueFunction(el, e) {
                 },
                 editRecord(id) {
                     window.location.href = getRootPath() + '/record/edit/' + id;
+                },
+                resetDateFilter() {
+                    this.$refs.filterTable.clearFilter('date');
+                },
+                clearFilter() {
+                    this.$refs.filterTable.clearFilter();
+                },
+                formatter(row, column) {
+                    return row.address;
+                },
+                filterTag(value, row) {
+                    return row.tag === value;
+                },
+                filterHandler(value, row, column) {
+                    const property = column['property'];
+                    return row[property] === value;
                 }
             }
         }

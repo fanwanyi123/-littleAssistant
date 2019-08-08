@@ -132,6 +132,9 @@ p {
     line-height: 26px;
     margin-bottom: 20px;
 }
+pre{
+    color: whitesmoke;
+}
 .lead{
     font-size: 18px;
     line-height: 28px;

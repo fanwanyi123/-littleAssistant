@@ -32,48 +32,22 @@
                             <!--Single Forum End-->
                         </div>
                         <div class="col-12">
-                            <div class="share-sd">
-                            <span class="share-s" style="margin-top: 25px!important;">
-                                <a href="javascript:void(0)" id="share-s" title="分享">
-                                                <i class="fa fa-share-alt"></i>分享
-                                </a>
-                            </span>
-                                <div id="share" style="display: none">
-                                    <ul>
-                                        <li><a title="更多" class="bds_more fa fa-plus-square" data-cmd="more"
-                                               onclick="return false;" href="#"></a></li>
-                                        <li><a title="分享到QQ空间" class="fa fa-qq" data-cmd="qzone" onclick="return false;"
-                                               href="#"></a></li>
-                                        <li><a title="分享到新浪微博" class="fa fa-weibo" data-cmd="tsina"
-                                               onclick="return false;" href="#"></a></li>
-                                        <li><a title="分享到腾讯微博" class="fa fa-pinterest-square" data-cmd="tqq"
-                                               onclick="return false;" href="#"></a></li>
-                                        <li><a title="分享到人人网" class="fa fa-renren" data-cmd="renren"
-                                               onclick="return false;" href="#"></a></li>
-                                        <li><a title="分享到微信" class="fa fa-weixin" data-cmd="weixin"
-                                               onclick="return false;" href="#"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <el-button type="primary" icon="el-icon-share"></el-button>
                         </div>
                     </div>
                 </article>
                 <div class="footer-nav">
                     <span class="footer-nav-link" style="float: left" v-if="preRecord==null" disabled="disabled">
-                        <i class="el-icon-arrow-left"></i>
-                         已是第一页
+                        <el-button type="primary" icon="el-icon-arrow-left"> 已是第一页</el-button>
                     </span>
                     <span class="footer-nav-link" style="float: left" v-else @click="pageJump(preRecord.recordId)">
-                        <i class="el-icon-arrow-left"></i>
-                          上一页
+                        <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
                     </span>
                     <span class="footer-nav-link" style="float: right" v-if="afterRecord==null" disabled="disabled">
-                        已是最后一页
-                        <i class="el-icon-arrow-right"></i>
+                         <el-button type="primary">已是最后一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
                     </span>
                     <span class="footer-nav-link" style="float: right" v-else @click="pageJump(afterRecord.recordId)">
-                        下一页
-                        <i class="el-icon-arrow-right"></i>
+                        <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
                     </span>
                 </div>
                 <!--<ul class="pager">-->
