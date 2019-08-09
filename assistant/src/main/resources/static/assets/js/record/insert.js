@@ -13,24 +13,25 @@ function vueFunction(el,e) {
             grandsonList: [],
             showSecond: false,
             showThird: false,
-            value: []
+            valueOne: [],
+            valueTwo: [],
+            valueThree: []
         },
         e: e,
         methods:{
             getChildTag: function (val) {
-                var recordParentCategoryId = $("#recordParentCategoryId").val();
-                if (recordParentCategoryId == 1){
+                if (val == 1){
                     $("#tagIcon").attr("style","color:green;");
-                } else if (recordParentCategoryId == 2){
+                } else if (val == 2){
                     $("#tagIcon").attr("style","color:yellow");
                 } else {
                     $("#tagIcon").attr("style","color:red");
                 }
                 vm.showSecond = false;
                 vm.childTagList = [];
-                if (recordParentCategoryId){
+                if (val){
                     for (var i=0; i < vm.categoryList.length;i++){
-                        if (recordParentCategoryId == vm.categoryList[i].pid){
+                        if (val == vm.categoryList[i].pid){
                             var set = new Set(vm.childTagList);
                             set.add(vm.categoryList[i]);
                             vm.childTagList = Array.from(set);
@@ -39,13 +40,12 @@ function vueFunction(el,e) {
                     }
                 }
             },
-            getGrandSonTag: function () {
-                var recordChildCategoryId = $("#recordChildCategoryId").val();
+            getGrandSonTag: function (val) {
                 vm.showThird = false;
                 vm.grandsonList = [];
-                if (recordChildCategoryId){
+                if (val){
                     for (var i=0; i < vm.categoryList.length;i++){
-                        if (recordChildCategoryId == vm.categoryList[i].pid){
+                        if (val == vm.categoryList[i].pid){
                             var set = new Set(vm.grandsonList);
                             set.add(vm.categoryList[i]);
                             vm.grandsonList = Array.from(set)

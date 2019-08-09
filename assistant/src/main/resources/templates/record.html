@@ -81,7 +81,7 @@
                 <el-table
                         ref="filterTable"
                         :data="pageInfo"
-                        style="width: 100%">
+                        style="width: 100%;">
                     <template>
                         <el-table-column
                                 prop="recordUpdateTime"
@@ -102,8 +102,7 @@
 
                         <el-table-column
                                 prop="recordStatus"
-                                label="状态"
-                                :formatter="formatter">
+                                label="状态">
                             <template slot-scope="scope">
                                 <col-span v-show="scope.row.recordStatus == '1'">已发布</col-span>
                                 <col-span v-show="scope.row.recordStatus == '0'">草稿</col-span>
@@ -111,11 +110,11 @@
                         </el-table-column>
                         <el-table-column prop="categoryList" label="所属分类"
                                 width="100"
-                               :filters="[{ text: '生活', value: '1' }, { text: '工作', value: '2' }, { text: '学习', value: '3' }]"
+                               :filters="[{ text: '生活', value: '生活' }, { text: '工作', value: '工作' }, { text: '学习', value: '学习' }]"
                                 :filter-method="filterTag"
                                 filter-placement="bottom-end">
                             <template slot-scope="scope">
-                                <col-span v-for="category in scope.row.categoryList">{{category.name}}</col-span>
+                                <col-span v-for="category in scope.row.categoryList">{{category.name}}&nbsp;</col-span>
                             </template>
                         </el-table-column>
                         <el-table-column label="操作">

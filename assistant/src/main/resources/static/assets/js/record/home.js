@@ -94,7 +94,13 @@ function vueFunction(el, e) {
                     return row.address;
                 },
                 filterTag(value, row) {
-                    return row.tag === value;
+                    var filter = false;
+                    for (var i = 0; i < row.categoryList.length; i++) {
+                        if (row.categoryList[i].name.includes(value)) {
+                            filter = true;
+                        }
+                    }
+                    return filter;
                 },
                 filterHandler(value, row, column) {
                     const property = column['property'];
