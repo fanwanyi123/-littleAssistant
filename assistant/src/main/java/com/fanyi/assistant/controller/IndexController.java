@@ -17,9 +17,9 @@ public class IndexController {
         return "recordInsert";
     }
 
-    @RequestMapping(value = "plan")
+    @RequestMapping(value = "album")
     public String plan() {
-        return "plan";
+        return "album";
     }
 
     @RequestMapping(value = "index")
@@ -27,8 +27,4 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value = "tab")
-    public String tab() {
-        return "tab";
-    }
 }

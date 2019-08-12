@@ -14,6 +14,12 @@ import java.util.List;
  */
 @Mapper
 public interface RecordDao {
+
+    /**
+     * 获取记录最大id值
+     * @return
+     */
+    Integer getMaxRecordId();
     /**
      * 添加记录
      *

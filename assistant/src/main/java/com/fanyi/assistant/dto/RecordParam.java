@@ -14,11 +14,11 @@ public class RecordParam {
 
     private String recordContent;
 
-    private Integer recordParentCategoryId;
+    private String recordParentCategoryName;
 
-    private Integer recordChildCategoryId;
+    private String recordChildCategoryName;
 
-    private Integer recordGrandsonCategoryId;
+    private String recordGrandsonCategoryName;
 
     private Integer recordOrder;
 

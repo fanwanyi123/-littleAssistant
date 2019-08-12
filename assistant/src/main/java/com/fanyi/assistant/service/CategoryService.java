@@ -33,5 +33,11 @@ public interface CategoryService {
     void updateCategory(Category category);
 
 
-
+    /**
+     * 根据分类名称获得分类信息
+     *
+     * @param categoryName categoryName
+     * @return 分类
+     */
+    Category getCategoryByName(String categoryName);
 }

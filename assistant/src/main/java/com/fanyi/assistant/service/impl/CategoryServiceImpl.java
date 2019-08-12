@@ -11,7 +11,6 @@ import java.util.List;
 
 
 /**
- *
  * @author fanyi
  */
 @Service
@@ -32,8 +31,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category getCategoryByName(String categoryName) {
+        return categoryDao.getCategoryByName(categoryName);
+    }
+
+    @Override
     public Category insertCategory(Category category) {
         try {
+            category.setId(categoryDao.getMaxCategoryId()+1);
             categoryDao.insert(category);
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,8 +59,6 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return categoryList;
     }
-
-
 
 
 }

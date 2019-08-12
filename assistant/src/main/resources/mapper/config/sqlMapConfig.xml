@@ -3,6 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!-- 全局配置 -->
+    <settings>
+        <!--允许 JDBC 支持自动生成主键-->
+        <setting name="useGeneratedKeys" value="false"/>
+        <!--是否开启自动驼峰命名规则映射。 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageHelper">
             <!--<property name="dialect" value="mysql"/>-->

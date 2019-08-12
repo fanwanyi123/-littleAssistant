@@ -5,10 +5,14 @@
 <body>
 <header th:include="common::commonHeader"></header>
 <div class="slider-area" id="home">
+    <el-autocomplete
+            v-model="state"
+            :fetch-suggestions="querySearchAsync"
+            placeholder="请输入内容"
+            @select="handleSelect"
+    ></el-autocomplete>
     <div class="slider-carousel owl-theme">
-        <div class="single-slides">
-
-        </div>
+        <div class="single-slides"></div>
         <div class="single-slides2"></div>
         <div class="single-slides3">
             <div class="container">

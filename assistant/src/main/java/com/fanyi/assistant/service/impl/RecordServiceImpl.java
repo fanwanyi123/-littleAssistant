@@ -43,6 +43,7 @@ public class RecordServiceImpl implements RecordService {
         record.setRecordLikeCount(0);
         record.setRecordCommentCount(0);
         record.setRecordOrder(1);
+        record.setRecordId(recordDao.getMaxRecordId() + 1);
         recordDao.insert(record);
         //添加分类和文章关联
         for (int i = 0; i < record.getCategoryList().size(); i++) {
@@ -67,6 +68,7 @@ public class RecordServiceImpl implements RecordService {
             }
         }
     }
+
     @Override
     public void deleteRecord(Integer id) {
         recordDao.deleteById(id);
@@ -74,8 +76,8 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public PageInfo<Record> pageArticle(Integer pageIndex,
-                                         Integer pageSize,
-                                         HashMap<String, Object> criteria) {
+                                        Integer pageSize,
+                                        HashMap<String, Object> criteria) {
         PageHelper.startPage(pageIndex, pageSize);
         List<Record> recordList = recordDao.findAll(criteria);
         for (int i = 0; i < recordList.size(); i++) {

@@ -69,25 +69,26 @@ public class RecordController {
         record.setRecordContent(recordParam.getRecordContent());
         record.setRecordStatus(recordParam.getRecordStatus());
         //填充分类
-        List<Category> categoryList = new ArrayList<>();
-        if (recordParam.getRecordChildCategoryId() != null) {
-            Category category = new Category();
-            category.setId(recordParam.getRecordParentCategoryId());
-            categoryList.add(category);
-        }
-        if (recordParam.getRecordChildCategoryId() != null) {
-            Category category = new Category();
-            category.setId(recordParam.getRecordChildCategoryId());
-            categoryList.add(category);
-        }
-        if (recordParam.getRecordGrandsonCategoryId() != null) {
-            Category category = new Category();
-            category.setId(recordParam.getRecordGrandsonCategoryId());
-            categoryList.add(category);
-        }
+        List<Category> categoryList = setRecordCategoryList(recordParam);
         record.setCategoryList(categoryList);
         recordService.insertRecord(record);
         return "redirect:/record";
+    }
+
+    private Integer getCategoryId(Integer pid, String categoryName) {
+        Category category = getCategoryByName(categoryName);
+        if (category != null) {
+            return category.getId();
+        } else {
+            Category categoryNew = new Category();
+            categoryNew.setName(categoryName);
+            categoryNew.setPid(pid);
+            return categoryService.insertCategory(categoryNew).getId();
+        }
+    }
+
+    private Category getCategoryByName(String categoryName) {
+        return categoryService.getCategoryByName(categoryName);
     }
 
 
@@ -195,26 +196,36 @@ public class RecordController {
         } else {
             record.setRecordSummary(summaryText);
         }
+
         //填充分类
-        List<Category> categoryList = new ArrayList<>();
-        if (recordParam.getRecordChildCategoryId() != null) {
-            Category category = new Category();
-            category.setId(recordParam.getRecordParentCategoryId());
-            categoryList.add(category);
-        }
-        if (recordParam.getRecordChildCategoryId() != null) {
-            Category category = new Category();
-            category.setId(recordParam.getRecordChildCategoryId());
-            categoryList.add(category);
-        }
-        if (recordParam.getRecordGrandsonCategoryId() != null) {
-            Category category = new Category();
-            category.setId(recordParam.getRecordGrandsonCategoryId());
-            categoryList.add(category);
-        }
+        List<Category> categoryList = setRecordCategoryList(recordParam);
         record.setCategoryList(categoryList);
         recordService.updateRecordDetail(record);
         return "redirect:/record";
+    }
+
+    private List<Category> setRecordCategoryList(RecordParam recordParam) {
+        List<Category> categoryList = new ArrayList<>();
+        if (recordParam.getRecordParentCategoryName() != null) {
+            Category category = new Category();
+            Integer tagId = getCategoryId(0, recordParam.getRecordParentCategoryName());
+            category.setId(tagId);
+            categoryList.add(category);
+        }
+        if (recordParam.getRecordChildCategoryName() != null) {
+            Category category = new Category();
+            Integer tagId = getCategoryId(getCategoryByName(recordParam.getRecordParentCategoryName()).getId(),
+                    recordParam.getRecordChildCategoryName());
+            category.setId(tagId);
+            categoryList.add(category);
+        }
+        if (recordParam.getRecordGrandsonCategoryName() != null) {
+            Category category = new Category();
+            Integer tagId = getCategoryId(getCategoryByName(recordParam.getRecordChildCategoryName()).getId(), recordParam.getRecordGrandsonCategoryName());
+            category.setId(tagId);
+            categoryList.add(category);
+        }
+        return categoryList;
     }
 }
 

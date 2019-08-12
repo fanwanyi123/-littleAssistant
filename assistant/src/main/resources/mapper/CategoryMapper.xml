@@ -15,12 +15,11 @@
   </sql>
 
 
-    <insert id="insert" parameterType="com.fanyi.assistant.model.Category" useGeneratedKeys="true"
-            keyProperty="id">
+    <insert id="insert" parameterType="com.fanyi.assistant.model.Category">
         insert into
         <include refid="tb"/>
-        (pid, name,description, order, icon)
-        values (#{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR})
+        (id,pid, name)
+        values (#{id,jdbcType=INTEGER},#{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
     </insert>
 
 
@@ -42,6 +41,11 @@
         <include refid="tb"/>
     </select>
 
+    <!--获得分类总数-->
+    <select id="getMaxCategoryId" resultType="Integer">
+        SELECT MAX(id) as id  FROM
+        <include refid="tb"/>
+    </select>
 
     <select id="listCategory" resultType="com.fanyi.assistant.model.Category">
         SELECT

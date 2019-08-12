@@ -49,34 +49,57 @@
                             <div class="mb-50 mb-sm-30 mb-xs-20">
                                 <i class="fa fa-bookmark" id="tagIcon"></i>
                                 <label>分类 <span style="color: #FF5722; ">*</span> </label>
-                                <div class="layui-input-inline">
-                                    <select name="recordParentCategoryId" id="recordParentCategoryId"
-                                            lay-filter="recordParentCategoryId" required
-                                            v-on:change="getChildTag" th:placeholder="请选择">
-                                        <option value="" selected="">请选择</option>
-                                        <option v-for="item in categoryList" v-if="item.pid == 0" :value="item.id">
-                                            {{item.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="layui-input-inline">
-                                    <select name="recordChildCategoryId" id="recordChildCategoryId"
-                                            v-on:change="getGrandSonTag" v-show="showSecond">
-                                        <option value="" selected>请选择</option>
-                                        <option v-for="item in childTagList" :value="item.id">
-                                            {{item.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="layui-input-inline">
-                                    <select name="recordGrandsonCategoryId" id="recordGrandsonCategoryId"
-                                            v-show="showThird">
-                                        <option value="" selected>请选择</option>
-                                        <option v-for="item in grandsonList" :value="item.id">
-                                            {{item.name}}
-                                        </option>
-                                    </select>
-                                </div>
+                                <el-select
+                                        v-model="valueOne"
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        placeholder="请选择标签"
+                                        v-on:change="getChildTag"
+                                        name="recordParentCategoryName" id="recordParentCategoryName">
+                                    <el-option
+                                            v-for="item in categoryList"
+                                            v-if="item.pid == 0"
+                                            :key="item.id"
+                                            :label="item.name"
+                                            :value="item.id">
+                                    </el-option>
+                                </el-select>
+
+                                <el-select
+                                        v-model="valueTwo"
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        placeholder="请选择标签"
+                                        v-on:change="getGrandSonTag"
+                                        name="recordChildCategoryName"
+                                        id="recordChildCategoryName"
+                                        v-show="showSecond">
+                                    <el-option
+                                            v-for="item in childTagList"
+                                            :key="item.id"
+                                            :label="item.name"
+                                            :value="item.id">
+                                    </el-option>
+                                </el-select>
+
+                                <el-select
+                                        v-model="valueThree"
+                                        filterable
+                                        allow-create
+                                        default-first-option
+                                        placeholder="请选择标签"
+                                        name="recordGrandsonCategoryId"
+                                        id="recordGrandsonCategoryId"
+                                        v-show="showThird">
+                                    <el-option
+                                            v-for="item in grandsonList"
+                                            :key="item.id"
+                                            :label="item.name"
+                                            :value="item.id">
+                                    </el-option>
+                                </el-select>
                             </div>
                         </div>
                     </div>

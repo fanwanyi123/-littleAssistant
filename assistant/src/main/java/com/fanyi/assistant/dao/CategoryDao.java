@@ -21,6 +21,7 @@ public interface CategoryDao {
     int insert(Category category);
 
 
+    Integer getMaxCategoryId();
     /**
      * 更新
      *
@@ -30,12 +31,12 @@ public interface CategoryDao {
     int update(Category category);
 
     /**
-     * 根据分类id获得分类信息
+     * 根据分类名称获得分类信息
      *
-     * @param id ID
+     * @param categoryName categoryName
      * @return 分类
      */
-    Category getCategoryById(Integer id);
+    Category getCategoryByName(String categoryName);
 
 
     /**

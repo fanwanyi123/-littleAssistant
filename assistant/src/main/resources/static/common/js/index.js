@@ -27,6 +27,11 @@ $(document).ready(function (e) {
             $(this).removeClass("active");
         }
     });
+
+    // 搜索
+    $("#js-search").click(function () {
+        // $("#search-main").fadeToggle(300);
+    });
 });
 
 function switchLanguage() {
