@@ -32,6 +32,8 @@ $(document).ready(function (e) {
     $("#js-search").click(function () {
         // $("#search-main").fadeToggle(300);
     });
+
+    // vueTagFunction("#vueTag", e);
 });
 
 function switchLanguage() {
@@ -57,4 +59,51 @@ function showModal(url) {
     var mainContent = document.getElementById('iframe-page-one');
     mainContent.src = url;//嵌套网址
     $("#myModal").modal('show');
+}
+
+var vueTagObj;
+function vueTagFunction(el, e) {
+    vueTagObj = new Vue({
+            el: el,
+            data: {
+                filterText: '',
+                tagInfo: [],
+                defaultProps: {
+                    children: 'children',
+                    label: 'label'
+                }
+            },
+            e: e,
+            watch: {
+                filterText(val) {
+                    this.$refs.tree.filter(val);
+                }
+            },
+            created() {
+                this.initTagInfo();
+            },
+            methods: {
+                filterNode(value, data) {
+                    if (!value) return true;
+                    return data.label.indexOf(value) !== -1;
+                },
+                initTagInfo() {
+                    $.ajax({
+                        url: getRootPath() + "/getTreeData",
+                        type: "post",
+                        dataType: "json",
+                        enable: true,
+                        success: function (data) {
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].pid == 0) {
+                                } else {
+                                }
+                            }
+                            this.tagInfo = data;
+                        }
+                    })
+                }
+            },
+        }
+    )
 }

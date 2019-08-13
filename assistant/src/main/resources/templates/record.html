@@ -32,52 +32,13 @@
         cursor: pointer;
     }
 </style>
-<section class="js-product-checkout-area has-color bg-dark pb-0" style="min-height: 850px;">
+<section class="js-product-checkout-area has-color bg-dark" style="min-height: 850px;">
     <div class="container">
-        <!--<ul class="breadcrumb">-->
-        <!--  <li><a href="/record">总览</a>-->
-        <!--</ul>-->
         <div class="js-product-checkout-content">
             <div id="vueRecord" v-cloak>
-                <span class="layui-breadcrumb" style="visibility: visible;">
-                  <a href="/record">总览</a><span lay-separator="">/</span>
-                </span>
-                <!--<el-breadcrumb separator-class="el-icon-arrow-right">-->
-                    <!--<el-breadcrumb-item :to="{ path: '/record' }">首页</el-breadcrumb-item>-->
-                    <!--<el-breadcrumb-item>总览</el-breadcrumb-item>-->
-                <!--</el-breadcrumb>-->
-                <!--<table cellpadding="0" cellspacing="0" class="table table-bordered table-hover">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th>标题</th>-->
-                        <!--<th>所属分类</th>-->
-                        <!--<th>状态</th>-->
-                        <!--<th>发布时间</th>-->
-                        <!--<th>操作</th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
-                    <!--<tr v-for="item in pageInfo">-->
-                        <!--<td><a @click="detailRecord(item.recordId,item.recordStatus)" href="#">{{item.recordTitle}}</a>-->
-                        <!--</td>-->
-                        <!--<td width="10%"><span v-for="category in item.categoryList">{{category.name}}</span></td>-->
-                        <!--<td width="15%"><a href=""><span style="color:#5FB878;"-->
-                                                         <!--v-show="item.recordStatus == 1">已发布</span></a>-->
-                            <!--<a href=""><span style="color:#FF5722;" v-show="item.recordStatus == 0">草稿</span></a>-->
-                        <!--</td>-->
-                        <!--<td width="15%">{{item.recordUpdateTime}}</td>-->
-                        <!--<td width="20%"><a @click="deleteRecord(item.recordId)"-->
-                                           <!--class="layui-btn layui-btn-danger layui-btn-mini">删除</a>-->
-                            <!--<a class="layui-btn layui-btn-danger layui-btn-mini"-->
-                               <!--@click="editRecord(item.recordId)">编辑</a></td>-->
-                    <!--</tr>-->
-                    <!--<tr v-show="pageInfo.length==0">-->
-                        <!--<td colspan="5" class="text-center text-info">-->
-                            <!--<p>暂无数据...</p>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
+                <ul class="breadcrumb">
+                    <li><a href="/record">总览</a></li>
+                </ul>
                 <el-table
                         ref="filterTable"
                         :data="pageInfo"

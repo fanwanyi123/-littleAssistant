@@ -152,8 +152,10 @@ public class RecordController {
      * @param id 文章ID
      */
     @RequestMapping(value = "/delete/{id}")
-    public void deleteRecord(@PathVariable("id") Integer id) {
+    @ResponseBody
+    public String deleteRecord(@PathVariable("id") Integer id) {
         recordService.deleteRecord(id);
+        return "OK";
     }
 
 

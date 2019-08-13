@@ -38,7 +38,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category insertCategory(Category category) {
         try {
-            category.setId(categoryDao.getMaxCategoryId()+1);
+            int categoryId = categoryDao.getMaxCategoryId() == null ? 0 : categoryDao.getMaxCategoryId();
+            category.setId(categoryId + 1);
             categoryDao.insert(category);
         } catch (Exception e) {
             e.printStackTrace();

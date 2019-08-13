@@ -7,8 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="shortcut icon" href="../static/common/images/21113.gif" th:href="@{/common/images/21113.gif}">
-    <!-- layUi -->
-    <link rel="stylesheet" href="../static/common/layui/css/layui.css" th:href="@{/common/layui/css/layui.css}">
     <!-- animate -->
     <link rel="stylesheet" href="../static/assets/css/animate.css" th:href="@{/assets/css/animate.css}">
     <!-- font-awesome -->
@@ -44,6 +42,8 @@
     <link rel="stylesheet" href="../static/common/css/element.min.css" th:href="@{/common/css/element.min.css}">
     <link rel="stylesheet" type="text/css" href="../static/common/css/zTreeStyle/zTreeStyle.css"
           th:href="@{/common/css/zTreeStyle/zTreeStyle.css}">
+    <link rel="stylesheet" type="text/css" href="../static/common/css/summernote.css"
+          th:href="@{/common/css/summernote.css}">
     <style>
         .ztree li {
             margin: 10px;
@@ -163,14 +163,23 @@
                 </div>
             </div>
             <div data-title="Menu">
-                <!--<ul class="menu list-inline menu-tabbable">-->
-                <!--<li class="active"><i class="fa fa-home"></i><a href="../index" th:text="#{message.home}"></a>-->
-                <!--</li>-->
-                <!--<li><i class="fa fa-pencil"></i><a href="#" th:text="#{message.recording}"></a></li>-->
-                <!--<li><i class="fa fa-calendar"></i><a href="#" th:text="#{message.plan}"></a></li>-->
-                <!--</ul>-->
                 <ul id="treeDemo" class="ztree"
                     style="max-height:500px;width:auto; overflow-y:scroll;overflow-x:scroll;color: #0b0b0b"></ul>
+                <!-- <div id="vueTag" v-cloak>
+                 <el-input
+                         placeholder="输入关键字进行过滤"
+                         v-model="filterText">
+                 </el-input>
+
+                 <el-tree
+                         class="filter-tree"
+                         :data="tagInfo"
+                         :props="defaultProps"
+                         default-expand-all
+                         :filter-node-method="filterNode"
+                         ref="tree">
+                 </el-tree>
+                 </div>-->
             </div><!-- #header-menu-wrap -->
         </nav> <!-- header-nav -->
     </div><!-- js-offcanvas-menu -->
@@ -332,7 +341,6 @@
     </footer> <!-- footer End-->
 </div>
 <div th:fragment="commonJs">
-    <script src="../static/common/layui/layui.all.js" th:src="@{/common/layui/layui.all.js}"></script>
     <script src="../static/assets/js/popper.min.js" th:src="@{/assets/js/popper.min.js}"></script>
     <script src="../static/assets/js/bootstrap.min.js" th:src="@{/assets/js/bootstrap.min.js}"></script>
     <script src="../static/assets/js/owl.carousel.min.js" th:src="@{/assets/js/owl.carousel.min.js}"></script>
@@ -357,6 +365,7 @@
             th:src="@{/common/js/jquery.ztree.excheck-3.5.js}"></script>
     <script type="text/javascript" src="../static/common/js/ztreeinit.js"
             th:src="@{/common/js/ztreeinit.js}"></script>
+    <script src="../static/common/js/summernote.js" th:src="@{/common/js/summernote.js}"></script>
 </div>
 </body>
 </html>

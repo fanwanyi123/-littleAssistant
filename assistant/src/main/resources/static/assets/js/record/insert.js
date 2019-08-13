@@ -2,6 +2,13 @@ var vm;
 $(document).ready(function (e) {
     vueFunction("#app",e);
     initCategory();
+    // Forum Note Active
+    $('#summernote').summernote({
+        height: 410,
+        minHeight: null,
+        maxHeight: null,
+        focus: true
+    });
 });
 
 function vueFunction(el,e) {

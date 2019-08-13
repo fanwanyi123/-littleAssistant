@@ -5,18 +5,14 @@
 <body>
 <header th:include="common::commonHeader"></header>
 <input type="hidden" name="recordId" id="recordId" th:value="${recordId}">
-<section class="js-product-checkout-area has-color bg-dark pb-0">
+<section class="js-product-checkout-area has-color bg-dark">
     <div class="container">
         <div class="js-product-checkout-content">
             <div id="recordDetailVue" v-cloak>
-                <!--<ul class="breadcrumb">-->
-                    <!--<li><a href="/record">总览</a> <span class="divider">/</span></li>-->
-                    <!--<li class="active">详情</li>-->
-                <!--</ul>-->
-                <span class="layui-breadcrumb" style="visibility: visible;">
-                  <a href="/record">总览</a><span lay-separator="">/</span>
-                    <a><cite>详情</cite></a>
-                </span>
+                <ul class="breadcrumb">
+                    <li><a href="/record">总览</a> <span class="divider">/</span></li>
+                    <li class="active">详情</li>
+                </ul>
                 <article class="post" id="articleDetail">
                     <div class="row">
                         <div class="col-12">
@@ -34,38 +30,26 @@
                         <div class="col-12">
                             <el-button type="primary" icon="el-icon-share"></el-button>
                         </div>
+                        <div class="col-12">
+                          <span class="footer-nav-link" style="float: left" v-if="preRecord==null" disabled="disabled">
+                              <el-button type="primary" icon="el-icon-arrow-left"> 已是第一页</el-button>
+                            </span>
+                            <span class="footer-nav-link" style="float: left" v-else
+                                  @click="pageJump(preRecord.recordId)">
+                                  <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
+                              </span>
+                            <span class="footer-nav-link" style="float: right" v-if="afterRecord==null"
+                                  disabled="disabled">
+                                 <el-button type="primary">已是最后一页<i
+                                         class="el-icon-arrow-right el-icon--right"></i></el-button>
+                               </span>
+                            <span class="footer-nav-link" style="float: right" v-else
+                                  @click="pageJump(afterRecord.recordId)"><el-button type="primary">下一页<i
+                                    class="el-icon-arrow-right el-icon--right"></i></el-button>
+                    </span>
+                        </div>
                     </div>
                 </article>
-                <div class="footer-nav">
-                    <span class="footer-nav-link" style="float: left" v-if="preRecord==null" disabled="disabled">
-                        <el-button type="primary" icon="el-icon-arrow-left"> 已是第一页</el-button>
-                    </span>
-                    <span class="footer-nav-link" style="float: left" v-else @click="pageJump(preRecord.recordId)">
-                        <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
-                    </span>
-                    <span class="footer-nav-link" style="float: right" v-if="afterRecord==null" disabled="disabled">
-                         <el-button type="primary">已是最后一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
-                    </span>
-                    <span class="footer-nav-link" style="float: right" v-else @click="pageJump(afterRecord.recordId)">
-                        <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
-                    </span>
-                </div>
-                <!--<ul class="pager">-->
-                <!--<li class="previous">-->
-                <!--<a href="#" @click="pageJump(preRecord.recordId)" rel="next">-->
-                <!--上一页-->
-                <!--<br>-->
-                <!--<span :value="preRecord==null ? '已是第一页': preRecord.recordTitle"></span>-->
-                <!--</a>-->
-                <!--</li>-->
-                <!--<li class="next">-->
-                <!--<a href="#" @click="pageJump(afterRecord.recordId)" rel="next">-->
-                <!--下一页-->
-                <!--<br>-->
-                <!--<span :value="afterRecord==null ? '已是最后一页': afterRecord.recordTitle"></span>-->
-                <!--</a>-->
-                <!--</li>-->
-                <!--</ul>-->
             </div><!--VUE -->
         </div><!-- js-product-checkout -->
     </div><!--container -->

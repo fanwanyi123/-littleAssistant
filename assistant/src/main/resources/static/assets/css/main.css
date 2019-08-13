@@ -3353,7 +3353,8 @@ textarea{
     padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
-    color: #ffffff;
+    /*color: #f2dede;*/
+    background-color: wheat;
 } 
 .js-checkout-form span {
     display: block;

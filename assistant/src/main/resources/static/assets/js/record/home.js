@@ -57,16 +57,15 @@ function vueFunction(el, e) {
                             async: false,
                             type: "POST",
                             url: getRootPath() + '/record/delete/' + id,
-                            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                            dataType: "text",
-                            complete: function () {
-                                this.$message({
-                                    type: 'success',
-                                    message: '删除成功!'
-                                });
-                                window.history.pushState(200, document.title, getRootPath() + '/record');
+                            dataType: "json",
+                            success:function () {
                             }
                         })
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                        window.location.href = getRootPath() + '/record';
                     }).catch(() => {
                         this.$message({
                             type: 'info',
