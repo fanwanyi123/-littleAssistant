@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common::commonHead('记录')">
+<head th:replace="common::commonHead('相册')">
 <body>
 <header th:include="common::commonHeader"></header>
 <section class="js-product-checkout-area has-color bg-dark pb-0">
+    <div class="container">
+        <div class="js-product-checkout-content">
+            <div id="vuePicture">
+                <el-upload
+                        class="upload-demo"
+                        action="https://jsonplaceholder.typicode.com/posts/"
+                        :on-preview="handlePreview"
+                        :on-remove="handleRemove"
+                        :file-list="fileList"
+                        list-type="picture">
+                    <el-button size="small" type="primary"><i class="el-icon-picture"></i>上传图片</el-button>
+                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                </el-upload>
+
+            </div>
+        </div>
+    </div>
 
 </section>
+<footer th:include="common::commonFooter"></footer>
 <div th:include="common::commonJs"></div>
+<script type="text/javascript" src="../static/assets/js/album/album.js"
+        th:src="@{/assets/js/album/album.js}"></script>
 </body>
 </html>
