@@ -100,8 +100,12 @@ public class RecordController {
     @RequestMapping(value = "list")
     @ResponseBody
     public Object dataList(@RequestParam(required = false, defaultValue = "1") Integer pageIndex,
-                           @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
+                           @RequestParam(required = false, defaultValue = "10") Integer pageSize,
+                           @RequestParam Integer tagId,
+                           @RequestParam String keywords) {
         HashMap<String, Object> criteria = new HashMap<>(1);
+        criteria.put("categoryId",tagId);
+        criteria.put("keywords", keywords);
         PageInfo<Record> articlePageInfo = recordService.pageArticle(pageIndex, pageSize, criteria);
         return articlePageInfo;
     }
@@ -109,13 +113,34 @@ public class RecordController {
     /**
      * 后台文章列表显示
      *
-     * @return modelAndView
+     * @return String
      */
     @RequestMapping(value = "")
     public String index() {
         return "record";
     }
 
+    /**
+     * 分类查询记录列表
+     *
+     * @return String
+     */
+    @RequestMapping(value = "/filter/{id}")
+    public String indexByTag(@PathVariable("id") Integer id,Model model) {
+        model.addAttribute("tagId", id);
+        return "record";
+    }
+
+    /**
+     * 分类查询记录列表
+     *
+     * @return String
+     */
+    @RequestMapping(value = "/search")
+    public String searchRecord(@RequestParam("keywords") String keywords,Model model) {
+        model.addAttribute("keywords", keywords);
+        return "record";
+    }
 
     /**
      * 文章详情页显示

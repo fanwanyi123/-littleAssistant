@@ -91,6 +91,7 @@ function vueTagFunction(el, e) {
                 nodeClick(data,checked,node){
                     this.checkedId = data.id
                     this.$refs.tree.setCheckedNodes([data]);
+                    window.location.href = getRootPath() + "/record/filter/" + this.checkedId;
 
                 },
                 initTagInfo() {

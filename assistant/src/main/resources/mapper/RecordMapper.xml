@@ -79,23 +79,24 @@
         FROM
         record
         <where>
-            <if test="status != null">
-                record.record_status = #{status} AND
-            </if>
-            <if test="keywords != null">
-                record.record_title LIKE concat(concat('%',#{keywords}),'%') AND
-            </if>
-            <if test="userId != null">
-                record.record_user_id = #{userId} AND
-            </if>
-            <if test="categoryId != null">
-                record.record_id IN (
-                SELECT record_category_ref.record_id FROM record_category_ref
-                WHERE record_category_ref.category_id = #{categoryId}
-                ) AND
-            </if>
+            <trim prefixOverrides="and">
+                <if test="status != null">
+                    AND record.record_status = #{status}
+                </if>
+                <if test="keywords != null">
+                    AND record.record_title LIKE concat(concat('%',#{keywords}),'%')
+                </if>
+                <if test="userId != null">
+                    AND record.record_user_id = #{userId}
+                </if>
+                <if test="categoryId != null">
+                    AND record.record_id IN (
+                    SELECT record_category_ref.record_id FROM record_category_ref
+                    WHERE record_category_ref.category_id = #{categoryId}
+                    )
+                </if>
+            </trim>
         </where>
-        ORDER BY `record`.`record_order` DESC, `record`.`record_id` DESC
     </select>
 
 

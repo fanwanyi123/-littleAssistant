@@ -14,6 +14,7 @@ function vueFunction(el, e) {
                 currentPage: 1,
                 recordId: 0,
                 recordDelete: false,
+                searchStatus: false
             },
             e: e,
             methods: {
@@ -32,13 +33,19 @@ function vueFunction(el, e) {
                 },
                 getPageData() {
                     console.log('现在是' + this.currentPage + '页');
+                    if ($("#keyword").val()){
+                        this.searchStatus = true
+                    }
+
                     $.ajax({
                         url: getRootPath() + "/record/list",
                         type: "post",
                         dataType: "json",
                         data: {
                             pageIndex: this.currentPage,
-                            pageSize: this.pageNum
+                            pageSize: this.pageNum,
+                            tagId :  $("#tagId").val(),
+                            keywords : $("#keyword").val()
                         },
                         success: function (data) {
                             vueObj.all = data.total

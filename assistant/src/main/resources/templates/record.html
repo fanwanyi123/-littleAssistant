@@ -2,42 +2,46 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common::commonHead('全部记录')">
+    <style type="text/css">
+        #vueRecord table {
+            width: 100%;
+            font-size: 14px;
+            border: 1px solid #eee
+        }
+
+        #vueRecord {
+            padding: 0 10px;
+        }
+
+        table thead th {
+            padding: 10px;
+            text-align: left;
+        }
+
+        table tbody td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            border-right: 1px solid #eee;
+        }
+
+        table tbody td span {
+            margin: 0 10px;
+            cursor: pointer;
+        }
+    </style>
 <body>
 <header th:include="common::commonHeader"></header>
-<style type="text/css">
-    #vueRecord table {
-        width: 100%;
-        font-size: 14px;
-        border: 1px solid #eee
-    }
-
-    #vueRecord {
-        padding: 0 10px;
-    }
-
-    table thead th {
-        padding: 10px;
-        text-align: left;
-    }
-
-    table tbody td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #eee;
-        border-right: 1px solid #eee;
-    }
-
-    table tbody td span {
-        margin: 0 10px;
-        cursor: pointer;
-    }
-</style>
+<input type="hidden" name="tagId" id="tagId" th:value="${tagId}">
+<input type="hidden" name="keyword" id="keyword" th:value="${keywords}">
 <section class="js-product-checkout-area has-color bg-dark" style="min-height: 850px;">
     <div class="container">
         <div class="js-product-checkout-content">
             <div id="vueRecord" v-cloak>
                 <ul class="breadcrumb">
                     <li><a href="/record">总览</a></li>
+                    <li class="active" v-show="searchStatus">
+                        <span class="divider">/</span>搜索到相关结果{{all}}个</a></li>
                 </ul>
                 <el-table
                         ref="filterTable"
@@ -70,10 +74,10 @@
                             </template>
                         </el-table-column>
                         <el-table-column prop="categoryList" label="所属分类"
-                                width="100"
-                               :filters="[{ text: '生活', value: '生活' }, { text: '工作', value: '工作' }, { text: '学习', value: '学习' }]"
-                                :filter-method="filterTag"
-                                filter-placement="bottom-end">
+                                         width="100"
+                                         :filters="[{ text: '生活', value: '生活' }, { text: '工作', value: '工作' }, { text: '学习', value: '学习' }]"
+                                         :filter-method="filterTag"
+                                         filter-placement="bottom-end">
                             <template slot-scope="scope">
                                 <col-span v-for="category in scope.row.categoryList">{{category.name}}&nbsp;</col-span>
                             </template>
