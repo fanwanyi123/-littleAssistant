@@ -30,10 +30,10 @@ $(document).ready(function (e) {
 
     // 搜索
     $("#js-search").click(function () {
-        // $("#search-main").fadeToggle(300);
+        $("#search-main").fadeToggle(300);
     });
 
-    // vueTagFunction("#vueTag", e);
+    vueTagFunction("#vueTag", e);
 });
 
 function switchLanguage() {
@@ -71,7 +71,8 @@ function vueTagFunction(el, e) {
                 defaultProps: {
                     children: 'children',
                     label: 'label'
-                }
+                },
+                checkedId: ""
             },
             e: e,
             watch: {
@@ -87,6 +88,11 @@ function vueTagFunction(el, e) {
                     if (!value) return true;
                     return data.label.indexOf(value) !== -1;
                 },
+                nodeClick(data,checked,node){
+                    this.checkedId = data.id
+                    this.$refs.tree.setCheckedNodes([data]);
+
+                },
                 initTagInfo() {
                     $.ajax({
                         url: getRootPath() + "/getTreeData",
@@ -94,12 +100,33 @@ function vueTagFunction(el, e) {
                         dataType: "json",
                         enable: true,
                         success: function (data) {
-                            for (var i = 0; i < data.length; i++) {
+                            let dataArray = [];
+                            for (let i = 0; i < data.length; i++) {
                                 if (data[i].pid == 0) {
-                                } else {
+                                    let objTemp = {
+                                        id: data[i].id,
+                                        label: data[i].name,
+                                        children: []
+                                    }
+                                    dataArray.push(objTemp);
                                 }
                             }
-                            this.tagInfo = data;
+
+                            for (let i = 0; i < dataArray.length; i++){
+                                let parentObj = dataArray[i];
+                                let id = parentObj.id;
+                                for (let j = 0; j < data.length; j++){
+                                    if (data[j].pid==id) {
+                                        let obj = {
+                                            id: data[j].id,
+                                            label: data[j].name,
+                                            children: []
+                                        }
+                                        dataArray[i].children.push(obj);
+                                    }
+                                }
+                            }
+                            vueTagObj.tagInfo = dataArray;
                         }
                     })
                 }

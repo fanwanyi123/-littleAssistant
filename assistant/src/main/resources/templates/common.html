@@ -40,15 +40,16 @@
     <!-- color -->
     <link rel="stylesheet" href="../static/assets/css/color.css" th:href="@{/assets/css/color.css}">
     <link rel="stylesheet" href="../static/common/css/element.min.css" th:href="@{/common/css/element.min.css}">
-    <link rel="stylesheet" type="text/css" href="../static/common/css/zTreeStyle/zTreeStyle.css"
-          th:href="@{/common/css/zTreeStyle/zTreeStyle.css}">
     <link rel="stylesheet" type="text/css" href="../static/common/css/summernote.css"
           th:href="@{/common/css/summernote.css}">
     <style>
         .ztree li {
             margin: 10px;
         }
-        [v-cloak]{ display: none; }
+
+        [v-cloak] {
+            display: none;
+        }
     </style>
     <script language="javascript">
         function getCurDate() {
@@ -147,39 +148,47 @@
                     </div><!-- header-icon -->
                 </div>
             </div><!-- row -->
+            <div class="row" id="search-main" style="display: none">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <div class="js-widget-search">
+                        <form>
+                            <input type="text" id="keyword" required="" placeholder="Search Here..">
+                            <i><img alt="search icon" src="../static/assets/images/search.png"
+                                    th:src="@{/assets/images/search.png}"></i>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+
         </div><!-- container -->
     </header><!-- header-nav -->
 
     <div class="js-offcanvas-menu js-index1-nav" id="js_offcanvas_menu">
         <nav class="header-nav">
             <span class="js-offcanvas-close"><i class="pe-7s-close"></i></span>
-            <div class="widget mt-3">
-                <div class="js-widget-search">
-                    <form>
-                        <input type="text" id="keyword" required="" placeholder="Search Here..">
-                        <i><img alt="search icon" src="../static/assets/images/search.png"
-                                th:src="@{/assets/images/search.png}"></i>
-                    </form>
-                </div>
-            </div>
             <div data-title="Menu">
-                <ul id="treeDemo" class="ztree"
-                    style="max-height:500px;width:auto; overflow-y:scroll;overflow-x:scroll;color: #0b0b0b"></ul>
-                <!-- <div id="vueTag" v-cloak>
-                 <el-input
-                         placeholder="输入关键字进行过滤"
-                         v-model="filterText">
-                 </el-input>
+                <div id="vueTag" v-cloak>
+                    <el-input
+                            placeholder="输入关键字进行过滤"
+                            v-model="filterText">
+                    </el-input>
 
-                 <el-tree
-                         class="filter-tree"
-                         :data="tagInfo"
-                         :props="defaultProps"
-                         default-expand-all
-                         :filter-node-method="filterNode"
-                         ref="tree">
-                 </el-tree>
-                 </div>-->
+                    <el-tree
+                            class="filter-tree"
+                            :data="tagInfo"
+                            :props="defaultProps"
+                            default-expand-all
+                            :filter-node-method="filterNode"
+                            ref="tree"
+                            @node-click="nodeClick"
+                            :check-strictly="true"
+                            node-key="id">
+                    </el-tree>
+                </div>
             </div><!-- #header-menu-wrap -->
         </nav> <!-- header-nav -->
     </div><!-- js-offcanvas-menu -->
@@ -359,12 +368,6 @@
     <script src="../static/assets/js/audioplayer.js" th:src="@{/assets/js/audioplayer.js}"></script>
     <script src="../static/assets/js/main.js" th:src="@{/assets/js/main.js}"></script>
     <script src="../static/common/js/index.js" th:src="@{/common/js/index.js}"></script>
-    <script type="text/javascript" src="../static/common/js/jquery.ztree.core-3.5.js"
-            th:src="@{/common/js/jquery.ztree.core-3.5.js}"></script>
-    <script type="text/javascript" src="../static/common/js/jquery.ztree.excheck-3.5.js"
-            th:src="@{/common/js/jquery.ztree.excheck-3.5.js}"></script>
-    <script type="text/javascript" src="../static/common/js/ztreeinit.js"
-            th:src="@{/common/js/ztreeinit.js}"></script>
     <script src="../static/common/js/summernote.js" th:src="@{/common/js/summernote.js}"></script>
 </div>
 </body>
