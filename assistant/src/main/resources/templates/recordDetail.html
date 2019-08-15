@@ -15,6 +15,23 @@
                 </ul>
                 <article class="post" id="articleDetail">
                     <div class="row">
+                        <div class="col-3 tag-group">
+                            <el-tag v-for="item in recordDetail.categoryList"
+                                    :key="item.id"
+                                    :type="item.icon"
+                                    effect="dark">{{item.name}}
+                            </el-tag>
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3" style="padding-left: 15%">
+                            <el-button type="primary" icon="el-icon-edit" circle
+                                       @click="editRecord(recordDetail.recordId)"></el-button>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-12">
                             <h3 name="recordTitle" style="text-align: center;">
                                 {{recordTitle}}

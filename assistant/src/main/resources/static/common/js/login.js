@@ -18,7 +18,7 @@ function severCheck() {
                 if ("success" == data.result) {
                     saveCookie();
                     var language = $("#Language").text();
-                    var lang = language == 'English' ? 'zh_CN' : 'en_US';
+                    var lang = language == 'Chinese' ? 'en_US':'zh_CN';
                     window.location.href = "index?Lang=" + lang;
                 } else if ("userError" == data.result) {
                     $("#loginName").tips({

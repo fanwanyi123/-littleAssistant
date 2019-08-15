@@ -28,9 +28,20 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <!--Single Forum Start-->
                             <div class="single-input mb-50 mb-sm-30 mb-xs-20">
                                 <textarea id="summernote" name="recordContent"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <!--Single Forum Start-->
+                            <div class="mb-50 mb-sm-30 mb-xs-20">
+                                <input type="file" name="myFile" id="customfile" class="sr-only">
+                                <label for="customfile"
+                                       style="border: 1px solid #4e555b;border-radius: 20px;font-size: 14px;
+                                       line-height: 30px;width: 90px;text-align: center">
+                                    <a><i class="fa fa-paperclip"></i>添加附件</a>
+                                </label>
+
                             </div>
                             <!--Single Forum End-->
                         </div>
@@ -38,13 +49,13 @@
                             <div id="app">
                                 <div class="mb-50 mb-sm-30 mb-xs-20">
                                     <i class="fa fa-bookmark" id="tagIcon"></i>
-                                    <label>分类 <span style="color: #FF5722; ">*</span> </label>
+                                    <label>添加标签 <span style="color: #FF5722; ">*</span> </label>
                                     <el-select
                                             v-model="valueOne"
                                             filterable
                                             allow-create
                                             default-first-option
-                                            placeholder="请选择标签"
+                                            placeholder="新增标签请直接输入"
                                             v-on:change="getChildTag"
                                             name="recordParentCategoryName" id="recordParentCategoryName">
                                         <el-option
@@ -61,7 +72,7 @@
                                             filterable
                                             allow-create
                                             default-first-option
-                                            placeholder="请选择标签"
+                                            placeholder="新增标签请直接输入"
                                             v-on:change="getGrandSonTag"
                                             name="recordChildCategoryName"
                                             id="recordChildCategoryName"
@@ -79,7 +90,7 @@
                                             filterable
                                             allow-create
                                             default-first-option
-                                            placeholder="请选择标签"
+                                            placeholder="新增标签请直接输入"
                                             name="recordGrandsonCategoryId"
                                             id="recordGrandsonCategoryId"
                                             v-show="showThird">

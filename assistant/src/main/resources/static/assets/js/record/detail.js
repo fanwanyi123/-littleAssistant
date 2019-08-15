@@ -34,7 +34,10 @@ function vueFunction(el, e) {
                 },
                 pageJump(id){
                     window.location.href = getRootPath() + '/record/detail/' + id;
-                }
+                },
+                editRecord(id) {
+                    window.location.href = getRootPath() + '/record/edit/' + id;
+                },
             }
         }
     )
