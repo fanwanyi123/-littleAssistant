@@ -20,33 +20,35 @@
         <div class="border">
             <div class="js-product-checkout-content" style="padding-top: 30px">
                 <form action="/record/insertSubmit" method="post">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="mb-50 mb-sm-30 mb-xs-20">
-                                <input class="input-text" name="recordTitle" type="text"
-                                       th:placeholder="#{message.enter.title}">
+                    <div id="app">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-50 mb-sm-30 mb-xs-20">
+                                    <input class="input-text" name="recordTitle" type="text"
+                                           th:placeholder="#{message.enter.title}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="single-input mb-50 mb-sm-30 mb-xs-20">
-                                <textarea id="summernote" name="recordContent"></textarea>
+                            <div class="col-12">
+                                <div class="single-input mb-50 mb-sm-30 mb-xs-20">
+                                    <textarea id="summernote" name="recordContent"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <!--Single Forum Start-->
-                            <div class="mb-50 mb-sm-30 mb-xs-20">
-                                <input type="file" name="myFile" id="customfile" class="sr-only">
-                                <label for="customfile"
-                                       style="border: 1px solid #4e555b;border-radius: 20px;font-size: 14px;
-                                       line-height: 30px;width: 90px;text-align: center">
-                                    <a><i class="fa fa-paperclip"></i>添加附件</a>
-                                </label>
-
+                            <div class="col-12" style="padding-bottom: 20px">
+                                <el-upload
+                                        class="upload-demo"
+                                        action="https://jsonplaceholder.typicode.com/posts/"
+                                        :on-preview="handlePreview"
+                                        :on-remove="handleRemove"
+                                        :before-remove="beforeRemove"
+                                        multiple
+                                        :limit="3"
+                                        :on-exceed="handleExceed"
+                                        :file-list="fileList">
+                                    <el-link size="small" type="primary"><i class="fa fa-paperclip"></i>添加附件</el-link>
+                                    <span slot="tip" class="el-upload__tip">(只能上传rar/zip文件，且不超过500kb)</span>
+                                </el-upload>
                             </div>
-                            <!--Single Forum End-->
-                        </div>
-                        <div class="col-12">
-                            <div id="app">
+                            <div class="col-12">
                                 <div class="mb-50 mb-sm-30 mb-xs-20">
                                     <i class="fa fa-bookmark" id="tagIcon"></i>
                                     <label>添加标签 <span style="color: #FF5722; ">*</span> </label>
@@ -103,24 +105,24 @@
                                     </el-select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <!--Single Forum Start-->
-                            <div class="mb-50 mb-sm-30 mb-xs-20">
-                                <span>状态</span>
-                                &nbsp;
-                                <input type="radio" name="recordStatus" value="1" title="发布" checked><span>发布</span>
-                                &nbsp;
-                                <input type="radio" name="recordStatus" value="0" title="草稿"><span>草稿</span>
+                            <div class="col-12">
+                                <!--Single Forum Start-->
+                                <div class="mb-50 mb-sm-30 mb-xs-20">
+                                    <span>状态</span>
+                                    &nbsp;
+                                    <input type="radio" name="recordStatus" value="1" title="发布" checked><span>发布</span>
+                                    &nbsp;
+                                    <input type="radio" name="recordStatus" value="0" title="草稿"><span>草稿</span>
+                                </div>
+                                <!--Single Forum End-->
                             </div>
-                            <!--Single Forum End-->
-                        </div>
-                        <div class="col-12">
-                            <div class="forum-post">
-                                <button type="submit" class="btn btn-primary no-border-radius" id="submit-btn">保存
-                                </button>
-                                &nbsp;
-                                <button type="reset" class="btn btn-primary no-border-radius">重置</button>
+                            <div class="col-12">
+                                <div class="forum-post">
+                                    <button type="submit" class="btn btn-primary no-border-radius" id="submit-btn">保存
+                                    </button>
+                                    &nbsp;
+                                    <button type="reset" class="btn btn-primary no-border-radius">重置</button>
+                                </div>
                             </div>
                         </div>
                     </div>
