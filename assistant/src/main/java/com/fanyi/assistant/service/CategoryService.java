@@ -40,4 +40,10 @@ public interface CategoryService {
      * @return 分类
      */
     Category getCategoryByName(String categoryName);
+
+    /**
+     * 通过id获取标签信息
+     * @return
+     */
+    Category getCategoryById(Integer id);
 }

@@ -14,7 +14,8 @@ function vueFunction(el, e) {
                 currentPage: 1,
                 recordId: 0,
                 recordDelete: false,
-                searchStatus: false
+                searchStatus: false,
+                hasTagName: $("#tagName").text() != ""
             },
             e: e,
             methods: {

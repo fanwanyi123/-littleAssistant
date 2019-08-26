@@ -128,6 +128,8 @@ public class RecordController {
     @RequestMapping(value = "/filter/{id}")
     public String indexByTag(@PathVariable("id") Integer id,Model model) {
         model.addAttribute("tagId", id);
+        Category category = categoryService.getCategoryById(id);
+        model.addAttribute("tagName", category.getName());
         return "record";
     }
 

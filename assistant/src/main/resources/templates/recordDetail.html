@@ -26,9 +26,11 @@
                         </div>
                         <div class="col-3">
                         </div>
-                        <div class="col-3" style="padding-left: 15%">
+                        <div class="col-3">
                             <el-button type="primary" icon="el-icon-edit" circle
                                        @click="editRecord(recordDetail.recordId)"></el-button>
+                            &nbsp;
+                            <el-button type="primary" icon="el-icon-share"></el-button>
                         </div>
                     </div>
                     <div class="row">
@@ -37,15 +39,12 @@
                                 {{recordTitle}}
                             </h3>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12" style="margin-top: 10px">
                             <!--Single Forum Start-->
                             <div class="mb-50 mb-sm-30 mb-xs-20">
                                 <span id="recordContent"></span>
                             </div>
                             <!--Single Forum End-->
-                        </div>
-                        <div class="col-12">
-                            <el-button type="primary" icon="el-icon-share"></el-button>
                         </div>
                         <div class="col-12">
                           <span class="footer-nav-link" style="float: left" v-if="preRecord==null" disabled="disabled">

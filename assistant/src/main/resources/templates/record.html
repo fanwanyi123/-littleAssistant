@@ -42,6 +42,8 @@
                     <li><a href="/record">总览</a></li>
                     <li class="active" v-show="searchStatus">
                         <span class="divider">/</span>搜索到相关结果{{all}}个</a></li>
+                    <li class="active" v-show="tagName">
+                        <span class="divider">/</span><span th:text="${tagName}" name="tagName" id="tagName"></span></a></li>
                 </ul>
                 <el-table
                         ref="filterTable"

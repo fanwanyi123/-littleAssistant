@@ -51,7 +51,7 @@ public interface CategoryDao {
      *
      * @return 数量
      */
-    Integer countCategory();
+    Category getCategoryById(Integer id);
 
     /**
      * 获得分类列表

@@ -61,5 +61,8 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryList;
     }
 
-
+    @Override
+    public Category getCategoryById(Integer id) {
+        return categoryDao.getCategoryById(id);
+    }
 }

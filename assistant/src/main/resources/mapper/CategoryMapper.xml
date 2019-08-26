@@ -11,8 +11,8 @@
     <sql id="tb">tag_info</sql>
 
     <sql id="Base_Column_List">
-    id, pid, name, icon
-  </sql>
+     id, pid, name, icon
+   </sql>
 
 
     <insert id="insert" parameterType="com.fanyi.assistant.model.Category">
@@ -61,7 +61,7 @@
         FROM
         <include refid="tb"/>
         WHERE
-        category.id=#{value}
+        id=#{value}
     </select>
 
 
