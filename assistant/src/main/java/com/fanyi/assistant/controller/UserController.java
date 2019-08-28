@@ -57,7 +57,7 @@ public class UserController {
             String random = (String) session.getAttribute("RANDOMVALIDATECODEKEY");
             if (random == null) {
                 checkResultMap.put("result","codeError");
-            }else if (random.equals(inputStr)) {
+            }else if (random.equalsIgnoreCase(inputStr)) {
                 boolean hasUser = userService.findUserByInputVal(userName,encryptBasedDes(password));
                 if (hasUser){
                     session.setAttribute("userName",userName);

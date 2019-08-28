@@ -1,6 +1,7 @@
 package com.fanyi.assistant.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author fanyi
@@ -23,5 +24,7 @@ public class RecordParam {
     private Integer recordOrder;
 
     private Integer recordStatus;
+
+    private MultipartFile[] files;
 
 }

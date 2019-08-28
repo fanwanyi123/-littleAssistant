@@ -9,8 +9,10 @@ import lombok.Data;
 @Data
 public class UploadFile {
 
-    private String src;
+    private String url;
 
-    private String title;
+    private String name;
+
+    private int success;
 
 }

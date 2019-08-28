@@ -2301,6 +2301,7 @@ aside .widget .shape {
     width: 50px;
     z-index: 999; 
     cursor: pointer;
+    border-radius: 100%;
 }
 
 /*====================

@@ -7,7 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * @author fanyi
@@ -26,63 +28,68 @@ public class UploadFileController {
 
     /**
      * 上传文件
-     * @param file file
+     *
+     * @param files files
      * @return
      * @throws IOException IOException
      */
-    @RequestMapping(value = "/img", method = RequestMethod.POST)
+    @RequestMapping(value = "/file", method = RequestMethod.POST)
     @ResponseBody
-    public Object uploadFile(@RequestParam("file") MultipartFile file) {
+    public Object uploadFile(@RequestParam("file") MultipartFile[] files) {
         //1.文件后缀过滤，只允许部分后缀
-        //文件的完整名称,如spring.jpeg
-        String filename = file.getOriginalFilename();
-        //文件名,如spring
-        String name = filename.substring(0, filename.indexOf("."));
-        //文件后缀,如.jpeg
-        String suffix = filename.substring(filename.lastIndexOf("."));
+        List<UploadFile> uploadFiles = new ArrayList<>();
+        for (MultipartFile file : files) {
+            //文件的完整名称,如spring.jpeg
+            String filename = file.getOriginalFilename();
+            //文件名,如spring
+            String name = filename.substring(0, filename.indexOf("."));
+            //文件后缀,如.jpeg
+            String suffix = filename.substring(filename.lastIndexOf("."));
 
-        if (allowSuffix.indexOf(suffix) == -1) {
-            return "不允许上传该后缀的文件！";
+            if (allowSuffix.indexOf(suffix) == -1) {
+                return "不允许上传该后缀的文件！";
+            }
+
+            //2.创建文件目录
+            //创建年月文件夹
+            Calendar date = Calendar.getInstance();
+            File dateDirs = new File(date.get(Calendar.YEAR)
+                    + File.separator + (date.get(Calendar.MONTH) + 1));
+
+            //目标文件
+            File descFile = new File(rootPath + File.separator + dateDirs + File.separator + filename);
+            int i = 1;
+            //若文件存在重命名
+            String newFilename = filename;
+            while (descFile.exists()) {
+                newFilename = name + "(" + i + ")" + suffix;
+                String parentPath = descFile.getParent();
+                descFile = new File(parentPath + File.separator + newFilename);
+                i++;
+            }
+            //判断目标文件所在的目录是否存在
+            if (!descFile.getParentFile().exists()) {
+                //如果目标文件所在的目录不存在，则创建父目录
+                descFile.getParentFile().mkdirs();
+            }
+
+            //3.存储文件
+            //将内存中的数据写入磁盘
+            try {
+                file.transferTo(descFile);
+            } catch (Exception e) {
+                e.printStackTrace();
+                log.error("上传失败，cause:{}", e);
+            }
+            //完整的url
+            String fileUrl = rootPath + dateDirs + File.separator + newFilename;
+            //4.返回URL
+            UploadFile uploadFile = new UploadFile();
+            uploadFile.setName(filename);
+            uploadFile.setUrl(fileUrl);
+            uploadFile.setSuccess(1);
+            uploadFiles.add(uploadFile);
         }
-
-
-        //2.创建文件目录
-        //创建年月文件夹
-        Calendar date = Calendar.getInstance();
-        File dateDirs = new File(date.get(Calendar.YEAR)
-                + File.separator + (date.get(Calendar.MONTH) + 1));
-
-        //目标文件
-        File descFile = new File(rootPath + File.separator + dateDirs + File.separator + filename);
-        int i = 1;
-        //若文件存在重命名
-        String newFilename = filename;
-        while (descFile.exists()) {
-            newFilename = name + "(" + i + ")" + suffix;
-            String parentPath = descFile.getParent();
-            descFile = new File(parentPath + File.separator + newFilename);
-            i++;
-        }
-        //判断目标文件所在的目录是否存在
-        if (!descFile.getParentFile().exists()) {
-            //如果目标文件所在的目录不存在，则创建父目录
-            descFile.getParentFile().mkdirs();
-        }
-
-        //3.存储文件
-        //将内存中的数据写入磁盘
-        try {
-            file.transferTo(descFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            log.error("上传失败，cause:{}", e);
-        }
-        //完整的url
-        String fileUrl = "/uploads/" + dateDirs + "/" + newFilename;
-        //4.返回URL
-        UploadFile uploadFile = new UploadFile();
-        uploadFile.setTitle(filename);
-        uploadFile.setSrc(fileUrl);
-        return uploadFile;
+        return uploadFiles;
     }
 }
