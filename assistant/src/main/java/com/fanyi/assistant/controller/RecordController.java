@@ -6,6 +6,7 @@ import com.fanyi.assistant.model.Category;
 import com.fanyi.assistant.model.Record;
 import com.fanyi.assistant.service.CategoryService;
 import com.fanyi.assistant.service.RecordService;
+import com.fanyi.assistant.service.UploadFileService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,9 +30,12 @@ public class RecordController {
 
     @Autowired
     private CategoryService categoryService;
+
     @Autowired
     private RecordService recordService;
 
+    @Autowired
+    UploadFileService uploadFileService;
     /**
      * 做记录页面显示
      *
@@ -71,7 +75,8 @@ public class RecordController {
         //填充分类
         List<Category> categoryList = setRecordCategoryList(recordParam);
         record.setCategoryList(categoryList);
-        recordService.insertRecord(record);
+        int recordId = recordService.insertRecord(record);
+        uploadFileService.uploadFile(recordParam.getFiles(),recordId);
         return "redirect:/record";
     }
 

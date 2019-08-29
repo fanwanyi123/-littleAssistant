@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fanyi.assistant.dao.UploadFileDao">
+    <resultMap id="BaseResultMap" type="com.fanyi.assistant.model.UploadFile">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="path" jdbcType="VARCHAR" property="url"/>
+        <result column="record_id" jdbcType="VARCHAR" property="recordId"/>
+    </resultMap>
+
+    <sql id="tb">file_info</sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into
+        <include refid="tb"/>
+        (name, path,record_id)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.name}, #{item.url}, #{item.recordId})
+        </foreach>
+    </insert>
+
+</mapper>

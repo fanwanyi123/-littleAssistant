@@ -19,8 +19,8 @@
     <div class="container">
         <div class="border">
             <div class="js-product-checkout-content" style="padding-top: 30px">
-                <form action="/record/insertSubmit" method="post">
-                    <div id="app">
+                <div id="app">
+                    <form id="formInsert" method="post" action="/record/insertSubmit" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-12">
                                 <div class="mb-50 mb-sm-30 mb-xs-20">
@@ -36,14 +36,17 @@
                             <div class="col-12" style="padding-bottom: 20px">
                                 <el-upload
                                         class="upload-demo"
-                                        action="https://jsonplaceholder.typicode.com/posts/"
+                                        ref="upload"
+                                        action=""
                                         :on-preview="handlePreview"
                                         :on-remove="handleRemove"
                                         :before-remove="beforeRemove"
                                         multiple
                                         :limit="3"
                                         :on-exceed="handleExceed"
-                                        :file-list="fileList">
+                                        :file-list="fileList"
+                                        :auto-upload="false"
+                                        name="files">
                                     <el-link size="small" type="primary"><i class="fa fa-paperclip"></i>添加附件</el-link>
                                     <span slot="tip" class="el-upload__tip">(只能上传rar/zip文件，且不超过500kb)</span>
                                 </el-upload>
@@ -118,21 +121,22 @@
                             </div>
                             <div class="col-12">
                                 <div class="forum-post">
-                                    <button type="submit" class="btn btn-primary no-border-radius" id="submit-btn">保存
+                                    <button type="submit" class="btn btn-primary no-border-radius"
+                                            id="submit-btn">保存
                                     </button>
                                     &nbsp;
                                     <button type="reset" class="btn btn-primary no-border-radius">重置</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div><!--VUE APP-->
             </div><!-- js-product-checkout -->
 
         </div><!-- border -->
     </div><!--container -->
-    <!--music -->
-    <div th:include="common::commonMusicPlayer"></div>
+    <!--&lt;!&ndash;music &ndash;&gt;-->
+    <!--<div th:include="common::commonMusicPlayer"></div>-->
 </section>
 <footer th:include="common::commonFooter"></footer>
 <div th:include="common::commonJs"></div>

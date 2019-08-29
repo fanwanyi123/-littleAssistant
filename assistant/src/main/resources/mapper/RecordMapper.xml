@@ -96,6 +96,7 @@
                     )
                 </if>
             </trim>
+            ORDER BY record_create_time DESC
         </where>
     </select>
 

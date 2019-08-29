@@ -1,4 +1,4 @@
-package com.fanyi.assistant.dto;
+package com.fanyi.assistant.model;
 
 import lombok.Data;
 
@@ -8,11 +8,12 @@ import lombok.Data;
 
 @Data
 public class UploadFile {
-
+    private Integer id;
+    
     private String url;
 
     private String name;
 
-    private int success;
+    private Integer recordId;
 
 }

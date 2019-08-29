@@ -33,7 +33,7 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void insertRecord(Record record) {
+    public Integer insertRecord(Record record) {
         //添加文章
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         record.setRecordCreateTime(formatter.format(new Date()));
@@ -44,13 +44,15 @@ public class RecordServiceImpl implements RecordService {
         record.setRecordCommentCount(0);
         record.setRecordOrder(1);
         int recordId = recordDao.getMaxRecordId() == null ? 0 : recordDao.getMaxRecordId();
-        record.setRecordId(recordId + 1);
+        int newRecordId = recordId + 1;
+        record.setRecordId(newRecordId);
         recordDao.insert(record);
         //添加分类和文章关联
         for (int i = 0; i < record.getCategoryList().size(); i++) {
-            RecordCategoryRef recordCategoryRef = new RecordCategoryRef(record.getRecordId(), record.getCategoryList().get(i).getId());
+            RecordCategoryRef recordCategoryRef = new RecordCategoryRef(newRecordId, record.getCategoryList().get(i).getId());
             recordCategoryRefDao.insert(recordCategoryRef);
         }
+        return newRecordId;
     }
 
     @Override

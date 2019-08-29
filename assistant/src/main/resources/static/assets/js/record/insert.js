@@ -24,7 +24,7 @@ function vueFunction(el, e) {
             valueTwo: [],
             valueThree: [],
             fileList: [],
-            fileData: new FormData()
+            formDatas: "",
         },
         e: e,
         methods: {
@@ -63,19 +63,6 @@ function vueFunction(el, e) {
                     }
                 }
             },
-            handleSuccess(response, file, fileList) {
-                var files = new Array()
-                for (var i = 0; i < fileList.length; i++) {
-                    if (fileList[i].response.success === 1) {
-                        files.push({name: fileList[i].response.name, url: fileList[i].response.url})
-                        console.log('解析成功')
-                    } else {
-                        console.log('解析失败')
-                    }
-                }
-                var fileStr = JSON.stringify(files);
-                $("#fileList").val(fileStr);
-            },
             handleRemove(file, fileList) {
                 console.log(file, fileList);
             },
@@ -88,38 +75,6 @@ function vueFunction(el, e) {
             beforeRemove(file, fileList) {
                 return this.$confirm(`确定移除 ${ file.name }？`);
             },
-            uploadFile(file){
-                this.fileData.append('file', file.file);
-            },
-            submitForm(){
-                // this.$refs.upload.submit();
-                $.ajax({
-                    type: "post",
-                    url: "你请求的URL",
-                    data: this.fileData,
-                    contentType: false,//这里不要落下
-                    dataType: 'json',
-                    success: function(data) {
-
-                    },
-                    error: function(error) {
-                    }
-                });
-
-                var formDatas = new FormData($("#formInsert")[0]);
-                formDatas.append("files",this.fileList)
-                $.ajax({
-                    url: "/record/insertSubmit",
-                    type: "post",
-                    dataType: "json",
-                    data: formDatas,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        console.log(data)
-                    }
-                });
-            }
         }
     })
 }

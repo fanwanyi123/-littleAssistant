@@ -16,7 +16,7 @@ public interface RecordService {
      *
      * @param record 文章
      */
-    void insertRecord(Record record);
+    Integer insertRecord(Record record);
 
     /**
      * 修改记录详细信息
