@@ -46,7 +46,8 @@
                                         :on-exceed="handleExceed"
                                         :file-list="fileList"
                                         :auto-upload="false"
-                                        name="files">
+                                        name="files"
+                                        accept=".rar,.RAR,.ZIP,.zip,.exe,.xlsx,.txt">
                                     <el-link size="small" type="primary"><i class="fa fa-paperclip"></i>添加附件</el-link>
                                     <span slot="tip" class="el-upload__tip">(只能上传rar/zip文件，且不超过500kb)</span>
                                 </el-upload>

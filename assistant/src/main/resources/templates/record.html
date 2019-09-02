@@ -45,18 +45,25 @@
                     <li class="active" v-show="tagName">
                         <span class="divider">/</span><span th:text="${tagName}" name="tagName" id="tagName"></span></a></li>
                 </ul>
+                <!--<div>-->
+                    <!--<el-button type="danger" icon="el-icon-delete" circle @click="">批量删除</el-button>-->
+                <!--</div>-->
                 <el-table
                         ref="filterTable"
                         :data="pageInfo"
-                        style="width: 100%;">
+                        style="width: 100%;"
+                        @selection-change="handleSelectionChange">
                     <template>
+                        <el-table-column
+                                type="selection"
+                                width="55">
+                        </el-table-column>
                         <el-table-column
                                 prop="recordUpdateTime"
                                 label="发布时间"
                                 sortable
                                 width="180"
-                                column-key="recordUpdateTime"
-                                :filter-method="filterHandler">
+                                column-key="recordUpdateTime">
                         </el-table-column>
                         <el-table-column
                                 prop="recordTitle"

@@ -2422,7 +2422,7 @@
             },
             image: {
                 image: 'Picture',
-                insert: 'Insert Image',
+                insert: '插入图片',
                 resizeFull: 'Resize Full',
                 resizeHalf: 'Resize Half',
                 resizeQuarter: 'Resize Quarter',
@@ -2435,27 +2435,27 @@
                 shapeNone: 'Shape: None',
                 dragImageHere: 'Drag image or text here',
                 dropImage: 'Drop image or Text',
-                selectFromFiles: 'Select from files',
+                selectFromFiles: '',
                 maximumFileSize: 'Maximum file size',
                 maximumFileSizeError: 'Maximum file size exceeded.',
-                url: 'Image URL',
+                url: '图片 URL',
                 remove: 'Remove Image',
                 original: 'Original'
             },
             video: {
                 video: 'Video',
                 videoLink: 'Video Link',
-                insert: 'Insert Video',
-                url: 'Video URL',
+                insert: '插入视频',
+                url: '视频 URL',
                 providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)'
             },
             link: {
                 link: 'Link',
-                insert: 'Insert Link',
+                insert: '插入链接',
                 unlink: 'Unlink',
                 edit: 'Edit',
-                textToDisplay: 'Text to display',
-                url: 'To what URL should this link go?',
+                textToDisplay: '要显示的文本',
+                url: '链接地址?',
                 openInNewWindow: 'Open in new window'
             },
             table: {

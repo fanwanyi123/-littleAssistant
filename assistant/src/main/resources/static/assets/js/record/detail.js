@@ -17,6 +17,9 @@ function vueFunction(el, e) {
             },
             e: e,
             methods: {
+                goBack() {
+                    window.location.href = getRootPath() + "record";
+                },
                 detailRecord() {
                     $.ajax({
                         url: getRootPath() + "/record/" + this.recordId,
@@ -32,7 +35,7 @@ function vueFunction(el, e) {
                         }
                     })
                 },
-                pageJump(id){
+                pageJump(id) {
                     window.location.href = getRootPath() + '/record/detail/' + id;
                 },
                 editRecord(id) {

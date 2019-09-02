@@ -15,7 +15,8 @@ function vueFunction(el, e) {
                 recordId: 0,
                 recordDelete: false,
                 searchStatus: false,
-                hasTagName: $("#tagName").text() != ""
+                hasTagName: $("#tagName").text() != "",
+                multipleSelection: []
             },
             e: e,
             methods: {
@@ -31,6 +32,9 @@ function vueFunction(el, e) {
                 handleCurrentChange(val) {
                     this.currentPage = val;
                     this.getPageData();//确定当前页面后刷新页面
+                },
+                handleSelectionChange(val) {
+                    this.multipleSelection = val;
                 },
                 getPageData() {
                     console.log('现在是' + this.currentPage + '页');
@@ -88,6 +92,9 @@ function vueFunction(el, e) {
                         window.location.href = getRootPath() + '/record/edit/' + id;
                     }
                 },
+                deleteAll(){
+                    alert("aaa")
+                },
                 editRecord(id) {
                     window.location.href = getRootPath() + '/record/edit/' + id;
                 },
@@ -109,10 +116,6 @@ function vueFunction(el, e) {
                     }
                     return filter;
                 },
-                filterHandler(value, row, column) {
-                    const property = column['property'];
-                    return row[property] === value;
-                }
             }
         }
     )

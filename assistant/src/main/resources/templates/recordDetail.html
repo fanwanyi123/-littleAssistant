@@ -28,9 +28,15 @@
                         </div>
                         <div class="col-3">
                             <el-button type="primary" icon="el-icon-edit" circle
-                                       @click="editRecord(recordDetail.recordId)"></el-button>
+                                       @click="editRecord(recordDetail.recordId)">编辑</el-button>
                             &nbsp;
-                            <el-button type="primary" icon="el-icon-share"></el-button>
+                            <el-dropdown>
+                                <el-button type="primary" icon="el-icon-share"></el-button>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item title="分享到QQ"><i class="fa fa-qq" aria-hidden="true"></i></el-dropdown-item>
+                                    <el-dropdown-item title="分享到微信" data-cmd="weixin"><i class="fa fa-weixin" aria-hidden="true"></i></el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
                         </div>
                     </div>
                     <div class="row">
@@ -45,6 +51,9 @@
                                 <span id="recordContent"></span>
                             </div>
                             <!--Single Forum End-->
+                        </div>
+                        <div class="col-12">
+                            <el-link>查看<i class="el-icon-view el-icon--right"></i> </el-link>
                         </div>
                         <div class="col-12">
                           <span class="footer-nav-link" style="float: left" v-if="preRecord==null" disabled="disabled">
