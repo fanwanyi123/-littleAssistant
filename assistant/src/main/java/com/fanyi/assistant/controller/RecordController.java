@@ -1,9 +1,11 @@
 package com.fanyi.assistant.controller;
 
 import cn.hutool.http.HtmlUtil;
+import com.alibaba.fastjson.JSON;
 import com.fanyi.assistant.dto.RecordParam;
 import com.fanyi.assistant.model.Category;
 import com.fanyi.assistant.model.Record;
+import com.fanyi.assistant.model.UploadFile;
 import com.fanyi.assistant.service.CategoryService;
 import com.fanyi.assistant.service.RecordService;
 import com.fanyi.assistant.service.UploadFileService;
@@ -36,6 +38,7 @@ public class RecordController {
 
     @Autowired
     UploadFileService uploadFileService;
+
     /**
      * 做记录页面显示
      *
@@ -76,7 +79,7 @@ public class RecordController {
         List<Category> categoryList = setRecordCategoryList(recordParam);
         record.setCategoryList(categoryList);
         int recordId = recordService.insertRecord(record);
-        uploadFileService.uploadFile(recordParam.getFiles(),recordId);
+        uploadFileService.uploadFile(recordParam.getFiles(), recordId);
         return "redirect:/record";
     }
 
@@ -109,7 +112,7 @@ public class RecordController {
                            @RequestParam Integer tagId,
                            @RequestParam String keywords) {
         HashMap<String, Object> criteria = new HashMap<>(1);
-        criteria.put("categoryId",tagId);
+        criteria.put("categoryId", tagId);
         criteria.put("keywords", keywords);
         PageInfo<Record> articlePageInfo = recordService.pageArticle(pageIndex, pageSize, criteria);
         return articlePageInfo;
@@ -131,7 +134,7 @@ public class RecordController {
      * @return String
      */
     @RequestMapping(value = "/filter/{id}")
-    public String indexByTag(@PathVariable("id") Integer id,Model model) {
+    public String indexByTag(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("tagId", id);
         Category category = categoryService.getCategoryById(id);
         model.addAttribute("tagName", category.getName());
@@ -144,7 +147,7 @@ public class RecordController {
      * @return String
      */
     @RequestMapping(value = "/search")
-    public String searchRecord(@RequestParam("keywords") String keywords,Model model) {
+    public String searchRecord(@RequestParam("keywords") String keywords, Model model) {
         model.addAttribute("keywords", keywords);
         return "record";
     }
@@ -169,6 +172,8 @@ public class RecordController {
         //获取上一篇文章
         Record preRecord = recordService.getPreRecord(articleId);
         recordMap.put("preRecord", preRecord);
+        List<UploadFile> recordFiles = uploadFileService.getRecordRefFile(articleId);
+        recordMap.put("recordFiles", recordFiles);
         return recordMap;
     }
 
@@ -260,6 +265,23 @@ public class RecordController {
             categoryList.add(category);
         }
         return categoryList;
+    }
+
+
+    /**
+     * 文章访问量数增加
+     *
+     * @param id 文章ID
+     * @return 访问量数量
+     */
+    @RequestMapping(value = "/view/{id}", method = {RequestMethod.POST})
+    @ResponseBody
+    public String increaseViewCount(@PathVariable("id") Integer id) {
+        Record record = recordService.getRecordByStatusAndId(1, id);
+        Integer recordCount = record.getRecordViewCount() + 1;
+        record.setRecordViewCount(recordCount);
+        recordService.updateRecord(record);
+        return JSON.toJSONString(recordCount);
     }
 }
 

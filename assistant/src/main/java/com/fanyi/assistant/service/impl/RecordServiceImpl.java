@@ -112,4 +112,9 @@ public class RecordServiceImpl implements RecordService {
     public Record getPreRecord(Integer id) {
         return recordDao.getPreRecord(id);
     }
+
+    @Override
+    public void updateRecord(Record record) {
+        recordDao.update(record);
+    }
 }

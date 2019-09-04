@@ -12,9 +12,9 @@ import java.util.HashMap;
  */
 public interface RecordService {
     /**
-     * 添加文章
+     * 添加记录
      *
-     * @param record 文章
+     * @param record 记录
      */
     Integer insertRecord(Record record);
 
@@ -24,8 +24,8 @@ public interface RecordService {
      */
     void updateRecordDetail(Record record);
     /**
-     * 删除文章
-     * @param id 文章ID
+     * 删除记录
+     * @param id 记录ID
      */
     void deleteRecord(Integer id);
 
@@ -34,7 +34,7 @@ public interface RecordService {
      * @param pageIndex 第几页开始
      * @param pageSize  一页显示多少
      * @param criteria  查询条件
-     * @return 文章列表
+     * @return 记录列表
      */
     PageInfo<Record> pageArticle(Integer pageIndex,
                                  Integer pageSize,
@@ -42,25 +42,33 @@ public interface RecordService {
 
 
     /**
-     * 文章详情页面显示
+     * 记录详情页面显示
      * @param status 状态
      * @param id 章ID
-     * @return 文章
+     * @return 记录
      */
     Record getRecordByStatusAndId(Integer status, Integer id);
 
 
     /**
-     * 获得上一篇文章
-     * @param id 文章ID
-     * @return 文章
+     * 获得上一篇记录
+     * @param id 记录ID
+     * @return 记录
      */
     Record getAfterRecord(Integer id);
 
     /**
-     * 获得下一篇文章
-     * @param id 文章ID
-     * @return 文章
+     * 获得下一篇记录
+     * @param id 记录ID
+     * @return 记录
      */
     Record getPreRecord(Integer id);
+
+    /**
+     * 修改记录简单信息
+     *
+     * @param record 记录
+     */
+    void updateRecord(Record record);
+
 }

@@ -1,10 +1,10 @@
 package com.fanyi.assistant.dao;
 
-import com.fanyi.assistant.model.UploadFile;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
+        import com.fanyi.assistant.model.UploadFile;
+        import org.apache.ibatis.annotations.Mapper;
+        import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+        import java.util.List;
 
 /**
  * 上传文件
@@ -17,4 +17,6 @@ public interface UploadFileDao {
      * @return 影响行数
      */
     int insert(@Param("list") List<UploadFile> files);
+
+    List<UploadFile> getRecordRefFile(@Param("recordId") Integer recordId);
 }

@@ -28,24 +28,32 @@
                         </div>
                         <div class="col-3">
                             <el-button type="primary" icon="el-icon-edit" circle
-                                       @click="editRecord(recordDetail.recordId)">编辑</el-button>
+                                       @click="editRecord(recordDetail.recordId)" size="small">编辑
+                            </el-button>
                             &nbsp;
                             <el-dropdown>
-                                <el-button type="primary" icon="el-icon-share"></el-button>
+                                <el-button type="primary" icon="el-icon-share" size="small"></el-button>
                                 <el-dropdown-menu slot="dropdown">
-                                    <el-dropdown-item title="分享到QQ"><i class="fa fa-qq" aria-hidden="true"></i></el-dropdown-item>
-                                    <el-dropdown-item title="分享到微信" data-cmd="weixin"><i class="fa fa-weixin" aria-hidden="true"></i></el-dropdown-item>
+                                    <el-dropdown-item title="分享到QQ"><i class="fa fa-qq" aria-hidden="true"></i>
+                                    </el-dropdown-item>
+                                    <el-dropdown-item title="分享到微信" data-cmd="weixin"><i class="fa fa-weixin"
+                                                                                         aria-hidden="true"></i>
+                                    </el-dropdown-item>
                                 </el-dropdown-menu>
                             </el-dropdown>
+                            &nbsp;
+                            <el-button type="primary" icon="el-icon-view" circle size="small"><span
+                                    class="recordViewCount" name="recordViewCount">{{recordDetail.recordViewCount}}</span>
+                            </el-button>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: 20px">
                         <div class="col-12">
                             <h3 name="recordTitle" style="text-align: center;">
                                 {{recordTitle}}
                             </h3>
                         </div>
-                        <div class="col-12" style="margin-top: 10px">
+                        <div class="col-12" style="padding-top: 25px">
                             <!--Single Forum Start-->
                             <div class="mb-50 mb-sm-30 mb-xs-20">
                                 <span id="recordContent"></span>
@@ -53,7 +61,9 @@
                             <!--Single Forum End-->
                         </div>
                         <div class="col-12">
-                            <el-link>查看<i class="el-icon-view el-icon--right"></i> </el-link>
+                            <a href="#" v-for="recordFile in recordFiles">
+                                <i :class="recordFile.icon" aria-hidden="true"></i>
+                                {{recordFile.name}}&#40;{{recordFile.size}}&#41; <br></a>
                         </div>
                         <div class="col-12">
                           <span class="footer-nav-link" style="float: left" v-if="preRecord==null" disabled="disabled">
@@ -83,29 +93,6 @@
 </section>
 <footer th:include="common::commonFooter"></footer>
 <div th:include="common::commonJs"></div>
-<script>
-    // 分享 √
-    if (/iphone|ipod|ipad|ipad|mobile/i.test(navigator.userAgent.toLowerCase())) {
-        $('.share-sd').click(function () {
-            $('#share').animate({
-                    opacity: 'toggle',
-                    top: '-80px'
-                },
-                500).animate({
-                    top: '-60px'
-                },
-                'fast');
-            return false;
-        });
-    } else {
-        $(".share-sd").mouseover(function () {
-            $(this).children("#share").show();
-        });
-        $(".share-sd").mouseout(function () {
-            $(this).children("#share").hide();
-        });
-    }
-</script>
 <script type="text/javascript" src="../static/assets/js/record/detail.js"
         th:src="@{/assets/js/record/detail.js}"></script>
 </body>

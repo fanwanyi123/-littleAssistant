@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -45,7 +46,7 @@ public class UploadFileServiceImpl implements UploadFileService {
             String name = filename.substring(0, filename.indexOf("."));
             //文件后缀,如.jpeg
             String suffix = filename.substring(filename.lastIndexOf("."));
-
+            String fileIcon = getFileIcon(suffix.toLowerCase());
             //2.创建文件目录
             //创建年月文件夹
             Calendar date = Calendar.getInstance();
@@ -80,9 +81,12 @@ public class UploadFileServiceImpl implements UploadFileService {
             //完整的url
             String fileUrl = rootPath + dateDirs + File.separator + newFilename;
             //4.返回URL
+            String fileSize = getFileSizeStr(descFile);
             UploadFile uploadFile = new UploadFile();
             uploadFile.setName(filename);
             uploadFile.setUrl(fileUrl);
+            uploadFile.setSize(fileSize);
+            uploadFile.setIcon(fileIcon);
             uploadFile.setRecordId(recordId);
             uploadFiles.add(uploadFile);
         }
@@ -91,6 +95,56 @@ public class UploadFileServiceImpl implements UploadFileService {
         } else {
             return -1;
         }
+    }
+
+    private String getFileIcon(String suffix) {
+        switch (suffix){
+            case ".zip":
+                return "fa fa-file-archive-o";
+            case ".rar":
+                return "fa fa-file-archive-o";
+            case ".txt":
+                return "fa fa-file-text";
+            case ".doc":
+                return "fa fa-file-word-o";
+            case ".docx":
+                return "fa fa-file-word-o";
+            case ".xlsx":
+                return "fa fa-file-excel-o";
+
+        }
+        return null;
+    }
+
+    @Override
+    public List<UploadFile> getRecordRefFile(Integer recordId) {
+        return uploadFileDao.getRecordRefFile(recordId);
+    }
+
+    private String getFileSizeStr(File descFile) {
+        String fileSizeVal = "";
+        long fileSize = descFile.length();
+        long mb = 1024 * 1024;
+        long kb = 1024;
+        if (fileSize > mb) {
+            fileSizeVal = saveOneBitTwoRound((double) fileSize / (1024 * 1024)) + "MB";
+        } else if (fileSize > kb) {
+            fileSizeVal = saveOneBitTwoRound((double) fileSize / 1024) + "KB";
+        }else {
+            fileSizeVal = fileSize + "Byte";
+        }
+        return fileSizeVal;
+    }
+
+    /**
+     * 保留两位小数,进行四舍五入
+     * @param d
+     * @return
+     */
+    public static Double saveOneBitTwoRound(Double d){
+        BigDecimal bd = new BigDecimal(d);
+        Double tem = bd.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
+        return tem;
     }
 
 }

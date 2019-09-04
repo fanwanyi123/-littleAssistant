@@ -5,7 +5,9 @@
         <result column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="path" jdbcType="VARCHAR" property="url"/>
-        <result column="record_id" jdbcType="VARCHAR" property="recordId"/>
+        <result column="size" jdbcType="VARCHAR" property="size"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="record_id" jdbcType="INTEGER" property="recordId"/>
     </resultMap>
 
     <sql id="tb">file_info</sql>
@@ -13,11 +15,15 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into
         <include refid="tb"/>
-        (name, path,record_id)
+        (name, path,size,icon,record_id)
         values
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.name}, #{item.url}, #{item.recordId})
+            (#{item.name}, #{item.url},#{item.size},#{item.icon},#{item.recordId})
         </foreach>
     </insert>
+
+    <select id="getRecordRefFile" resultMap="BaseResultMap">
+		select * from <include refid="tb"/> where record_id = #{recordId}
+	</select>
 
 </mapper>

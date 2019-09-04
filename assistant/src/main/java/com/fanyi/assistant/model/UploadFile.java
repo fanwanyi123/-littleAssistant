@@ -14,6 +14,9 @@ public class UploadFile {
 
     private String name;
 
-    private Integer recordId;
+    private String size;
 
+    private String icon;
+
+    private Integer recordId;
 }
