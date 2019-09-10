@@ -36,7 +36,7 @@ function vueFunction(el, e) {
                 } else {
                     $("#tagIcon").attr("style", "color:red");
                 }
-                vm.showSecond = false;
+                vm.showSecond = true
                 vm.childTagList = [];
                 if (val) {
                     for (var i = 0; i < vm.categoryList.length; i++) {
@@ -44,7 +44,6 @@ function vueFunction(el, e) {
                             var set = new Set(vm.childTagList);
                             set.add(vm.categoryList[i]);
                             vm.childTagList = Array.from(set);
-                            vm.showSecond = true
                         }
                     }
                 }

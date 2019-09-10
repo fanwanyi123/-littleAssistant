@@ -240,6 +240,7 @@ public class RecordController {
         List<Category> categoryList = setRecordCategoryList(recordParam);
         record.setCategoryList(categoryList);
         recordService.updateRecordDetail(record);
+        uploadFileService.uploadFile(recordParam.getFiles(), recordParam.getRecordId());
         return "redirect:/record";
     }
 

@@ -27,8 +27,6 @@ public class UploadFileServiceImpl implements UploadFileService {
      */
     public final String rootPath = "E:/Upload";
 
-    public final String allowSuffix = ".bmp.jpg.jpeg.png.gif.pdf.doc.zip.rar.gz";
-
     @Autowired
     UploadFileDao uploadFileDao;
 

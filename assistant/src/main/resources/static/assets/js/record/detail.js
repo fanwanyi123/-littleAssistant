@@ -45,6 +45,10 @@ function vueFunction(el, e) {
                 editRecord(id) {
                     window.location.href = getRootPath() + '/record/edit/' + id;
                 },
+                downFile(recordFile) {
+                    var path = recordFile.url + "\\" + recordFile.name;
+                    window.open(getRootPath() + "/download/file?path=" + encodeURI(path));
+                }
             }
         }
     )

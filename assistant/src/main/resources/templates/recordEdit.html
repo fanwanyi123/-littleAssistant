@@ -22,7 +22,7 @@
                 <li><a href="/record">总览</a> <span class="divider">/</span></li>
                 <li class="active">编辑</li>
             </ul>
-            <form action="/record/editSubmit" method="post">
+            <form action="/record/editSubmit" method="post" enctype="multipart/form-data">
                 <div id="app">
                     <input type="hidden" name="recordId" th:value="${record.recordId}">
                     <div class="row">

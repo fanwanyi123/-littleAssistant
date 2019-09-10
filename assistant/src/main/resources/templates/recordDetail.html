@@ -61,7 +61,7 @@
                             <!--Single Forum End-->
                         </div>
                         <div class="col-12">
-                            <a href="#" v-for="recordFile in recordFiles">
+                            <a v-for="recordFile in recordFiles" href="#" @click="downFile(recordFile)">
                                 <i :class="recordFile.icon" aria-hidden="true"></i>
                                 {{recordFile.name}}&#40;{{recordFile.size}}&#41; <br></a>
                         </div>
