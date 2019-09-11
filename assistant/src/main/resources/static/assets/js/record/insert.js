@@ -20,11 +20,23 @@ function vueFunction(el, e) {
             grandsonList: [],
             showSecond: false,
             showThird: false,
-            valueOne: [],
-            valueTwo: [],
-            valueThree: [],
             fileList: [],
             formDatas: "",
+            ruleForm: {
+                title: '',
+                content: '',
+                valueOne: "",
+                valueTwo: "",
+                valueThree: "",
+            },
+            rules: {
+                title: [
+                    {required: true, message: '标题不能为空', trigger: 'blur'},
+                ],
+                content: [
+                    {required: true, message: '请输入内容', trigger: 'blur'}
+                ],
+            }
         },
         e: e,
         methods: {
@@ -88,4 +100,19 @@ function initCategory() {
             vm.categoryList = data;
         }
     });
+}
+
+
+function checkSub() {
+    if ($("#recordTitle").text() == "" || $("#summernote").text() == "") {
+        vm.$notify.error({
+            title: '错误',
+            message: '输入内容不能为空',
+            position: 'bottom-left',
+            offset: 150
+        });
+        return false;
+    } else {
+        return true;//不写此返回值也行，此时就直接提交了
+    }
 }

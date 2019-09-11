@@ -22,8 +22,9 @@
                 <li><a href="/record">总览</a> <span class="divider">/</span></li>
                 <li class="active">编辑</li>
             </ul>
-            <form action="/record/editSubmit" method="post" enctype="multipart/form-data">
-                <div id="app">
+            <div id="app">
+                <form action="/record/editSubmit" method="post" enctype="multipart/form-data"
+                      onsubmit="return checkSub()">
                     <input type="hidden" name="recordId" th:value="${record.recordId}">
                     <div class="row">
                         <div class="col-12">
@@ -64,7 +65,7 @@
                                 <i class="fa fa-bookmark" id="tagIcon"></i>
                                 <label>添加标签 <span style="color: #FF5722; ">*</span> </label>
                                 <el-select
-                                        v-model="valueOne"
+                                        v-model="ruleForm.valueOne"
                                         filterable
                                         allow-create
                                         default-first-option
@@ -81,7 +82,7 @@
                                 </el-select>
 
                                 <el-select
-                                        v-model="valueTwo"
+                                        v-model="ruleForm.valueTwo"
                                         filterable
                                         allow-create
                                         default-first-option
@@ -99,7 +100,7 @@
                                 </el-select>
 
                                 <el-select
-                                        v-model="valueThree"
+                                        v-model="ruleForm.valueThree"
                                         filterable
                                         allow-create
                                         default-first-option
@@ -138,8 +139,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div><!-- js-product-checkout -->
     </div><!--container -->
     <!--music -->

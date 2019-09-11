@@ -20,17 +20,22 @@
         <div class="border">
             <div class="js-product-checkout-content" style="padding-top: 30px">
                 <div id="app">
-                    <form id="formInsert" method="post" action="/record/insertSubmit" enctype="multipart/form-data">
+                    <el-form id="formInsert" method="post" :model="ruleForm" :rules="rules" ref="ruleForm"
+                             action="/record/insertSubmit" enctype="multipart/form-data" onsubmit="return checkSub()">
                         <div class="row">
                             <div class="col-12">
                                 <div class="mb-50 mb-sm-30 mb-xs-20">
-                                    <input class="input-text" name="recordTitle" type="text"
-                                           th:placeholder="#{message.enter.title}">
+                                    <el-form-item prop="title">
+                                        <el-input class="input-text" name="recordTitle" type="text"
+                                                  th:placeholder="#{message.enter.title}"  v-model="ruleForm.title"></el-input>
+                                    </el-form-item>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="single-input mb-50 mb-sm-30 mb-xs-20">
-                                    <textarea id="summernote" name="recordContent"></textarea>
+                                    <el-form-item prop="content">
+                                        <el-input type="textarea" id="summernote"  name="recordContent" v-model="ruleForm.content"></el-input>
+                                    </el-form-item>
                                 </div>
                             </div>
                             <div class="col-12" style="padding-bottom: 20px">
@@ -54,59 +59,59 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-50 mb-sm-30 mb-xs-20">
-                                    <i class="fa fa-bookmark" id="tagIcon"></i>
-                                    <label>添加标签 <span style="color: #FF5722; ">*</span> </label>
-                                    <el-select
-                                            v-model="valueOne"
-                                            filterable
-                                            allow-create
-                                            default-first-option
-                                            placeholder="新增标签请直接输入"
-                                            v-on:change="getChildTag"
-                                            name="recordParentCategoryName" id="recordParentCategoryName">
-                                        <el-option
-                                                v-for="item in categoryList"
-                                                v-if="item.pid == 0"
-                                                :key="item.id"
-                                                :label="item.name"
-                                                :value="item.id">
-                                        </el-option>
-                                    </el-select>
+                                        <i class="fa fa-bookmark" id="tagIcon"></i>
+                                        <label>添加标签 <span style="color: #FF5722; ">*</span> </label>
+                                        <el-select
+                                                v-model="ruleForm.valueOne"
+                                                filterable
+                                                allow-create
+                                                default-first-option
+                                                placeholder="新增标签请直接输入"
+                                                v-on:change="getChildTag"
+                                                name="recordParentCategoryName" id="recordParentCategoryName">
+                                            <el-option
+                                                    v-for="item in categoryList"
+                                                    v-if="item.pid == 0"
+                                                    :key="item.id"
+                                                    :label="item.name"
+                                                    :value="item.id">
+                                            </el-option>
+                                        </el-select>
 
-                                    <el-select
-                                            v-model="valueTwo"
-                                            filterable
-                                            allow-create
-                                            default-first-option
-                                            placeholder="新增标签请直接输入"
-                                            v-on:change="getGrandSonTag"
-                                            name="recordChildCategoryName"
-                                            id="recordChildCategoryName"
-                                            v-show="showSecond">
-                                        <el-option
-                                                v-for="item in childTagList"
-                                                :key="item.id"
-                                                :label="item.name"
-                                                :value="item.id">
-                                        </el-option>
-                                    </el-select>
+                                        <el-select
+                                                v-model="ruleForm.valueTwo"
+                                                filterable
+                                                allow-create
+                                                default-first-option
+                                                placeholder="新增标签请直接输入"
+                                                v-on:change="getGrandSonTag"
+                                                name="recordChildCategoryName"
+                                                id="recordChildCategoryName"
+                                                v-show="showSecond">
+                                            <el-option
+                                                    v-for="item in childTagList"
+                                                    :key="item.id"
+                                                    :label="item.name"
+                                                    :value="item.id">
+                                            </el-option>
+                                        </el-select>
 
-                                    <el-select
-                                            v-model="valueThree"
-                                            filterable
-                                            allow-create
-                                            default-first-option
-                                            placeholder="新增标签请直接输入"
-                                            name="recordGrandsonCategoryId"
-                                            id="recordGrandsonCategoryId"
-                                            v-show="showThird">
-                                        <el-option
-                                                v-for="item in grandsonList"
-                                                :key="item.id"
-                                                :label="item.name"
-                                                :value="item.id">
-                                        </el-option>
-                                    </el-select>
+                                        <el-select
+                                                v-model="ruleForm.valueThree"
+                                                filterable
+                                                allow-create
+                                                default-first-option
+                                                placeholder="新增标签请直接输入"
+                                                name="recordGrandsonCategoryId"
+                                                id="recordGrandsonCategoryId"
+                                                v-show="showThird">
+                                            <el-option
+                                                    v-for="item in grandsonList"
+                                                    :key="item.id"
+                                                    :label="item.name"
+                                                    :value="item.id">
+                                            </el-option>
+                                        </el-select>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -130,7 +135,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </el-form>
                 </div><!--VUE APP-->
             </div><!-- js-product-checkout -->
 
