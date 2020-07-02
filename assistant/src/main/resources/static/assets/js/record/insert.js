@@ -92,6 +92,7 @@ function vueFunction(el, e) {
 
 
 function initCategory() {
+    var data = [""]
     $.ajax({
         url: getRootPath() + "/record/getCategory",
         type: "post",
@@ -105,6 +106,7 @@ function initCategory() {
 
 function checkSub() {
     if ($("#recordTitle").text() == "" || $("#summernote").text() == "") {
+
         vm.$notify.error({
             title: '错误',
             message: '输入内容不能为空',

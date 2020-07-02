@@ -43,10 +43,6 @@
     <link rel="stylesheet" type="text/css" href="../static/common/css/summernote.css"
           th:href="@{/common/css/summernote.css}">
     <style>
-        .ztree li {
-            margin: 10px;
-        }
-
         [v-cloak] {
             display: none;
         }
@@ -110,6 +106,13 @@
 <body>
 <input type="hidden" id="path">
 <div th:fragment="commonHeader">
+    <!-- start page-loader -->
+    <div class="page-loader">
+        <div class="page-loader-inner">
+            <div class="inner"></div>
+        </div>
+    </div>
+    <!-- end page-loader -->
     <header class="header-nav-area js-index1-nav sticky-on"><!-- header-nav -->
         <div class="container-fluid">
             <div class="row flexbox-center">

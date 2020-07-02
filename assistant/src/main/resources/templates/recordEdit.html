@@ -24,13 +24,13 @@
             </ul>
             <div id="app">
                 <form action="/record/editSubmit" method="post" enctype="multipart/form-data"
-                      onsubmit="return checkSub()">
+                     >
                     <input type="hidden" name="recordId" th:value="${record.recordId}">
                     <div class="row">
                         <div class="col-12">
                             <div class="mb-50 mb-sm-30 mb-xs-20">
                                 <input class="input-text" name="recordTitle" type="text"
-                                       th:placeholder="#{message.enter.title}" th:value="${record.recordTitle}">
+                                       th:placeholder="#{message.enter.title}" th:value="${record.recordTitle}" id="recordTitle">
                             </div>
                         </div>
                         <div class="col-12">

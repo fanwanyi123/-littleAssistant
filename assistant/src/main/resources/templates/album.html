@@ -10,15 +10,19 @@
             <div id="vuePicture" class="js-gallary-list">
                 <el-upload
                         class="upload-demo"
-                        action="https://jsonplaceholder.typicode.com/posts/"
-                        :on-preview="handlePreview"
-                        :on-remove="handleRemove"
-                        :file-list="fileList"
-                        list-type="picture">
-                    <el-button size="small" type="primary"><i class="el-icon-picture"></i>上传图片</el-button>
-                    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                        ref="upload"
+                        drag
+                        action=""
+                        multiple
+                        :http-request="httpRequest"
+                        :auto-upload="false">
+                    <i class="el-icon-upload"></i>
+                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                    <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
                 </el-upload>
-
+                <div slot="footer" class="dialog-footer">
+                    <el-button type="primary" @click="submitUpload">确定上传</el-button>
+                </div>
             </div>
         </div>
     </div>
@@ -26,7 +30,10 @@
 
 <footer th:include="common::commonFooter"></footer>
 <div th:include="common::commonJs"></div>
-<script type="text/javascript" src="../static/assets/js/album/album.js"
-        th:src="@{/assets/js/album/album.js}"></script>
+<script type="text/javascript" src="../static/common/js/vue-resource.js"
+        th:src="@{/common/js/vue-resource.js}"></script>
+<script type="text/javascript" src="../static/assets/js/album/album.js" th:src="@{/assets/js/album/album.js}">
+
+</script>
 </body>
 </html>

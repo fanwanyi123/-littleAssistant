@@ -58,7 +58,7 @@ public class UserController {
             if (random == null) {
                 checkResultMap.put("result","codeError");
             }else if (random.equalsIgnoreCase(inputStr)) {
-                boolean hasUser = userService.findUserByInputVal(userName,encryptBasedDes(password));
+                boolean hasUser = userService.findUserByInputVal(userName,password);
                 if (hasUser){
                     session.setAttribute("userName",userName);
                     checkResultMap.put("result","success");
@@ -155,4 +155,5 @@ public class UserController {
         }
         return decryptedData;
     }
+
 }

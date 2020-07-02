@@ -22,3 +22,17 @@ function showModal(url) {
     mainContent.src = url;//嵌套网址
     $("#myModal").modal('show');
 }
+
+/*------------------------------------------
+        = HIDE PRELOADER
+    -------------------------------------------*/
+function pageLoader() {
+    if($('.page-loader').length) {
+        $('.page-loader').delay(100).fadeOut(500, function() {
+
+            //Active heor slider
+            heroSlider();
+
+        });
+    }
+}

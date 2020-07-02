@@ -1,5 +1,6 @@
 package com.fanyi.assistant.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fanyi.assistant.service.UploadFileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,9 @@ public class UploadFileController {
      * @throws IOException IOException
      */
     @RequestMapping(value = "/upload/file", method = RequestMethod.POST)
-    public Object uploadFile(@RequestParam("file") MultipartFile[] files) {
+    @ResponseBody
+    public Object uploadFile(@RequestParam("file") JSONObject obj) {
+        MultipartFile[] files = (MultipartFile[]) obj.get("file");
         return uploadFileService.uploadFile(files, null);
     }
 
